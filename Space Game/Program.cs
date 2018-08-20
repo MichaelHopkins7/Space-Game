@@ -34,10 +34,10 @@ namespace Space_Game
             double WarpSpeed(requestedWF, formulaSpeed)
             {
                 double warpFactor = requestedWF; 
-                formulaSpeed = warpFactor^(10/3.0) + (10 - warpFactor) ^ (-11 / 3.0);
+                formulaSpeed = Math.Pow (warpFactor, (10/3.0)) + Math.Pow ((10 - warpFactor), (-11 / 3.0));
                 return formulaSpeed;
             }
-        }
+        } 
 
         
     }
