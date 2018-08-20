@@ -26,20 +26,19 @@ namespace Space_Game
             int shipAMSpeed = 6;
             int shipBMSpeed = 7;
             int shipCMSpeed = 9;
-            double 
+            int requestedWF = 0; //requested speed in warp
+            double formulaSpeed = 0; //will be used to store speed in lightyears from formula
+            
+            requestedWF = int.Parse(Console.ReadLine());
 
-
-
-
-
-
-
-
-
-
-
-
-
+            double WarpSpeed(requestedWF, formulaSpeed)
+            {
+                double warpFactor = requestedWF; 
+                formulaSpeed = warpFactor^(10/3.0) + (10 - warpFactor) ^ (-11 / 3.0);
+                return formulaSpeed;
+            }
         }
+
+        
     }
 }
