@@ -13,8 +13,7 @@ namespace Space_Game
         static void Main(string[] args)
         {
             bool isGameOver = false; //if a game end triggers this will be changed to true
-            bool isGood = false; // just going to reuse this a ton
-
+            string input = ""; //Useful for when we want input
 
             double cargoSpace = 6; // Setting ship max cargo capacities
             double shipAMCargo = 8; // capacity for ships other than starting ship
@@ -32,49 +31,111 @@ namespace Space_Game
             int shipCMSpeed = 9;
             int warpFactor = 0; //your warp number for a trip
             double formulaSpeed = 0; //will be used to store speed in lightyears from formula
-
-
-
-
-
+            
             int totalYears = 0; //tracking time spent traveling
             int totalWeeks = 0;
             int totalDays = 0;
             int totalHours = 0;
-
-            double distToNew = 0; //var for travel distance to new coordinates
-            double tripTime = 0; //var for time spent traveling on a trip
+ 
             double currentX = 0; //set up tracker for current location to be used to calculate distance
             double currentY = 0; //	and sets up starting coordinates to match starting planet of Earth
             int curShipSpeed = 4; // initial ship max speed
+            double totalTravelDistance = 0; // tracks total lifetime travel distance
 
             string playerLoc = "Earth"; //sets up current location name var and sets Earth for game start
             string destSystem = "";
             double destXCoord = 0;
             double destYCoord = 0;
-            double distToDest = 0;
-            double destTravelTime = 0;
+            double distToDest = 0; //var for travel distance to new coordinates
+            double destTravelTime = 0; //var for time spent traveling on a trip
 
-            destSystem = newPlanet(playerLoc);
-            Console.WriteLine(destSystem);
-            destXCoord = destX(destSystem);
-            Console.WriteLine(destXCoord);
-            destYCoord = destY(destSystem);
-            Console.WriteLine(destYCoord);
-            warpFactor = requestWF(curShipSpeed);
-            Console.WriteLine(warpFactor);
-            formulaSpeed = WarpSpeed(warpFactor);
-            Console.WriteLine(formulaSpeed);
-            distToDest = calcDistance(currentX, currentY, destXCoord, destYCoord);
-            Console.WriteLine(distToDest);
-            destTravelTime = travelTime(distToDest, formulaSpeed);
-            Console.WriteLine(destTravelTime);
-            addTime(destTravelTime, ref totalYears, ref totalWeeks, ref totalDays, ref totalHours);
+
+            Console.WriteLine("Welcome to the beggining of your space trade.");
+
+            do
+            {
+                do
+                {
+                    input = "";
+                    Console.WriteLine("What would you like to do?");
+                    Console.WriteLine("Buy, Sell, or Travel?");
+                    Console.WriteLine("Or press \"Enter\" when you are ready to quit.");
+                    input = Console.ReadLine();
+                    if (input == "Buy")
+                    {
+                        Console.WriteLine("Not ready yet.");
+                    }
+                    else if (input == "Sell")
+                    {
+                        Console.WriteLine("Not ready yet.");
+                    }
+                    else if (input == "Travel")
+                    {
+                        destSystem = newPlanet(playerLoc);
+                        destXCoord = destX(destSystem);
+                        destYCoord = destY(destSystem);
+                        warpFactor = requestWF(curShipSpeed);
+                        formulaSpeed = WarpSpeed(warpFactor);
+                        distToDest = calcDistance(currentX, currentY, destXCoord, destYCoord);
+                        totalTravelDistance += distToDest;
+                        destTravelTime = travelTime(distToDest, formulaSpeed);
+                        addTime(destTravelTime, ref totalYears, ref totalWeeks, ref totalDays, ref totalHours);
+                        Console.WriteLine($"You have arrived at {destSystem}.");
+                        Console.Write("It took: ");
+                        Console.Write($"{totalYears} Years, ");
+                        Console.Write($"{totalWeeks} Weeks, ");
+                        Console.Write($"{totalDays} Days, ");
+                        Console.Write($"and {totalHours} Hours.");
+                        playerLoc = destSystem;
+                        currentX = destXCoord;
+                        currentY = destYCoord;
+                    }
+                    else if (input == "")
+                    {
+                        isGameOver = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("That is not a valid input.");
+                    }
+
+                    if (totalYears >= 40)
+                    {
+                        isGameOver = true;
+                        input = "";
+                    }
+                    else if ((shipCargoCurrent == 0) && (creditsNow == 0))
+                    {
+                        isGameOver = true;
+                        input = "";
+                    }
+                    
+                }
+                while (input != "");
+            }
+            while (!isGameOver);
+
+            Console.WriteLine("You have been traveling for:");
             Console.WriteLine($"Years:{totalYears}");
-            Console.WriteLine($"Years:{totalWeeks}");
-            Console.WriteLine($"Years:{totalDays}");
-            Console.WriteLine($"Years:{totalHours}");
+            Console.WriteLine($"Weeks:{totalWeeks}");
+            Console.WriteLine($"Days:{totalDays}");
+            Console.WriteLine($"Hours:{totalHours}");
 
+            Console.WriteLine($"You traveled {totalTravelDistance} lightyears!");
+
+            Console.WriteLine($"You had {creditsNow}");
+            if (creditsNow > 100)
+            {
+                Console.WriteLine($"You made {creditsNow - 100}!");
+            }
+            else if (creditsNow < 100)
+            {
+                Console.WriteLine($"You lost {100 - creditsNow}.");
+            }
+            else
+            {
+                Console.WriteLine($"You broke even.");
+            }
         }
 
         static public string newPlanet(string atLocal)
