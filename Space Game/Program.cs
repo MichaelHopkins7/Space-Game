@@ -108,9 +108,8 @@ namespace Space_Game
                         Console.Write($"{totalYears} Years, ");
                         Console.Write($"{totalWeeks} Weeks, ");
                         Console.Write($"{totalDays} Days, ");
-                        Console.Write($"and {totalHours} Hours.");
+                        Console.Write($"and {totalHours} Hours.\n");
                         Console.WriteLine($"You have {creditsNow} credits.");
-
                     }
                     else if (input == "")
                     {
