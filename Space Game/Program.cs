@@ -54,8 +54,17 @@ namespace Space_Game
             double distToDest = 0; //var for travel distance to new coordinates
             double destTravelTime = 0; //var for time spent traveling on a trip
 
-
-            Console.WriteLine("Welcome to the beggining of your space trade.");
+            Console.WriteLine("The Space Game");
+            Console.WriteLine("After a lifetime of wandering between planets you have finally");
+            Console.WriteLine("decided to pursue your fortune in the interplanetary trade industry. ");
+            Console.WriteLine("With Earth being your new home you have decided that the best ");
+            Console.WriteLine("trading planets for your success will be The Great Planet and ");
+            Console.WriteLine("Alpha Centauri.");
+            Console.ReadLine();
+            Console.WriteLine("With your life savings(100 credits) and a brand ");
+            Console.WriteLine("new ship you head out to make your fortune.");
+            Console.ReadLine();
+            Console.WriteLine("Welcome to the begining of your space trade.");
 
             do
             {
