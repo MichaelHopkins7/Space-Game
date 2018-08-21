@@ -288,10 +288,10 @@ namespace Space_Game
         static void convertTime(double time, ref int totYears, ref int totWeeks, ref int totDays, ref int totHours)
         {
             bool isGood = false;
-            int timeYears = 0; //initiate time spent on current trip
-            int timeWeeks = 0;
-            int timeDays = 0;
-            int timeHours = 0;
+            totYears = 0; //initiate time spent on current trip
+            totWeeks = 0;
+            totDays = 0;
+            totHours = 0;
 
             do
             {
@@ -300,7 +300,7 @@ namespace Space_Game
                 if (time >= 1) //is trip 1 or more years
                 {
                     --time;
-                    ++timeYears; //add years for year total until time has no years
+                    ++totYears; //add years for year total until time has no years
                     isGood = false;
                 }
                 else
@@ -317,7 +317,7 @@ namespace Space_Game
                 if (time >= 1)
                 {
                     --time;
-                    ++timeDays;
+                    ++totDays;
                     isGood = false;
                 }
                 else
@@ -326,8 +326,8 @@ namespace Space_Game
                 }
             }
             while (!isGood);
-		    timeWeeks = timeDays / 7;
-		    timeDays %= 7;
+		    totWeeks = totDays / 7;
+		    totDays %= 7;
             time *= 24;
             do //rounds up hours
             {
@@ -335,7 +335,7 @@ namespace Space_Game
                 if (time > 0)
                 {
                     --time;
-                    ++timeHours;
+                    ++totHours;
                     isGood = false;
                 }
                 else
@@ -344,13 +344,8 @@ namespace Space_Game
                 }
             }
             while (!isGood);
-
-            totYears = tripYears;
-            totWeeks = tripWeeks;
-            totDays = tripDays;
-            totHours = tripHours;
-
-            ++timeHours; //you spent at least an hour landing/docking and taking off/undocking 
+            
+            ++totHours; //you spent at least an hour landing/docking and taking off/undocking 
 		}
         static void addTime(int tripYears, int tripWeeks, int tripDays, int tripHours, //taking trip time
                         ref int totYears, ref int totWeeks, ref int totDays, ref int totHours) //to add to total time
