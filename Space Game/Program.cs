@@ -32,11 +32,16 @@ namespace Space_Game
             int warpFactor = 0; //your warp number for a trip
             double formulaSpeed = 0; //will be used to store speed in lightyears from formula
             
-            int totalYears = 0; //tracking time spent traveling
+            int totalYears = 0; //trackers for total time spent traveling
             int totalWeeks = 0;
             int totalDays = 0;
             int totalHours = 0;
- 
+
+            int tripYears = 0; //trackers for time spent traveling on current trip
+            int tripWeeks = 0;
+            int tripDays = 0;
+            int tripHours = 0;
+
             double currentX = 0; //set up tracker for current location to be used to calculate distance
             double currentY = 0; //	and sets up starting coordinates to match starting planet of Earth
             int curShipSpeed = 4; // initial ship max speed
@@ -58,7 +63,7 @@ namespace Space_Game
                 {
                     input = "";
                     Console.WriteLine("What would you like to do?");
-                    Console.WriteLine("Buy, Sell, or Travel?");
+                    Console.WriteLine("Buy, Sell, Travel, Check Status?");
                     Console.WriteLine("Or press \"Enter\" when you are ready to quit.");
                     input = Console.ReadLine();
                     if (input == "Buy")
@@ -79,16 +84,33 @@ namespace Space_Game
                         distToDest = calcDistance(currentX, currentY, destXCoord, destYCoord);
                         totalTravelDistance += distToDest;
                         destTravelTime = travelTime(distToDest, formulaSpeed);
-                        addTime(destTravelTime, ref totalYears, ref totalWeeks, ref totalDays, ref totalHours);
+                        convertTime(destTravelTime, ref tripYears, ref tripWeeks, ref tripDays, ref tripHours);
                         Console.WriteLine($"You have arrived at {destSystem}.");
                         Console.Write("It took: ");
+                        Console.Write($"{tripYears} Years, ");
+                        Console.Write($"{tripWeeks} Weeks, ");
+                        Console.Write($"{tripDays} Days, ");
+                        Console.Write($"and {tripHours} Hours.");
+                        playerLoc = destSystem;
+                        currentX = destXCoord;
+                        currentY = destYCoord;
+                        addTime(tripYears, tripWeeks, tripDays, tripHours, //adds travel time to total time
+                            ref totalYears, ref totalWeeks, ref totalDays, ref totalHours);
+                        tripYears = 0;
+                        tripWeeks = 0;
+                        tripDays = 0;
+                        tripHours = 0;
+                    }
+                    else if (input == "Check Status")
+                    {
+                        Console.WriteLine($"You are at {destSystem}.");
+                        Console.Write("You have been traveling for ");
                         Console.Write($"{totalYears} Years, ");
                         Console.Write($"{totalWeeks} Weeks, ");
                         Console.Write($"{totalDays} Days, ");
                         Console.Write($"and {totalHours} Hours.");
-                        playerLoc = destSystem;
-                        currentX = destXCoord;
-                        currentY = destYCoord;
+                        Console.WriteLine($"You have {creditsNow} credits.");
+
                     }
                     else if (input == "")
                     {
@@ -138,7 +160,7 @@ namespace Space_Game
             }
         }
 
-        static public string newPlanet(string atLocal)
+        static string newPlanet(string atLocal)
         {
             bool isGood = false;
             Console.WriteLine("Enter the world you wish to travel to from the list.");
@@ -188,7 +210,7 @@ namespace Space_Game
             return destName;
         }
 
-        static public double destX(string destName)
+        static double destX(string destName)
         {
             if (destName == "Earth")
             {
@@ -204,7 +226,7 @@ namespace Space_Game
             }
         }
 
-        static public double destY(string destName)
+        static double destY(string destName)
         {
             if (destName == "Earth")
             {
@@ -220,7 +242,7 @@ namespace Space_Game
             }
         }
 
-        static public int requestWF(int maxSpeed)
+        static int requestWF(int maxSpeed)
         {
             bool isGood = false;
             int requestedWF = 0;
@@ -253,18 +275,18 @@ namespace Space_Game
             return requestedWF;
         }
 
-        static public double WarpSpeed(int warpFactor) => Math.Pow(warpFactor, (10 / 3.0)) + Math.Pow((10 - warpFactor), (-11 / 3.0));
+        static double WarpSpeed(int warpFactor) => Math.Pow(warpFactor, (10 / 3.0)) + Math.Pow((10 - warpFactor), (-11 / 3.0));
 
-        static public double calcDistance(double curX, double curY, double newX, double newY)
+        static double calcDistance(double curX, double curY, double newX, double newY)
         {
             double diffX = Math.Abs(newX - curX);
             double diffY = Math.Abs(newY - curY);
             return Math.Sqrt(diffX * diffX + diffY * diffY);
         }
 
-        static public double travelTime(double distance, double speed) => distance / speed;
+        static double travelTime(double distance, double speed) => distance / speed;
 
-        static public void addTime(double time, ref int totYears, ref int totWeeks, ref int totDays, ref int totHours)
+        static void convertTime(double time, ref int totYears, ref int totWeeks, ref int totDays, ref int totHours)
         {
             bool isGood = false;
             int timeYears = 0; //initiate time spent on current trip
@@ -325,37 +347,41 @@ namespace Space_Game
             while (!isGood);
 
             ++timeHours; //you spent at least an hour landing/docking and taking off/undocking 
-		
-		    totYears += timeYears;
-		    totWeeks += timeWeeks;
-		    totDays += timeDays;
-		    totHours += timeHours;
-		
-		    do // calculates adjustments to values due to totals crossing threshhold to next value and checks 40Year end.
-		    {
-			    isGood = false;
-			    if (totWeeks >= 53)
-			    {
-                    totWeeks -= 53;
-			    	++totYears;
-                    totDays += 6;
-			    }
-			    else if (totDays >= 7)
-			    {
-			    	totDays -= 7;
-			    	++totWeeks;
-			    }
-			    else if (totHours > 24)
-			    {
-			    	totHours -= 24;
-			    	++totDays;
-			    }
-			    else
-			    {
-			    	isGood = true;
-			    }
-		    }
-            while (!isGood) ;
 		}
+        static void addTime(int tripYears, int tripWeeks, int tripDays, int tripHours, //taking trip time
+                        ref int totYears, ref int totWeeks, ref int totDays, ref int totHours) //to add to total time
+        {
+            bool isGood = false;
+            totYears += tripYears;
+            totWeeks += tripWeeks;
+            totDays += tripDays;
+            totHours += tripHours;
+
+            do // calculates adjustments to values due to totals crossing threshhold to next value and checks 40Year end.
+            {
+                isGood = false;
+                if (totWeeks >= 53)
+                {
+                    totWeeks -= 53;
+                    ++totYears;
+                    totDays += 6;
+                }
+                else if (totDays >= 7)
+                {
+                    totDays -= 7;
+                    ++totWeeks;
+                }
+                else if (totHours > 24)
+                {
+                    totHours -= 24;
+                    ++totDays;
+                }
+                else
+                {
+                    isGood = true;
+                }
+            }
+            while (!isGood);
+        }
     }
 }
