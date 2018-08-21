@@ -14,6 +14,16 @@ namespace Space_Game
         {
             bool isGameOver = false; //if a game end triggers this will be changed to true
             string input = ""; //Useful for when we want input
+            Console.WriteLine("The Space Game");
+            Console.WriteLine("After a lifetime of wandering between planets you have finally");
+            Console.WriteLine("decided to pursue your fortune in the interplanetary trade industry. ");
+            Console.WriteLine("With Earth being your new home you have decided that the best ");
+            Console.WriteLine("trading planets for your success will be The Great Planet and ");
+            Console.WriteLine("Alpha Centauri.");
+            Console.ReadLine();
+            Console.WriteLine("With your life savings(100 credits) and a brand ");
+            Console.WriteLine("new ship you head out to make your fortune.");
+            Console.ReadLine();
 
             double cargoSpace = 6; // Setting ship max cargo capacities
             double shipAMCargo = 8; // capacity for ships other than starting ship
