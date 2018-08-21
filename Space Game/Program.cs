@@ -8,32 +8,35 @@ namespace Space_Game
 {
     class Program
     {
-        bool isGameOver = false; //if a game end triggers this will be changed to true
-        bool isGood = false: // just going to reuse this a ton
-
         
-        string destName = ""; //string for where you're trying to go
-        string atLocal = "Earth"; //sets up current location name var and sets Earth for game start
-
-        double cargoSpace = 6; // Setting ship max cargo capacities
-        double shipAMCargo = 8; // capacity for ships other than starting ship
-        double shipBMCargo = 10;
-        double shipCMCargo = 12;
-
-        double shipCargoCurrent = 0; // variable for Cargo in ship now
-
-        int creditsNow = 100; //creates value for storing currency amount and sets initial currency. Whole credits only.
-        int purchasePrice = 0; //sets up value to use for purchases
-
-        
-        int shipAMSpeed = 6; //setting speeds for other ships
-        int shipBMSpeed = 7;
-        int shipCMSpeed = 9;
-        int warpFactor = 0; //your speed for a trip
-        double formulaSpeed = 0; //will be used to store speed in lightyears from formula
 
         static void Main(string[] args)
         {
+            bool isGameOver = false; //if a game end triggers this will be changed to true
+            bool isGood = false; // just going to reuse this a ton
+
+
+            double cargoSpace = 6; // Setting ship max cargo capacities
+            double shipAMCargo = 8; // capacity for ships other than starting ship
+            double shipBMCargo = 10;
+            double shipCMCargo = 12;
+
+            double shipCargoCurrent = 0; // variable for Cargo in ship now
+
+            int creditsNow = 100; //creates value for storing currency amount and sets initial currency. Whole credits only.
+            int purchasePrice = 0; //sets up value to use for purchases
+
+
+            int shipAMSpeed = 6; //setting speeds for other ships
+            int shipBMSpeed = 7;
+            int shipCMSpeed = 9;
+            int warpFactor = 0; //your warp number for a trip
+            double formulaSpeed = 0; //will be used to store speed in lightyears from formula
+
+
+
+
+
             int totalYears = 0; //tracking time spent traveling
             int totalWeeks = 0;
             int totalDays = 0;
@@ -45,6 +48,32 @@ namespace Space_Game
             double currentY = 0; //	and sets up starting coordinates to match starting planet of Earth
             int curShipSpeed = 4; // initial ship max speed
 
+            string playerLoc = "Earth"; //sets up current location name var and sets Earth for game start
+            string destSystem = "";
+            double destXCoord = 0;
+            double destYCoord = 0;
+            double distToDest = 0;
+            double destTravelTime = 0;
+
+            destSystem = newPlanet(playerLoc);
+            Console.WriteLine(destSystem);
+            destXCoord = destX(destSystem);
+            Console.WriteLine(destXCoord);
+            destYCoord = destY(destSystem);
+            Console.WriteLine(destYCoord);
+            warpFactor = requestWF(curShipSpeed);
+            Console.WriteLine(warpFactor);
+            formulaSpeed = WarpSpeed(warpFactor);
+            Console.WriteLine(formulaSpeed);
+            distToDest = calcDistance(currentX, currentY, destXCoord, destYCoord);
+            Console.WriteLine(distToDest);
+            destTravelTime = travelTime(distToDest, formulaSpeed);
+            Console.WriteLine(destTravelTime);
+            addTime(destTravelTime, ref totalYears, ref totalWeeks, ref totalDays, ref totalHours);
+            Console.WriteLine($"Years:{totalYears}");
+            Console.WriteLine($"Years:{totalWeeks}");
+            Console.WriteLine($"Years:{totalDays}");
+            Console.WriteLine($"Years:{totalHours}");
 
         }
 
@@ -104,13 +133,13 @@ namespace Space_Game
             {
                 return 0.0;
             }
-            else if (destName == "Alpha Centauri") 
+            else if (destName == "Alpha Centauri")
             {
                 return 0.0;
             }
-		    else if (destName == "My Great Planet") 
+            else 
             {
-                return -4.6;
+            return -4.6;
             }
         }
 
@@ -124,7 +153,7 @@ namespace Space_Game
             {
                 return -4.367;
             }
-            else if (destName == "My Great Planet")
+            else 
             {
                 return 5;
             }
