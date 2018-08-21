@@ -345,6 +345,11 @@ namespace Space_Game
             }
             while (!isGood);
 
+            totYears = tripYears;
+            totWeeks = tripWeeks;
+            totDays = tripDays;
+            totHours = tripHours;
+
             ++timeHours; //you spent at least an hour landing/docking and taking off/undocking 
 		}
         static void addTime(int tripYears, int tripWeeks, int tripDays, int tripHours, //taking trip time
