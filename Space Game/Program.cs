@@ -89,29 +89,36 @@ namespace Space_Game
                     else if (input == "Travel")
                     {
                         destSystem = newPlanet(playerLoc, ref planetNum);
-                        destXCoord = destX(planetNum);
-                        destYCoord = destY(planetNum);
-                        warpFactor = requestWF(curShipSpeed);
-                        formulaSpeed = WarpSpeed(warpFactor);
-                        distToDest = calcDistance(currentX, currentY, destXCoord, destYCoord);
-                        totalTravelDistance += distToDest;
-                        destTravelTime = travelTime(distToDest, formulaSpeed);
-                        convertTime(destTravelTime, ref tripYears, ref tripWeeks, ref tripDays, ref tripHours);
-                        Console.WriteLine($"You have arrived at {destSystem}.");
-                        Console.Write("It took: ");
-                        Console.Write($"{tripYears} Years, ");
-                        Console.Write($"{tripWeeks} Weeks, ");
-                        Console.Write($"{tripDays} Days, ");
-                        Console.Write($"and {tripHours} Hours.");
-                        playerLoc = destSystem;
-                        currentX = destXCoord;
-                        currentY = destYCoord;
-                        addTime(tripYears, tripWeeks, tripDays, tripHours, //adds travel time to total time
-                            ref totalYears, ref totalWeeks, ref totalDays, ref totalHours);
-                        tripYears = 0;
-                        tripWeeks = 0;
-                        tripDays = 0;
-                        tripHours = 0;
+                        if (destSystem != playerLoc)
+                        {
+                            destXCoord = destX(planetNum);
+                            destYCoord = destY(planetNum);
+                            warpFactor = requestWF(curShipSpeed);
+                            formulaSpeed = WarpSpeed(warpFactor);
+                            distToDest = calcDistance(currentX, currentY, destXCoord, destYCoord);
+                            totalTravelDistance += distToDest;
+                            destTravelTime = travelTime(distToDest, formulaSpeed);
+                            convertTime(destTravelTime, ref tripYears, ref tripWeeks, ref tripDays, ref tripHours);
+                            Console.WriteLine($"You have arrived at {destSystem}.");
+                            Console.Write("It took: ");
+                            Console.Write($"{tripYears} Years, ");
+                            Console.Write($"{tripWeeks} Weeks, ");
+                            Console.Write($"{tripDays} Days, ");
+                            Console.Write($"and {tripHours} Hours.");
+                            playerLoc = destSystem;
+                            currentX = destXCoord;
+                            currentY = destYCoord;
+                            addTime(tripYears, tripWeeks, tripDays, tripHours, //adds travel time to total time
+                                ref totalYears, ref totalWeeks, ref totalDays, ref totalHours);
+                            tripYears = 0;
+                            tripWeeks = 0;
+                            tripDays = 0;
+                            tripHours = 0;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You decided not to go anywhere.");
+                        }
                     }
                     else if (input == "Check Status")
                     {
@@ -468,6 +475,7 @@ namespace Space_Game
             int[] prices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             bool isDone = false;
             setPrices(placeNum, prices);
+            
             do
             {
                 switch (placeNum) //shows stuff at planet
