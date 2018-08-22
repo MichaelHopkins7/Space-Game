@@ -15,12 +15,12 @@ namespace Space_Game
             bool isGameOver = false; //if a game end triggers this will be changed to true
             string input = ""; //Useful for when we want input
 
-            int cargoSpace = 6; // Setting ship max cargo capacities
-            int shipAMCargo = 8; // capacity for ships other than starting ship
-            int shipBMCargo = 10;
-            int shipCMCargo = 12;
+            int cargoSpace = 12; // Setting ship max cargo capacities
+            int shipAMCargo = 16; // capacity for ships other than starting ship
+            int shipBMCargo = 20;
+            int shipCMCargo = 24;
 
-            int shipCargoCurrent = 0; // variable for Cargo in ship now
+            int cargoCount = 0; // variable for Cargo in ship now
 
             int creditsNow = 100; //creates value for storing currency amount and sets initial currency. Whole credits only.
             int purchasePrice = 0; //sets up value to use for purchases
@@ -81,7 +81,7 @@ namespace Space_Game
                     if (input == "Trade")
                     {
                         vendorGreet(playerLoc);
-
+                        
                     }
                     else if (input == "Travel")
                     {
@@ -134,7 +134,7 @@ namespace Space_Game
                         isGameOver = true;
                         input = "";
                     }
-                    else if ((shipCargoCurrent == 0) && (creditsNow == 0))
+                    else if ((cargoCount == 0) && (creditsNow == 0))
                     {
                         isGameOver = true;
                         input = "";
@@ -417,16 +417,17 @@ namespace Space_Game
         static void theGreatPlanetInv() // The Great Planet Inventory
         {
             Console.WriteLine("Cargo Name			Cost\n");
-            Console.WriteLine("Gold, 				5");
-            Console.WriteLine("Iron, 				8");
-            Console.WriteLine("Selenium, 			9");
-            Console.WriteLine("Platinum, 			1");
-            Console.WriteLine("Titanium, 			11");
-            Console.WriteLine("Aluminum, 			7");
-            Console.WriteLine("Rhodium, 			10");
-            Console.WriteLine("Rhuthenium, 			12");
-            Console.WriteLine("Iridium, 			3");
+            Console.WriteLine("1, 				    5");   //Gold, 		
+            Console.WriteLine("2, 				    8");   //Iron, 		
+            Console.WriteLine("3, 			        9");   //Selenium, 	
+            Console.WriteLine("4, 			        1");   //Platinum, 	
+            Console.WriteLine("5, 			        11");   //Titanium, 	;
+            Console.WriteLine("6, 			        7");   //Aluminum, 	
+            Console.WriteLine("7, 			        10");   //Rhodium, 	;
+            Console.WriteLine("8, 			        12");   //Rhuthenium, 	;
+            Console.WriteLine("9, 			        3");   //Iridium, 	
         }
+
         static void earthInv() // Earth Inventory
         {
             Console.WriteLine("Cargo Name			Cost\n");
@@ -440,6 +441,7 @@ namespace Space_Game
             Console.WriteLine("Rhuthenium			8");
             Console.WriteLine("Iridium 			    7");
         }
+
         static void alphaCentuariInv() //Alpha Centauri Inventory
         {
             Console.WriteLine("Cargo Name			Cost\n");
@@ -452,6 +454,14 @@ namespace Space_Game
             Console.WriteLine("Rhodium				4");
             Console.WriteLine("Rhuthenium			6");
             Console.WriteLine("Iridium				8");
+        }
+
+        static void trading(string playerAt, ref int playerMoney, ref int cargoOnShip)
+        {
+            if (playerAt == "Earth")
+            {
+                string whatDo = ""
+            }
         }
     }
 
