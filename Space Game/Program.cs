@@ -416,44 +416,44 @@ namespace Space_Game
 
         static void theGreatPlanetInv() // The Great Planet Inventory
         {
-            Console.WriteLine("Cargo Name			Cost\n");
-            Console.WriteLine("1, 				    5");   //Gold, 		
-            Console.WriteLine("2, 				    8");   //Iron, 		
-            Console.WriteLine("3, 			        9");   //Selenium, 	
-            Console.WriteLine("4, 			        1");   //Platinum, 	
-            Console.WriteLine("5, 			        11");   //Titanium, 	;
-            Console.WriteLine("6, 			        7");   //Aluminum, 	
-            Console.WriteLine("7, 			        10");   //Rhodium, 	;
-            Console.WriteLine("8, 			        12");   //Rhuthenium, 	;
-            Console.WriteLine("9, 			        3");   //Iridium, 	
+            Console.WriteLine("(1)Cargo Name		    Cost\n");
+            Console.WriteLine("(2)Gold	 		        5");   //Gold, 		
+            Console.WriteLine("(3)Iron			        8");   //Iron, 		
+            Console.WriteLine("(4)Selenium	            9");   //Selenium, 	
+            Console.WriteLine("(5)Platinum	            1");   //Platinum, 	
+            Console.WriteLine("(6)Titanium	            11");   //Titanium, 	;
+            Console.WriteLine("(7)Aluminum	            7");   //Aluminum, 	
+            Console.WriteLine("(8)Rhodium	            10");   //Rhodium, 	;
+            Console.WriteLine("(9)Rhuthenium            12");   //Rhuthenium, 	;
+            Console.WriteLine("Iridium		            3");   //Iridium, 	
         }
 
         static void earthInv() // Earth Inventory
         {
             Console.WriteLine("Cargo Name			Cost\n");
-            Console.WriteLine("Gold				    9");
-            Console.WriteLine("Iron 				1");
-            Console.WriteLine("Selenium			    6");
-            Console.WriteLine("Platinum			    10");
-            Console.WriteLine("Titanium			    5");
-            Console.WriteLine("Aluminum			    2");
-            Console.WriteLine("Rhodium				12");
-            Console.WriteLine("Rhuthenium			8");
-            Console.WriteLine("Iridium 			    7");
+            Console.WriteLine("(1) Gold				    9");
+            Console.WriteLine("(2) Iron 				1");
+            Console.WriteLine("(3) Selenium			    6");
+            Console.WriteLine("(4) Platinum			    10");
+            Console.WriteLine("(5) Titanium			    5");
+            Console.WriteLine("(6) Aluminum			    2");
+            Console.WriteLine("(7) Rhodium				12");
+            Console.WriteLine("(8) Rhuthenium			8");
+            Console.WriteLine("(9)Iridium 			    7");
         }
 
         static void alphaCentuariInv() //Alpha Centauri Inventory
         {
-            Console.WriteLine("Cargo Name			Cost\n");
-            Console.WriteLine("Gold	 				2");
-            Console.WriteLine("Iron					10");
-            Console.WriteLine("Selenium				3");
-            Console.WriteLine("Platinum				3");
-            Console.WriteLine("Titanium			    4");
-            Console.WriteLine("Aluminum				12");
-            Console.WriteLine("Rhodium				4");
-            Console.WriteLine("Rhuthenium			6");
-            Console.WriteLine("Iridium				8");
+            Console.WriteLine("(1)Cargo Name			Cost\n");
+            Console.WriteLine("(2)Gold	 				2");
+            Console.WriteLine("(3)Iron					10");
+            Console.WriteLine("(4)Selenium				3");
+            Console.WriteLine("(5)Platinum				3");
+            Console.WriteLine("(6)Titanium			    4");
+            Console.WriteLine("(7)Aluminum				12");
+            Console.WriteLine("(8)Rhodium				4");
+            Console.WriteLine("(9)Rhuthenium			6");
+            Console.WriteLine("Iridium				    8");
         }
 
         static void trading(string playerAt, ref int playerMoney, ref int cargoOnShip)
