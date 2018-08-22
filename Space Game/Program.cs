@@ -61,10 +61,13 @@ namespace Space_Game
             Console.WriteLine("trading planets for your success will be The Great Planet and ");
             Console.WriteLine("Alpha Centauri.");
             System.Threading.Thread.Sleep(2000);
+            Console.Clear();
             Console.WriteLine("With your life savings(100 credits) and a brand ");
             Console.WriteLine("new ship you head out to make your fortune.");
+            System.Threading.Thread.Sleep(1000);
+            Console.WriteLine("Welcome to the beginning of your space trade.");
             System.Threading.Thread.Sleep(2000);
-            Console.WriteLine("Welcome to the begining of your space trade.");
+            Console.Clear (),
 
             do
             {
