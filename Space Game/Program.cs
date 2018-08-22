@@ -8,7 +8,7 @@ namespace Space_Game
 {
     class Program
     {
-        
+
 
         static void Main(string[] args)
         {
@@ -31,7 +31,7 @@ namespace Space_Game
             int shipCMSpeed = 9;
             int warpFactor = 0; //your warp number for a trip
             double formulaSpeed = 0; //will be used to store speed in lightyears from formula
-            
+
             int totalYears = 0; //trackers for total time spent traveling
             int totalWeeks = 0;
             int totalDays = 0;
@@ -60,10 +60,10 @@ namespace Space_Game
             Console.WriteLine("With Earth being your new home you have decided that the best ");
             Console.WriteLine("trading planets for your success will be The Great Planet and ");
             Console.WriteLine("Alpha Centauri.");
-            Console.ReadLine();
+            System.Threading.Thread.Sleep(2000);
             Console.WriteLine("With your life savings(100 credits) and a brand ");
             Console.WriteLine("new ship you head out to make your fortune.");
-            Console.ReadLine();
+            System.Threading.Thread.Sleep(2000);
             Console.WriteLine("Welcome to the begining of your space trade.");
 
             do
@@ -72,14 +72,10 @@ namespace Space_Game
                 {
                     input = "";
                     Console.WriteLine("What would you like to do?");
-                    Console.WriteLine("Buy, Sell, Travel, Check Status?");
+                    Console.WriteLine("Trade, Travel, Check Status?");
                     Console.WriteLine("Or press \"Enter\" when you are ready to quit.");
                     input = Console.ReadLine();
-                    if (input == "Buy")
-                    {
-                        Console.WriteLine("Not ready yet.");
-                    }
-                    else if (input == "Sell")
+                    if (input == "Trade")
                     {
                         Console.WriteLine("Not ready yet.");
                     }
@@ -139,7 +135,7 @@ namespace Space_Game
                         isGameOver = true;
                         input = "";
                     }
-                    
+
                 }
                 while (input != "");
             }
@@ -173,48 +169,48 @@ namespace Space_Game
             bool isGood = false;
             Console.WriteLine("Enter the world you wish to travel to from the list.");
             string destName;
-                do
+            do
+            {
+                Console.WriteLine("Please enter the destination name as shown with no spaces.");
+                Console.WriteLine($"Press \"Enter\" if you do not wish to move.\n");
+
+                Console.WriteLine("Earth"); //Planets list
+                Console.WriteLine("Alpha Centauri");
+                Console.WriteLine("My Great Planet");
+
+                destName = Console.ReadLine();
+
+                if (destName == atLocal)
                 {
-                    Console.WriteLine("Please enter the destination name as shown with no spaces.");
-                    Console.WriteLine($"Press \"Enter\" if you do not wish to move.\n");
-
-                    Console.WriteLine("Earth"); //Planets list
-                    Console.WriteLine("Alpha Centauri");
-                    Console.WriteLine("My Great Planet");
-
-                    destName = Console.ReadLine();
-
-                    if (destName == atLocal)
-                    {
-                        Console.WriteLine("You are already there");
-                    }
-                    else if (destName == "Earth")
-                    {
-                        isGood = true;
-                    }
-                    else if (destName == "Alpha Centauri")
-                    {
-                        isGood = true;
-                    }
-                    else if (destName == "My Great Planet")
-                    {
-                        isGood = true;
-                    }
-                    else if (destName == "")
-                    {
-                        destName = atLocal;
-                        isGood = true;
-                    }
-                    else if (destName != "")
-                    {
-                        Console.WriteLine("That is not a supported destination.");
-                    }
-                    else
-                    {
-                        isGood = true;
-                    }
+                    Console.WriteLine("You are already there");
                 }
-                while (!isGood);
+                else if (destName == "Earth")
+                {
+                    isGood = true;
+                }
+                else if (destName == "Alpha Centauri")
+                {
+                    isGood = true;
+                }
+                else if (destName == "My Great Planet")
+                {
+                    isGood = true;
+                }
+                else if (destName == "")
+                {
+                    destName = atLocal;
+                    isGood = true;
+                }
+                else if (destName != "")
+                {
+                    Console.WriteLine("That is not a supported destination.");
+                }
+                else
+                {
+                    isGood = true;
+                }
+            }
+            while (!isGood);
             return destName;
         }
 
@@ -228,15 +224,15 @@ namespace Space_Game
             {
                 return 0.0;
             }
-            else 
+            else
             {
-            return -4.6;
+                return -4.6;
             }
         }
 
         static double destY(string destName)
         {
-            if (destName == "Earth")
+            if (destName == "Earth" || destName == "earth")
             {
                 return 0.0;
             }
@@ -244,7 +240,7 @@ namespace Space_Game
             {
                 return -4.367;
             }
-            else 
+            else
             {
                 return 5;
             }
@@ -335,8 +331,8 @@ namespace Space_Game
                 }
             }
             while (!isGood);
-		    totWeeks = totDays / 7;
-		    totDays %= 7;
+            totWeeks = totDays / 7;
+            totDays %= 7;
             time *= 24;
             do //rounds up hours
             {
@@ -353,9 +349,10 @@ namespace Space_Game
                 }
             }
             while (!isGood);
-            
+
             ++totHours; //you spent at least an hour landing/docking and taking off/undocking 
-		}
+        }
+
         static void addTime(int tripYears, int tripWeeks, int tripDays, int tripHours, //taking trip time
                         ref int totYears, ref int totWeeks, ref int totDays, ref int totHours) //to add to total time
         {
@@ -391,5 +388,54 @@ namespace Space_Game
             }
             while (!isGood);
         }
+
+        // Design the vendors for each location
+        // Method for labeling each vendor
+        static void vendorGreet(string playerAt)
+        {
+            Console.WriteLine($"Welcome to {playerAt}.");
+            Console.WriteLine("Do you want to access the vendor?");
+        }
+
+        static void theGreatPlanetInv() // The Great Planet Inventory
+        {
+            Console.WriteLine("Cargo Name			Cost\n");
+            Console.WriteLine("Gold, 				5");
+            Console.WriteLine("Iron, 				8");
+            Console.WriteLine("Selenium, 			9");
+            Console.WriteLine("Platinum, 			1");
+            Console.WriteLine("Titanium, 			11");
+            Console.WriteLine("Aluminum, 			7");
+            Console.WriteLine("Rhodium, 			10");
+            Console.WriteLine("Rhuthenium, 			12");
+            Console.WriteLine("Iridium, 			3");
+        }
+        static void earthInv() // Earth Inventory
+        {
+            Console.WriteLine("Cargo Name			Cost\n");
+            Console.WriteLine("Gold				    9");
+            Console.WriteLine("Iron 				1");
+            Console.WriteLine("Selenium			    6");
+            Console.WriteLine("Platinum			    10");
+            Console.WriteLine("Titanium			    5");
+            Console.WriteLine("Aluminum			    2");
+            Console.WriteLine("Rhodium				12");
+            Console.WriteLine("Rhuthenium			8");
+            Console.WriteLine("Iridium 			    7");
+        }
+        static void alphaCentuariInv() //Alpha Centauri Inventory
+        {
+            Console.WriteLine("Cargo Name			Cost\n");
+            Console.WriteLine("Gold	 				2");
+            Console.WriteLine("Iron					10");
+            Console.WriteLine("Selenium				3");
+            Console.WriteLine("Platinum				3");
+            Console.WriteLine("Titanium			    4");
+            Console.WriteLine("Aluminum				12");
+            Console.WriteLine("Rhodium				4");
+            Console.WriteLine("Rhuthenium			6");
+            Console.WriteLine("Iridium				8");
+        }
     }
+
 }
