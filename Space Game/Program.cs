@@ -23,7 +23,7 @@ namespace Space_Game
             int cargoCount = 0; // variable for Cargo in ship now
             int[,] cargoItems = new int[24, 2] { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
                 { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
-                { 0, 0 }, { 0, 0 }, { 0, 0 } }; 
+                { 0, 0 }, { 0, 0 }, { 0, 0 } }; //to store type and amount of cargo in slots
 
             int creditsNow = 100; //creates value for storing currency amount and sets initial currency. Whole credits only.
             
@@ -85,8 +85,6 @@ namespace Space_Game
                     {
                         vendorGreet(playerLoc);
                         trading(planetNum, ref creditsNow, cargoSpace, ref cargoCount, cargoItems);
-
-
                     }
                     else if (input == "Travel")
                     {
@@ -425,16 +423,16 @@ namespace Space_Game
 
         static void myGreatPlanetInv() // The Great Planet Inventory
         {
-            Console.WriteLine("(1)Cargo Name		    Cost\n");
-            Console.WriteLine("(2)Gold	 		        5");   //Gold, 		
-            Console.WriteLine("(3)Iron			        8");   //Iron, 		
-            Console.WriteLine("(4)Selenium	            9");   //Selenium, 	
-            Console.WriteLine("(5)Platinum	            1");   //Platinum, 	
-            Console.WriteLine("(6)Titanium	            11");   //Titanium, 	;
-            Console.WriteLine("(7)Aluminum	            7");   //Aluminum, 	
-            Console.WriteLine("(8)Rhodium	            10");   //Rhodium, 	;
-            Console.WriteLine("(9)Rhuthenium            12");   //Rhuthenium, 	;
-            Console.WriteLine("Iridium		            3");   //Iridium, 	
+            Console.WriteLine("Cargo Name		    Cost\n");
+            Console.WriteLine("(1)Gold	 		        5");   //Gold, 		
+            Console.WriteLine("(2)Iron			        8");   //Iron, 		
+            Console.WriteLine("(3)Selenium	            9");   //Selenium, 	
+            Console.WriteLine("(4)Platinum	            1");   //Platinum, 	
+            Console.WriteLine("(5)Titanium	            11");   //Titanium, 	;
+            Console.WriteLine("(6)Aluminum	            7");   //Aluminum, 	
+            Console.WriteLine("(7)Rhodium	            10");   //Rhodium, 	;
+            Console.WriteLine("(8)Rhuthenium            12");   //Rhuthenium, 	;
+            Console.WriteLine("(9)Iridium		        3");   //Iridium, 	
         }
 
         static void earthInv() // Earth Inventory
@@ -453,37 +451,41 @@ namespace Space_Game
 
         static void alphaCentauriInv() //Alpha Centauri Inventory
         {
-            Console.WriteLine("(1)Cargo Name			Cost\n");
-            Console.WriteLine("(2)Gold	 				2");
-            Console.WriteLine("(3)Iron					10");
-            Console.WriteLine("(4)Selenium				3");
-            Console.WriteLine("(5)Platinum				3");
-            Console.WriteLine("(6)Titanium			    4");
-            Console.WriteLine("(7)Aluminum				12");
-            Console.WriteLine("(8)Rhodium				4");
-            Console.WriteLine("(9)Rhuthenium			6");
-            Console.WriteLine("Iridium				    8");
+            Console.WriteLine("Cargo Name			Cost\n");
+            Console.WriteLine("(1)Gold	 				2");
+            Console.WriteLine("(2)Iron					10");
+            Console.WriteLine("(3)Selenium				3");
+            Console.WriteLine("(4)Platinum				3");
+            Console.WriteLine("(5)Titanium			    4");
+            Console.WriteLine("(6)Aluminum				12");
+            Console.WriteLine("(7)Rhodium				4");
+            Console.WriteLine("(8)Rhuthenium			6");
+            Console.WriteLine("(9)Iridium				8");
         }
 
         static void trading(int placeNum, ref int playerMoney, int totalSpace, ref int cargoTotal, int[,] shipContents)
         {
-
-            int[] prices = [1];
-            switch (placeNum) //shows stuff at planet
+            int[] prices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            bool isDone = false;
+            setPrices(placeNum, prices);
+            do
             {
+                switch (placeNum) //shows stuff at planet
+                 {
                 case 0:
                     earthInv();
-                    setPrices(placeNum, prices);
                     break;
                 case 1:
                     alphaCentauriInv();
-                    setPrices(placeNum, prices);
                     break;
                 case 2:
                     myGreatPlanetInv();
-                    setPrices(placeNum, prices);
                     break;
+                }
+                
+
             }
+            while (!isDone);
         }
 
         static void setPrices(int planet, int[] prices)
