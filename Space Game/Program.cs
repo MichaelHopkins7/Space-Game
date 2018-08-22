@@ -467,19 +467,66 @@ namespace Space_Game
 
         static void trading(int placeNum, ref int playerMoney, int totalSpace, ref int cargoTotal, int[,] shipContents)
         {
+
+            int[] prices = [1];
             switch (placeNum) //shows stuff at planet
             {
                 case 0:
                     earthInv();
+                    setPrices(placeNum, prices);
                     break;
                 case 1:
                     alphaCentauriInv();
+                    setPrices(placeNum, prices);
                     break;
                 case 2:
                     myGreatPlanetInv();
+                    setPrices(placeNum, prices);
                     break;
             }
+        }
 
+        static void setPrices(int planet, int[] prices)
+        {
+            switch (planet)
+            {
+                case 0:
+                    prices[0] = 0;
+                    prices[1] = 9;
+                    prices[2] = 1;
+                    prices[3] = 6;
+                    prices[4] = 10;
+                    prices[5] = 5;
+                    prices[6] = 2;
+                    prices[7] = 12;
+                    prices[8] = 8;
+                    prices[9] = 7;
+                    break;
+                case 1:
+                    prices[0] = 0;
+                    prices[1] = 9;
+                    prices[2] = 1;
+                    prices[3] = 6;
+                    prices[4] = 10;
+                    prices[5] = 5;
+                    prices[6] = 2;
+                    prices[7] = 12;
+                    prices[8] = 8;
+                    prices[9] = 7;
+                    break;
+                case 2:
+                    prices[0] = 0;
+                    prices[1] = 9;
+                    prices[2] = 1;
+                    prices[3] = 6;
+                    prices[4] = 10;
+                    prices[5] = 5;
+                    prices[6] = 2;
+                    prices[7] = 12;
+                    prices[8] = 8;
+                    prices[9] = 7;
+                    break;
+            }
         }
     }
 
