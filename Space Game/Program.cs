@@ -15,12 +15,12 @@ namespace Space_Game
             bool isGameOver = false; //if a game end triggers this will be changed to true
             string input = ""; //Useful for when we want input
 
-            double cargoSpace = 6; // Setting ship max cargo capacities
-            double shipAMCargo = 8; // capacity for ships other than starting ship
-            double shipBMCargo = 10;
-            double shipCMCargo = 12;
+            int cargoSpace = 6; // Setting ship max cargo capacities
+            int shipAMCargo = 8; // capacity for ships other than starting ship
+            int shipBMCargo = 10;
+            int shipCMCargo = 12;
 
-            double shipCargoCurrent = 0; // variable for Cargo in ship now
+            int shipCargoCurrent = 0; // variable for Cargo in ship now
 
             int creditsNow = 100; //creates value for storing currency amount and sets initial currency. Whole credits only.
             int purchasePrice = 0; //sets up value to use for purchases
@@ -67,7 +67,7 @@ namespace Space_Game
             System.Threading.Thread.Sleep(1000);
             Console.WriteLine("Welcome to the beginning of your space trade.");
             System.Threading.Thread.Sleep(2000);
-            Console.Clear (),
+            Console.Clear();
 
             do
             {
@@ -80,7 +80,8 @@ namespace Space_Game
                     input = Console.ReadLine();
                     if (input == "Trade")
                     {
-                        Console.WriteLine("Not ready yet.");
+                        vendorGreet(playerLoc);
+
                     }
                     else if (input == "Travel")
                     {
@@ -182,6 +183,19 @@ namespace Space_Game
                 Console.WriteLine("My Great Planet");
 
                 destName = Console.ReadLine();
+
+                if (destName == "earth")
+                {
+                    destName = "Earth";
+                }
+                else if (destName == "alpha centauri")
+                {
+                    destName = "Alpha Centauri";
+                }
+                else if (destName == "my great planet")
+                {
+                    destName = "My Great Planet";
+                }
 
                 if (destName == atLocal)
                 {
