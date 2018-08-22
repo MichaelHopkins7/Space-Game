@@ -431,7 +431,7 @@ namespace Space_Game
         static void myGreatPlanetInv() // The Great Planet Inventory
         {
             Console.WriteLine("Cargo Name		    Cost\n");
-            Console.WriteLine("(1)Gold	 		        5");   //Gold, 		
+            Console.WriteLine("(1)Gold	 		        5");   //Gold, 		{prices[1]}
             Console.WriteLine("(2)Iron			        8");   //Iron, 		
             Console.WriteLine("(3)Selenium	            9");   //Selenium, 	
             Console.WriteLine("(4)Platinum	            1");   //Platinum, 	
