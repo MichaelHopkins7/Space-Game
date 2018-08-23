@@ -26,12 +26,12 @@ namespace Space_Game
                 { 0, 0 }, { 0, 0 }, { 0, 0 } }; //to store type and amount of cargo in slots
 
             int creditsNow = 100; //creates value for storing currency amount and sets initial currency. Whole credits only.
-
+            
+            int shipSpeed = 4; // initial ship max speed
             int shipAMSpeed = 6; //setting speeds for other ships
             int shipBMSpeed = 7;
             int shipCMSpeed = 9;
-            int warpFactor = 0; //your warp number for a trip
-            double formulaSpeed = 0; //will be used to store speed in lightyears from formula
+            double speed = 0; //will be used to store speed in lightyears from formula
 
             int totalYears = 0; //trackers for total time spent traveling
             int totalWeeks = 0;
@@ -47,15 +47,14 @@ namespace Space_Game
             
             double currentX = 0; //set up tracker for current location to be used to calculate distance
             double currentY = 0; //	and sets up starting coordinates to match starting planet of Earth
-            int curShipSpeed = 4; // initial ship max speed
             double totalTravelDistance = 0; // tracks total lifetime travel distance
 
             int planetNum = 0; //start at Earths number
 
             string playerLoc = "Earth"; //sets up current location name var and sets Earth for game start
             string destSystem = "";
-            double destXCoord = 0;
-            double destYCoord = 0;
+            double destXC = 0;
+            double destYC = 0;
             double distToDest = 0; //var for travel distance to new coordinates
             double destTravelTime = 0; //var for time spent traveling on a trip
            
@@ -95,13 +94,13 @@ namespace Space_Game
                         newPlanet(playerLoc, ref destSystem, ref planetNum);
                         if (destSystem != playerLoc)
                         {
-                            destXCoord = destX(planetNum);
-                            destYCoord = destY(planetNum);
-                            warpFactor = requestWF(curShipSpeed);
-                            formulaSpeed = WarpSpeed(warpFactor);
-                            distToDest = calcDistance(currentX, currentY, destXCoord, destYCoord);
+
+                            destX(planetNum, ref destXC);
+                            destY(planetNum, ref destYC);
+                            speed = warpSpeed(shipSpeed);
+                            distToDest = calcDistance(currentX, currentY, destXC, destYC);
                             totalTravelDistance += distToDest;
-                            destTravelTime = travelTime(distToDest, formulaSpeed);
+                            destTravelTime = travelTime(distToDest, speed);
                             convertTime(destTravelTime, ref tripYears, ref tripWeeks, ref tripDays, ref tripHours);
                             Console.WriteLine($"You have arrived at {destSystem}.");
                             Console.Write("It took: ");
@@ -110,8 +109,8 @@ namespace Space_Game
                             Console.Write($"{tripDays} Days, ");
                             Console.Write($"and {tripHours} Hours.");
                             playerLoc = destSystem;
-                            currentX = destXCoord;
-                            currentY = destYCoord;
+                            currentX = destXC;
+                            currentY = destYC;
                             addTime(tripYears, tripWeeks, tripDays, tripHours, //adds travel time to total time
                                 ref totalYears, ref totalWeeks, ref totalDays, ref totalHours);
                             tripYears = 0;
@@ -256,39 +255,49 @@ namespace Space_Game
             while (!isGood);
         }
 
-        static double destX(int destNum)
+        static void destX(int destNum, ref double destXC)
         {
-            if (destNum == 0)
+            switch (destNum)
             {
-                return 0.0;
+                case 0:
+                    destXC = 0.0;
+                    break;
+                case 1:
+                    destXC = 0.0;
+                    break;
+                case 2:
+                    destXC  =- 4.6;
+                    break;
+                default:
+                    {
+                        return;
+                    }
             }
-            else if (destNum == 1)
-            {
-                return 0.0;
-            }
-            else
-            {
-                return -4.6;
-            }
+            return;
         }
 
-        static double destY(int destNum)
+        static void destY(int destNum, ref double destYC)
         {
-            if (destNum == 0)
+            switch (destNum)
             {
-                return 0.0;
+                case 0:
+                    destYC = 0.0;
+                    break;
+                case 1:
+                    destYC = -4.367;
+                    break;
+                case 2:
+                    destYC = 5;
+                    break;
+                default:
+                    {
+                        return;
+                    }
             }
-            else if (destNum == 1)
-            {
-                return -4.367;
-            }
-            else
-            {
-                return 5;
-            }
+            return;
         }
 
-        static int requestWF(int maxSpeed)
+        static double warpSpeed(int maxSpeed)
         {
             bool isGood = false;
             int requestedWF = 0;
@@ -318,10 +327,10 @@ namespace Space_Game
                 }
             }
             while (!isGood);
-            return requestedWF;
-        }
 
-        static double WarpSpeed(int warpFactor) => Math.Pow(warpFactor, (10 / 3.0)) + Math.Pow((10 - warpFactor), (-11 / 3.0));
+            double speed = Math.Pow(requestedWF, (10 / 3.0)) + Math.Pow((10 - requestedWF), (-11 / 3.0));
+            return speed;
+        }
 
         static double calcDistance(double curX, double curY, double newX, double newY)
         {
