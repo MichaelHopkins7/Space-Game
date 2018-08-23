@@ -88,11 +88,11 @@ namespace Space_Game
                     if (input == "Trade")
                     {
                         vendorGreet(playerLoc);
-                        trading(planetNum, ref creditsNow, cargoSpace, ref cargoCount, cargoItems);
+                        trading(planetNum, ref creditsNow, cargoSpace, ref cargoCount, cargoItems, prices);
                     }
                     else if (input == "Travel")
                     {
-                        destSystem = newPlanet(playerLoc, ref planetNum);
+                        newPlanet(playerLoc, ref destSystem, ref planetNum);
                         if (destSystem != playerLoc)
                         {
                             destXCoord = destX(planetNum);
@@ -118,7 +118,7 @@ namespace Space_Game
                             tripWeeks = 0;
                             tripDays = 0;
                             tripHours = 0;
-                            setPrices(placeNum, prices);
+                            setPrices(planetNum, prices);
                             economicFluctuation(prices);
                         }
                         else
@@ -184,8 +184,8 @@ namespace Space_Game
             }
         }
 
-        static string newPlanet(string atLocal, ref int planetNum)
-        {
+        static string newPlanet(string atLocal, ref string destSystem, ref int planetNum)
+        { //newPlanet(playerLoc, ref destSystem, ref planetNum);
             bool isGood = false;
             Console.WriteLine("Enter the place you wish to travel to from the list.");
             string destName;
@@ -248,7 +248,7 @@ namespace Space_Game
                 }
             }
             while (!isGood);
-            return destName;
+            destSystem = destName;
         }
 
         static double destX(int destNum)
@@ -386,7 +386,6 @@ namespace Space_Game
                 }
             }
             while (!isGood);
-
             ++totHours; //you spent at least an hour landing/docking and taking off/undocking 
         }
 
@@ -434,71 +433,59 @@ namespace Space_Game
             Console.WriteLine($"Here is what we have.\n");
         }
 
-        static void myGreatPlanetInv() // The Great Planet Inventory
+        static void planetInv(int[] prices) // Planet Inventory
         {
             Console.WriteLine("Cargo Name		    Cost\n");
-            Console.WriteLine("(1)Gold	 		        5");   //Gold, 		{prices[1]}
-            Console.WriteLine("(2)Iron			        8");   //Iron, 		
-            Console.WriteLine("(3)Selenium	            9");   //Selenium, 	
-            Console.WriteLine("(4)Platinum	            6");   //Platinum, 	
-            Console.WriteLine("(5)Titanium	            11");   //Titanium, 	;
-            Console.WriteLine("(6)Aluminum	            7");   //Aluminum, 	
-            Console.WriteLine("(7)Rhodium	            10");   //Rhodium, 	;
-            Console.WriteLine("(8)Rhuthenium            12");   //Rhuthenium, 	;
-            Console.WriteLine("(9)Iridium		        3");   //Iridium, 	
+            Console.WriteLine($"(1)Gold	 		        {(prices[1])}");   //Gold, 		{prices[1]}
+            Console.WriteLine($"(2)Iron			        {(prices[2])}");   //Iron, 		
+            Console.WriteLine($"(3)Selenium	            {(prices[3])}9");   //Selenium, 	
+            Console.WriteLine($"(4)Platinum	            {(prices[4])}");   //Platinum, 	
+            Console.WriteLine($"(5)Titanium	            {(prices[5])}");   //Titanium, 	;
+            Console.WriteLine($"(6)Aluminum	            {(prices[6])}");   //Aluminum, 	
+            Console.WriteLine($"(7)Rhodium	            {(prices[7])}7");   //Rhodium, 	;
+            Console.WriteLine($"(8)Rhuthenium           {(prices[8])}");   //Rhuthenium, 	;
+            Console.WriteLine($"(9)Iridium		        {(prices[9])}");   //Iridium, 	
         }
-
-        static void earthInv() // Earth Inventory
-        {
-            Console.WriteLine("Cargo Name			Cost\n");
-            Console.WriteLine("(1) Gold				    9");
-            Console.WriteLine("(2) Iron 				3");
-            Console.WriteLine("(3) Selenium			    6");
-            Console.WriteLine("(4) Platinum			    10");
-            Console.WriteLine("(5) Titanium			    5");
-            Console.WriteLine("(6) Aluminum			    4");
-            Console.WriteLine("(7) Rhodium				12");
-            Console.WriteLine("(8) Rhuthenium			8");
-            Console.WriteLine("(9)Iridium 			    7");
-        }
-
-        static void alphaCentauriInv() //Alpha Centauri Inventory
-        {
-            Console.WriteLine("Cargo Name			Cost\n");
-            Console.WriteLine("(1)Gold	 				5");
-            Console.WriteLine("(2)Iron					10");
-            Console.WriteLine("(3)Selenium				3");
-            Console.WriteLine("(4)Platinum				3");
-            Console.WriteLine("(5)Titanium			    4");
-            Console.WriteLine("(6)Aluminum				12");
-            Console.WriteLine("(7)Rhodium				4");
-            Console.WriteLine("(8)Rhuthenium			6");
-            Console.WriteLine("(9)Iridium				8");
-        }
-
+        
         static void trading(int placeNum, ref int playerMoney, int totalSpace, ref int cargoTotal, int[,] shipContents, int[] prices)
         {
             
             bool isDone = false;
-                        
+            string input = "";
             do
             {
-                switch (placeNum) //shows stuff at planet
-                 {
-                case 0:
-                    earthInv();
-                    break;
-                case 1:
-                    alphaCentauriInv();
-                    break;
-                case 2:
-                    myGreatPlanetInv();
-                    break;
+                planetInv(prices);
+                Console.WriteLine("Would you like to buy or sell?");
+                Console.WriteLine("If you would like to leave press \"Enter\".");
+                input = Console.ReadLine();
+                if (input == "")
+                {
+                    isDone = true;
                 }
-                
-
+                else if (input == "Buy" || input == "buy")
+                {
+                    buyingThings();
+                }
+                else if (input == "Sell" || input == "sell")
+                {
+                    sellThings();
+                }
+                else
+                {
+                    Console.WriteLine("I don't understand.");
+                }
             }
             while (!isDone);
+        }
+
+        private static void sellThings()
+        {
+            Console.WriteLine("Not done.");
+        }
+
+        private static void buyingThings()
+        {
+            Console.WriteLine("Not done.");
         }
 
         static void setPrices(int planet, int[] prices)
@@ -519,31 +506,31 @@ namespace Space_Game
                     break;
                 case 1:
                     prices[0] = 0;
-                    prices[1] = 9;
-                    prices[2] = 1;
-                    prices[3] = 6;
-                    prices[4] = 10;
-                    prices[5] = 5;
-                    prices[6] = 2;
-                    prices[7] = 12;
-                    prices[8] = 8;
-                    prices[9] = 7;
+                    prices[1] = 5;
+                    prices[2] = 10;
+                    prices[3] = 3;
+                    prices[4] = 3;
+                    prices[5] = 4;
+                    prices[6] = 12;
+                    prices[7] = 4;
+                    prices[8] = 6;
+                    prices[9] = 8;
                     break;
                 case 2:
                     prices[0] = 0;
-                    prices[1] = 9;
-                    prices[2] = 1;
-                    prices[3] = 6;
-                    prices[4] = 10;
-                    prices[5] = 5;
-                    prices[6] = 2;
-                    prices[7] = 12;
-                    prices[8] = 8;
-                    prices[9] = 7;
+                    prices[1] = 5;
+                    prices[2] = 8;
+                    prices[3] = 9;
+                    prices[4] = 6;
+                    prices[5] = 11;
+                    prices[6] = 7;
+                    prices[7] = 10;
+                    prices[8] = 12;
+                    prices[9] = 3;
                     break;
             }
         }
-        static void economicFluctuation(prices)
+        static void economicFluctuation(int[] prices)
         {
             Random rnd = new Random();
             int rando;
@@ -553,8 +540,7 @@ namespace Space_Game
                 rando = rnd.Next(1, 6);
                 prices[counter] += (rando - 3);
                 ++counter;
-        
-    }
+            }
             while (counter < 10);
         }
     }
