@@ -94,11 +94,7 @@ namespace Space_Game
                         newPlanet(playerLoc, ref destSystem, ref planetNum);
                         if (destSystem != playerLoc)
                         {
-
-                            destX(planetNum, ref destXC);
-                            destY(planetNum, ref destYC);
-                            speed = warpSpeed(shipSpeed);
-                            distToDest = calcDistance(curXC, curYC, destXC, destYC);
+                            Moving(planetNum, shipSpeed, ref speed, ref curXC, ref curYC, ref distToDest);
                             totalTravelDistance += distToDest;
                             destTravelTime = travelTime(distToDest, speed);
                             convertTime(destTravelTime, ref tripYears, ref tripWeeks, ref tripDays, ref tripHours);
@@ -109,8 +105,6 @@ namespace Space_Game
                             Console.Write($"{tripDays} Days, ");
                             Console.Write($"and {tripHours} Hours.");
                             playerLoc = destSystem;
-                            curXC = destXC;
-                            curYC = destYC;
                             addTime(tripYears, tripWeeks, tripDays, tripHours, //adds travel time to total time
                                 ref totalYears, ref totalWeeks, ref totalDays, ref totalHours);
                             tripYears = 0;
@@ -274,6 +268,18 @@ namespace Space_Game
                     }
             }
             return;
+        }
+
+        static void Moving(int planetNum, int shipSpeed, ref double speed, ref double curXC, ref double curYC, ref double distToDest)
+        {
+            double destXC = 0;
+            double destYC = 0;
+            speed = warpSpeed(shipSpeed);
+            destX(planetNum, ref destXC);
+            destY(planetNum, ref destYC);
+            distToDest = calcDistance(curXC, curYC, destXC, destYC);
+            curXC = destXC;
+            curYC = destYC;
         }
 
         static void destY(int destNum, ref double destYC)
