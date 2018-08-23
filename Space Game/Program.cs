@@ -192,7 +192,6 @@ namespace Space_Game
         { //newPlanet(playerLoc, ref destSystem, ref planetNum);
             bool isGood = false;
             Console.WriteLine("Enter the place you wish to travel to from the list.");
-            string destName;
             do
             {
                 Console.WriteLine("Please enter the name or number of the destination.");
@@ -202,25 +201,25 @@ namespace Space_Game
                 Console.WriteLine("2. Alpha Centauri");
                 Console.WriteLine("3. My Great Planet");
 
-                destName = Console.ReadLine();
+                destSystem = Console.ReadLine();
                 int destNum = 4;
                 
-                if (destName == "Earth" || destName == "earth" || destName == "1")
+                if (destSystem == "Earth" || destSystem == "earth" || destSystem == "1")
                 {
                     destNum = 0;
                 }
-                else if (destName == "Alpha Centauri" || destName == "alpha centauri" || destName == "2")
+                else if (destSystem == "Alpha Centauri" || destSystem == "alpha centauri" || destSystem == "2")
                 {
                     destNum = 1;
                 }
-                else if (destName == "My Great Planet" || destName == "my great planet" || destName == "3")
+                else if (destSystem == "My Great Planet" || destSystem == "my great planet" || destSystem == "3")
                 {
                     destNum = 2;
                 }
-                else if (destName == "")
+                else if (destSystem == "")
                 {
                     destNum = planetNum;
-                    destName = atLocal;
+                    destSystem = atLocal;
                     isGood = true;
                 }
 
@@ -237,25 +236,24 @@ namespace Space_Game
                     switch (destNum)
                     {
                         case 0:
-                            destName = "Earth";
+                            destSystem = "Earth";
                             isGood = true;
-                            destSystem = destName;
+                            planetNum = 0;
                             break;
                         case 1:
-                            destName = "Alpha Centauri";
+                            destSystem = "Alpha Centauri";
                             isGood = true;
-                            destSystem = destName;
+                            planetNum = 1;
                             break;
                         case 2:
-                            destName = "My Great Planet";
+                            destSystem = "My Great Planet";
                             isGood = true;
-                            destSystem = destName;
+                            planetNum = 2;
                             break;
                     }
                 }
             }
             while (!isGood);
-            destSystem = destName;
         }
 
         static double destX(int destNum)
@@ -443,15 +441,15 @@ namespace Space_Game
         static void planetInv(int[] prices) // Planet Inventory
         {
             Console.WriteLine("Cargo Name		    Cost\n");
-            Console.WriteLine($"(1)Gold	 		        {(prices[1])}");   //Gold, 		{prices[1]}
-            Console.WriteLine($"(2)Iron			        {(prices[2])}");   //Iron, 		
-            Console.WriteLine($"(3)Selenium	            {(prices[3])}");   //Selenium, 	
-            Console.WriteLine($"(4)Platinum	            {(prices[4])}");   //Platinum, 	
-            Console.WriteLine($"(5)Titanium	            {(prices[5])}");   //Titanium, 	;
-            Console.WriteLine($"(6)Aluminum	            {(prices[6])}");   //Aluminum, 	
-            Console.WriteLine($"(7)Rhodium	            {(prices[7])}7");   //Rhodium, 	;
-            Console.WriteLine($"(8)Rhuthenium           {(prices[8])}");   //Rhuthenium, 	;
-            Console.WriteLine($"(9)Iridium		        {(prices[9])}");   //Iridium, 	
+            Console.WriteLine($"(1)Gold              {(prices[1])}");   //Gold
+            Console.WriteLine($"(2)Iron              {(prices[2])}");   //Iron
+            Console.WriteLine($"(3)Selenium          {(prices[3])}");   //Selenium
+            Console.WriteLine($"(4)Platinum          {(prices[4])}");   //Platinum
+            Console.WriteLine($"(5)Titanium          {(prices[5])}");   //Titanium
+            Console.WriteLine($"(6)Aluminum          {(prices[6])}");   //Aluminum	
+            Console.WriteLine($"(7)Rhodium           {(prices[7])}7");   //Rhodium	
+            Console.WriteLine($"(8)Rhuthenium        {(prices[8])}");   //Rhuthenium	
+            Console.WriteLine($"(9)Iridium           {(prices[9])}");   //Iridium
         }
         
         static void trading(int placeNum, ref int playerMoney, int totalSpace, ref int cargoTotal, int[,] shipContents, int[] prices)
