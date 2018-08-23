@@ -184,7 +184,7 @@ namespace Space_Game
             }
         }
 
-        static string newPlanet(string atLocal, ref string destSystem, ref int planetNum)
+        static void newPlanet(string atLocal, ref string destSystem, ref int planetNum)
         { //newPlanet(playerLoc, ref destSystem, ref planetNum);
             bool isGood = false;
             Console.WriteLine("Enter the place you wish to travel to from the list.");
