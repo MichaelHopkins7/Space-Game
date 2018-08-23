@@ -58,22 +58,22 @@ namespace Space_Game
             double destYCoord = 0;
             double distToDest = 0; //var for travel distance to new coordinates
             double destTravelTime = 0; //var for time spent traveling on a trip
-
+           
             Console.WriteLine("The Space Game");
             Console.WriteLine("After a lifetime of wandering between planets you have finally decided to pursue your fortune in the interplanetary trade industry.");
             Console.WriteLine("With Earth being your new home you have decided that the best trading planets for your success will be The Great Planet and Alpha Centauri.");
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(6000);
             Console.Clear();
             Console.WriteLine("With your life savings(100 credits) and a brand new ship you head out to make your fortune. ");
             Console.WriteLine("Welcome to the beginning of your space trading adventure.");
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(5000);
             Console.Clear();
             Console.WriteLine("Rules for the game:");
             Console.WriteLine("You will have 40 years to acquire as much wealth as possible and become the greatest trader of all time.");
             Console.WriteLine("Trade Routes: Plan appropriate and ensure that you find the best routes for moving around the galaxy.");
             Console.WriteLine("Time: This is your greatest enemy, learn to manipulate it to give you the advantage.");
             Console.WriteLine("Game Over Criteria: The game will end if you lose all of your fortune, quit the game, or you survive to 40 years.");
-            System.Threading.Thread.Sleep(4000);
+            System.Threading.Thread.Sleep(8000);
             Console.Clear();
 
             do
@@ -128,13 +128,8 @@ namespace Space_Game
                     }
                     else if (input == "Check Status")
                     {
-                        Console.WriteLine($"You are at {playerLoc}.");
-                        Console.Write("You have been traveling for ");
-                        Console.Write($"{totalYears} Years, ");
-                        Console.Write($"{totalWeeks} Weeks, ");
-                        Console.Write($"{totalDays} Days, ");
-                        Console.Write($"and {totalHours} Hours.\n");
-                        Console.WriteLine($"You have {creditsNow} credits.");
+                        status(totalYears, totalWeeks, totalDays, totalHours, 
+                            totalTravelDistance, creditsNow);
                     }
                     else if (input == "")
                     {
@@ -161,15 +156,9 @@ namespace Space_Game
             }
             while (!isGameOver);
 
-            Console.WriteLine("You have been traveling for:");
-            Console.WriteLine($"Years:{totalYears}");
-            Console.WriteLine($"Weeks:{totalWeeks}");
-            Console.WriteLine($"Days:{totalDays}");
-            Console.WriteLine($"Hours:{totalHours}");
+            status(totalYears, totalWeeks, totalDays, totalHours, 
+                totalTravelDistance, creditsNow);
 
-            Console.WriteLine($"You traveled {totalTravelDistance} lightyears!");
-
-            Console.WriteLine($"You had {creditsNow}");
             if (creditsNow > 100)
             {
                 Console.WriteLine($"You made {creditsNow - 100}!");
@@ -183,6 +172,21 @@ namespace Space_Game
                 Console.WriteLine($"You broke even.");
             }
         }
+
+        static void status(int totalYears, int totalWeeks, int totalDays, int totalHours
+                        , double totalTravelDistance, int creditsNow)
+        {
+            Console.WriteLine("You have been traveling for:");
+            Console.WriteLine($"Years:{totalYears}");
+            Console.WriteLine($"Weeks:{totalWeeks}");
+            Console.WriteLine($"Days:{totalDays}");
+            Console.WriteLine($"Hours:{totalHours}");
+
+            Console.WriteLine($"You traveled {totalTravelDistance} lightyears!");
+
+            Console.WriteLine($"You have {creditsNow}");
+        }
+
 
         static void newPlanet(string atLocal, ref string destSystem, ref int planetNum)
         { //newPlanet(playerLoc, ref destSystem, ref planetNum);
@@ -235,14 +239,17 @@ namespace Space_Game
                         case 0:
                             destName = "Earth";
                             isGood = true;
+                            destSystem = destName;
                             break;
                         case 1:
                             destName = "Alpha Centauri";
                             isGood = true;
+                            destSystem = destName;
                             break;
                         case 2:
                             destName = "My Great Planet";
                             isGood = true;
+                            destSystem = destName;
                             break;
                     }
                 }
@@ -438,7 +445,7 @@ namespace Space_Game
             Console.WriteLine("Cargo Name		    Cost\n");
             Console.WriteLine($"(1)Gold	 		        {(prices[1])}");   //Gold, 		{prices[1]}
             Console.WriteLine($"(2)Iron			        {(prices[2])}");   //Iron, 		
-            Console.WriteLine($"(3)Selenium	            {(prices[3])}9");   //Selenium, 	
+            Console.WriteLine($"(3)Selenium	            {(prices[3])}");   //Selenium, 	
             Console.WriteLine($"(4)Platinum	            {(prices[4])}");   //Platinum, 	
             Console.WriteLine($"(5)Titanium	            {(prices[5])}");   //Titanium, 	;
             Console.WriteLine($"(6)Aluminum	            {(prices[6])}");   //Aluminum, 	
