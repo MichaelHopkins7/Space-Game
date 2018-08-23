@@ -45,8 +45,8 @@ namespace Space_Game
 
             int[] prices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             
-            double currentX = 0; //set up tracker for current location to be used to calculate distance
-            double currentY = 0; //	and sets up starting coordinates to match starting planet of Earth
+            double curXC = 0; //set up tracker for current location to be used to calculate distance
+            double curYC = 0; //	and sets up starting coordinates to match starting planet of Earth
             double totalTravelDistance = 0; // tracks total lifetime travel distance
 
             int planetNum = 0; //start at Earths number
@@ -98,7 +98,7 @@ namespace Space_Game
                             destX(planetNum, ref destXC);
                             destY(planetNum, ref destYC);
                             speed = warpSpeed(shipSpeed);
-                            distToDest = calcDistance(currentX, currentY, destXC, destYC);
+                            distToDest = calcDistance(curXC, curYC, destXC, destYC);
                             totalTravelDistance += distToDest;
                             destTravelTime = travelTime(distToDest, speed);
                             convertTime(destTravelTime, ref tripYears, ref tripWeeks, ref tripDays, ref tripHours);
@@ -109,8 +109,8 @@ namespace Space_Game
                             Console.Write($"{tripDays} Days, ");
                             Console.Write($"and {tripHours} Hours.");
                             playerLoc = destSystem;
-                            currentX = destXC;
-                            currentY = destYC;
+                            curXC = destXC;
+                            curYC = destYC;
                             addTime(tripYears, tripWeeks, tripDays, tripHours, //adds travel time to total time
                                 ref totalYears, ref totalWeeks, ref totalDays, ref totalHours);
                             tripYears = 0;
