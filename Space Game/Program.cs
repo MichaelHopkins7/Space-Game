@@ -26,7 +26,7 @@ namespace Space_Game
                 { 0, 0 }, { 0, 0 }, { 0, 0 } }; //to store type and amount of cargo in slots
 
             int creditsNow = 100; //creates value for storing currency amount and sets initial currency. Whole credits only.
-            
+
             int shipAMSpeed = 6; //setting speeds for other ships
             int shipBMSpeed = 7;
             int shipCMSpeed = 9;
@@ -43,6 +43,8 @@ namespace Space_Game
             int tripDays = 0;
             int tripHours = 0;
 
+            int[] prices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            
             double currentX = 0; //set up tracker for current location to be used to calculate distance
             double currentY = 0; //	and sets up starting coordinates to match starting planet of Earth
             int curShipSpeed = 4; // initial ship max speed
@@ -58,18 +60,20 @@ namespace Space_Game
             double destTravelTime = 0; //var for time spent traveling on a trip
 
             Console.WriteLine("The Space Game");
-            Console.WriteLine("After a lifetime of wandering between planets you have finally");
-            Console.WriteLine("decided to pursue your fortune in the interplanetary trade industry. ");
-            Console.WriteLine("With Earth being your new home you have decided that the best ");
-            Console.WriteLine("trading planets for your success will be The Great Planet and ");
-            Console.WriteLine("Alpha Centauri.");
-            System.Threading.Thread.Sleep(4000);
+            Console.WriteLine("After a lifetime of wandering between planets you have finally decided to pursue your fortune in the interplanetary trade industry.");
+            Console.WriteLine("With Earth being your new home you have decided that the best trading planets for your success will be The Great Planet and Alpha Centauri.");
+            System.Threading.Thread.Sleep(5000);
             Console.Clear();
-            Console.WriteLine("With your life savings(100 credits) and a brand ");
-            Console.WriteLine("new ship you head out to make your fortune.");
-            System.Threading.Thread.Sleep(1000);
-            Console.WriteLine("Welcome to the beginning of your space trade.");
+            Console.WriteLine("With your life savings(100 credits) and a brand new ship you head out to make your fortune. ");
+            Console.WriteLine("Welcome to the beginning of your space trading adventure.");
             System.Threading.Thread.Sleep(3000);
+            Console.Clear();
+            Console.WriteLine("Rules for the game:");
+            Console.WriteLine("You will have 40 years to acquire as much wealth as possible and become the greatest trader of all time.");
+            Console.WriteLine("Trade Routes: Plan appropriate and ensure that you find the best routes for moving around the galaxy.");
+            Console.WriteLine("Time: This is your greatest enemy, learn to manipulate it to give you the advantage.");
+            Console.WriteLine("Game Over Criteria: The game will end if you lose all of your fortune, quit the game, or you survive to 40 years.");
+            System.Threading.Thread.Sleep(4000);
             Console.Clear();
 
             do
@@ -114,6 +118,8 @@ namespace Space_Game
                             tripWeeks = 0;
                             tripDays = 0;
                             tripHours = 0;
+                            setPrices(placeNum, prices);
+                            economicFluctuation(prices);
                         }
                         else
                         {
@@ -303,7 +309,7 @@ namespace Space_Game
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("Please enter an interger.");
+                    Console.WriteLine("Please enter an integer.");
                 }
             }
             while (!isGood);
@@ -434,7 +440,7 @@ namespace Space_Game
             Console.WriteLine("(1)Gold	 		        5");   //Gold, 		{prices[1]}
             Console.WriteLine("(2)Iron			        8");   //Iron, 		
             Console.WriteLine("(3)Selenium	            9");   //Selenium, 	
-            Console.WriteLine("(4)Platinum	            1");   //Platinum, 	
+            Console.WriteLine("(4)Platinum	            6");   //Platinum, 	
             Console.WriteLine("(5)Titanium	            11");   //Titanium, 	;
             Console.WriteLine("(6)Aluminum	            7");   //Aluminum, 	
             Console.WriteLine("(7)Rhodium	            10");   //Rhodium, 	;
@@ -446,11 +452,11 @@ namespace Space_Game
         {
             Console.WriteLine("Cargo Name			Cost\n");
             Console.WriteLine("(1) Gold				    9");
-            Console.WriteLine("(2) Iron 				1");
+            Console.WriteLine("(2) Iron 				3");
             Console.WriteLine("(3) Selenium			    6");
             Console.WriteLine("(4) Platinum			    10");
             Console.WriteLine("(5) Titanium			    5");
-            Console.WriteLine("(6) Aluminum			    2");
+            Console.WriteLine("(6) Aluminum			    4");
             Console.WriteLine("(7) Rhodium				12");
             Console.WriteLine("(8) Rhuthenium			8");
             Console.WriteLine("(9)Iridium 			    7");
@@ -459,7 +465,7 @@ namespace Space_Game
         static void alphaCentauriInv() //Alpha Centauri Inventory
         {
             Console.WriteLine("Cargo Name			Cost\n");
-            Console.WriteLine("(1)Gold	 				2");
+            Console.WriteLine("(1)Gold	 				5");
             Console.WriteLine("(2)Iron					10");
             Console.WriteLine("(3)Selenium				3");
             Console.WriteLine("(4)Platinum				3");
@@ -470,12 +476,11 @@ namespace Space_Game
             Console.WriteLine("(9)Iridium				8");
         }
 
-        static void trading(int placeNum, ref int playerMoney, int totalSpace, ref int cargoTotal, int[,] shipContents)
+        static void trading(int placeNum, ref int playerMoney, int totalSpace, ref int cargoTotal, int[,] shipContents, int[] prices)
         {
-            int[] prices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            bool isDone = false;
-            setPrices(placeNum, prices);
             
+            bool isDone = false;
+                        
             do
             {
                 switch (placeNum) //shows stuff at planet
@@ -537,6 +542,20 @@ namespace Space_Game
                     prices[9] = 7;
                     break;
             }
+        }
+        static void economicFluctuation(prices)
+        {
+            Random rnd = new Random();
+            int rando;
+            int counter = 1;
+            do
+            {
+                rando = rnd.Next(1, 6);
+                prices[counter] += (rando - 3);
+                ++counter;
+        
+    }
+            while (counter < 10);
         }
     }
 
