@@ -15,22 +15,15 @@ namespace Space_Game
             bool isGameOver = false; //if a game end triggers this will be changed to true
             string input = ""; //Useful for when we want input
 
-            int cargoSpace = 12; // Setting ship max cargo capacities
-            int shipAMCargo = 16; // capacity for ships other than starting ship
-            int shipBMCargo = 20;
-            int shipCMCargo = 24;
-
-            int cargoCount = 0; // variable for Cargo in ship now
+            int cargoSlots = 12; // Setting ship number of cargo slots
+            int slotSpace = 6; // setting cargo limit per slot
             int[,] cargoItems = new int[24, 2] { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
                 { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
                 { 0, 0 }, { 0, 0 }, { 0, 0 } }; //to store type and amount of cargo in slots
 
             int creditsNow = 100; //creates value for storing currency amount and sets initial currency. Whole credits only.
             
-            int shipSpeed = 4; // initial ship max speed
-            int shipAMSpeed = 6; //setting speeds for other ships
-            int shipBMSpeed = 7;
-            int shipCMSpeed = 9;
+            int shipSpeed = 3; // initial ship max speed
             double speed = 0; //will be used to store speed in lightyears from formula
 
             int totalYears = 0; //trackers for total time spent traveling
@@ -53,8 +46,6 @@ namespace Space_Game
 
             string playerLoc = "Earth"; //sets up current location name var and sets Earth for game start
             string destSystem = "";
-            double destXC = 0;
-            double destYC = 0;
             double distToDest = 0; //var for travel distance to new coordinates
             double destTravelTime = 0; //var for time spent traveling on a trip
            
@@ -87,7 +78,7 @@ namespace Space_Game
                     if (input == "Trade")
                     {
                         vendorGreet(playerLoc);
-                        trading(planetNum, ref creditsNow, cargoSpace, ref cargoCount, cargoItems, prices);
+                        trading(planetNum, ref creditsNow, cargoSlots, slotSpace, ref cargoItems, prices);
                     }
                     else if (input == "Travel")
                     {
@@ -123,6 +114,7 @@ namespace Space_Game
                     {
                         status(totalYears, totalWeeks, totalDays, totalHours, 
                             totalTravelDistance, creditsNow);
+                        showCargoInv(cargoSlots, cargoItems);
                     }
                     else if (input == "")
                     {
@@ -138,7 +130,7 @@ namespace Space_Game
                         isGameOver = true;
                         input = "";
                     }
-                    else if ((cargoCount == 0) && (creditsNow == 0))
+                    else if ((creditsNow == 0))
                     {
                         isGameOver = true;
                         input = "";
@@ -467,7 +459,7 @@ namespace Space_Game
             Console.WriteLine($"(9)Iridium           {(prices[9])}");   //Iridium
         }
         
-        static void trading(int placeNum, ref int playerMoney, int totalSpace, ref int cargoTotal, int[,] shipContents, int[] prices)
+        static void trading(int placeNum, ref int playerMoney, int totalSpace, int slotSpace, ref int[,] shipContents, int[] prices)
         {
             
             bool isDone = false;
@@ -475,6 +467,7 @@ namespace Space_Game
             do
             {
                 planetInv(prices);
+                showCargoInv(totalSpace, shipContents);
                 Console.WriteLine("Would you like to buy or sell?");
                 Console.WriteLine("If you would like to leave press \"Enter\".");
                 input = Console.ReadLine();
@@ -496,6 +489,7 @@ namespace Space_Game
                 }
             }
             while (!isDone);
+            Console.WriteLine("Good Luck!");
         }
 
         private static void sellThings()
@@ -563,28 +557,54 @@ namespace Space_Game
             }
             while (counter < 10);
         }
-    }
-    public void cargoInv(cargoCount, cargoItems)
-    {
-        int cargoCount = 0; // variable for Cargo in ship now
-        int[,] cargoItems = new int[24, 2] { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
-                { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
-                { 0, 0 }, { 0, 0 }, { 0, 0 } }; //to store type and amount of cargo in slots
-        Console.WriteLine("Do you want to check your stuff? Yes or No?");
-        bool = Console.ReadLine();
-        bool = true("Yes");
-        if ("Yes")
+
+        static void showCargoInv(int cargoSpace, int[,] cargoItems)
         {
-            Console.WriteLine($"{cargoCount} and {cargoItems}");
+            int counter = 0;
+            Console.WriteLine("SHIP CARGO");
+            do
+            {
+                switch (cargoItems[(counter), 1])
+                {
+                    case 0:
+                        Console.WriteLine($"{counter+1}. This container is empty.");
+                        break;
+                    case 1:
+                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Gold.");
+                        break;
+                    case 2:
+                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Iron.");
+                        break;
+                    case 3:
+                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Selenium.");
+                        break;
+                    case 4:
+                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Platinum.");
+                        break;
+                    case 5:
+                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Titanium.");
+                        break;
+                    case 6:
+                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Aluminum.");
+                        break;
+                    case 7:
+                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Rhodium.");
+                        break;
+                    case 8:
+                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Rhuthenium.");
+                        break;
+                    case 9:
+                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Iridium.");
+                        break;
+                }
+                counter++;
+            }
+            while (counter <= cargoSpace);
         }
-        else
-         {
-            Console.WriteLine("Good Luck");
-         }
 
     }
 }
 
-    }
+    
 
-}
+
