@@ -564,5 +564,27 @@ namespace Space_Game
             while (counter < 10);
         }
     }
+    public void cargoInv(cargoCount, cargoItems)
+    {
+        int cargoCount = 0; // variable for Cargo in ship now
+        int[,] cargoItems = new int[24, 2] { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
+                { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
+                { 0, 0 }, { 0, 0 }, { 0, 0 } }; //to store type and amount of cargo in slots
+        Console.WriteLine("Do you want to check your stuff? Yes or No?");
+        bool = Console.ReadLine();
+        bool = true("Yes");
+        if ("Yes")
+        {
+            Console.WriteLine($"{cargoCount} and {cargoItems}");
+        }
+        else
+         {
+            Console.WriteLine("Good Luck");
+         }
+
+    }
+}
+
+    }
 
 }
