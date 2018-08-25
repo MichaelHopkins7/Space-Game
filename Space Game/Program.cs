@@ -500,17 +500,14 @@ namespace Space_Game
         private static void buyingThings()   
         {
             Console.WriteLine("What would you like to buy?");
-            switch
+            //method that shows current itmes and prices
+            string var1 = Console.ReadLine;
+            int item = int.Parse(var1);
+            Console.WriteLine("You want {item});
+            Console.WriteLine("How much do you want");
+            va
             {
-                case 0:
-                    public static void DisplayArray
-                    break;
-                case 1:
-                    Console.WriteLine
-                    break;
-                case 2:
-                    Console.WriteLine
-                    break;
+                
                 
             }
         }
