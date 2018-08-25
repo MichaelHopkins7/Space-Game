@@ -497,7 +497,23 @@ namespace Space_Game
             Console.WriteLine("Not done.");
         }
 
-        private static void buyingThings()
+        private static void buyingThings()   
+        {
+            Console.WriteLine("What would you like to buy?");
+            switch
+            {
+                case 0:
+                    public static void DisplayArray
+                    break;
+                case 1:
+                    Console.WriteLine
+                    break;
+                case 2:
+                    Console.WriteLine
+                    break;
+                
+            }
+        }
         {
             Console.WriteLine("Not done.");
         }
