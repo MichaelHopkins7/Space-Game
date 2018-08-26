@@ -497,7 +497,7 @@ namespace Space_Game
             Console.WriteLine("Not done.");
         }
 
-        private static void buyingThings()   
+        private static void buyingThings()
         {
             Console.WriteLine("What would you like to buy?");
             //method that shows current itmes and prices
@@ -506,13 +506,6 @@ namespace Space_Game
             Console.WriteLine("You want {item});
             Console.WriteLine("How much do you want");
             va
-            {
-                
-                
-            }
-        }
-        {
-            Console.WriteLine("Not done.");
         }
 
         static void setPrices(int planet, int[] prices)
@@ -580,7 +573,7 @@ namespace Space_Game
                 switch (cargoItems[(counter), 1])
                 {
                     case 0:
-                        Console.WriteLine($"{counter+1}. This container is empty.");
+                        Console.WriteLine($"{counter + 1}. This container is empty.");
                         break;
                     case 1:
                         Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Gold.");
@@ -614,6 +607,128 @@ namespace Space_Game
             }
             while (counter <= cargoSpace);
         }
+        static int getInt()
+        {
+            int value;
+            string input = Console.ReadLine();
+            do
+            {
+                if (int.TryParse(input, out value))
+                {
+                    return value;
+                }
+                else
+                {
+                    Console.WriteLine("Please enter the number of your choice");
+                    input = Console.ReadLine();
+                }
+            }
+            while (false);
+            return value;
+        }
+
+        static void buySellYN(ref int money, int val, ref bool action, int buySell)
+        {
+            int choice;
+            string purchaseSell;
+            if (buySell == 1) { purchaseSell = "Purchase"; } //says buy if buying
+            else { purchaseSell = "Sell"; } // says sell if selling
+            Console.WriteLine($"1. {purchaseSell}");
+            Console.WriteLine("2. Decline");
+            choice = getInt();
+            switch (choice)
+            {
+                case 1:
+                    if (buySell == 1)
+                    {
+                        if (money > val)
+                        {
+                            Console.WriteLine("You don't have enough money.");
+                            action = false;
+                            break;
+                        }
+                        else
+                        {
+                            money -= val;
+                            action = true;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        money += val;
+                        action = true;
+                        break;
+                    }
+                case 2:
+                    Console.WriteLine("Well maybe another time.");
+                    action = false;
+                    break;
+                default:
+                    Console.WriteLine("Uh... ok, well see you later...");
+                    action = false;
+                    break;
+            }
+        }
+
+
+        static void planetInv(int[] prices) // Planet Inventory
+        {
+            Console.WriteLine("Cargo Name		    Cost\n");
+            int counter = 1;
+            do
+            {
+                Console.WriteLine($"({counter}){cargoName(counter)}              {(prices[counter])}");
+            }
+            while (counter <= 9);
+        }
+
+        static string cargoName(int typeNum)
+        {
+            switch (typeNum)
+            {
+                case 1:
+                    return "Gold";
+                case 2:
+                    return "Iron";
+                case 3:
+                    return "Selenium";
+                case 4:
+                    return "Platinum";
+                case 5:
+                    return "Titanium";
+                case 6:
+                    return "Aluminum";
+                case 7:
+                    return "Rhodium";
+                case 8:
+                    return "Rhuthenium";
+                case 9:
+                    return "Iridium";
+                default:
+                    return "nothing";
+            }
+        }
+
+        static void showCargoInv(int cargoSlots, int[,] inventory)
+        {
+            int counter = 0;
+            Console.WriteLine("SHIP CARGO");
+            do
+            {
+                if (inventory[(counter), 0] == 0) // first spot in array is cargo type.  Type 0 is empty.
+                {
+                    Console.WriteLine($"Container {counter + 1} has nothing in it."); //says container it's on is empty
+                }
+                else
+                {
+                    Console.WriteLine($"Container {counter + 1} has {inventory[counter, 1]} units of {cargoName(inventory[counter, 0])}."); //says container content type and count.
+                }
+                counter++;
+            }
+            while (counter <= cargoSlots);
+        }
+    }
 
     }
 }
