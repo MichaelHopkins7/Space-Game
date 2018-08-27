@@ -501,11 +501,14 @@ namespace Space_Game
         {
             Console.WriteLine("What would you like to buy?");
             //method that shows current itmes and prices
-            string var1 = Console.ReadLine;
+            string var1 = Console.ReadLine();
             int item = int.Parse(var1);
-            Console.WriteLine("You want {item});
-            Console.WriteLine("How much do you want");
-            va
+            Console.WriteLine($"You want {item}.");
+            Console.WriteLine("How much do you want?");
+            if
+                {
+
+                }
         }
 
         static void setPrices(int planet, int[] prices)
