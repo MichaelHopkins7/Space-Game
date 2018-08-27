@@ -445,20 +445,7 @@ namespace Space_Game
             Console.WriteLine($"Here is what we have.\n");
         }
 
-        static void planetInv(int[] prices) // Planet Inventory
-        {
-            Console.WriteLine("Cargo Name		    Cost\n");
-            Console.WriteLine($"(1)Gold              {(prices[1])}");   //Gold
-            Console.WriteLine($"(2)Iron              {(prices[2])}");   //Iron
-            Console.WriteLine($"(3)Selenium          {(prices[3])}");   //Selenium
-            Console.WriteLine($"(4)Platinum          {(prices[4])}");   //Platinum
-            Console.WriteLine($"(5)Titanium          {(prices[5])}");   //Titanium
-            Console.WriteLine($"(6)Aluminum          {(prices[6])}");   //Aluminum	
-            Console.WriteLine($"(7)Rhodium           {(prices[7])}7");   //Rhodium	
-            Console.WriteLine($"(8)Rhuthenium        {(prices[8])}");   //Rhuthenium	
-            Console.WriteLine($"(9)Iridium           {(prices[9])}");   //Iridium
-        }
-        
+                
         static void trading(int placeNum, ref int playerMoney, int totalSpace, int slotSpace, ref int[,] shipContents, int[] prices)
         {
             
@@ -500,15 +487,12 @@ namespace Space_Game
         private static void buyingThings()
         {
             Console.WriteLine("What would you like to buy?");
-            //method that shows current itmes and prices
-            string var1 = Console.ReadLine();
-            int item = int.Parse(var1);
-            Console.WriteLine($"You want {item}.");
+            //method that shows current items and prices
+            int input = getInt();
+            Console.WriteLine($"You want {cargoName(input)}.");
             Console.WriteLine("How much do you want?");
-            if
-                {
-
-                }
+            int itemCount = getInt();
+            
         }
 
         static void setPrices(int planet, int[] prices)
@@ -566,50 +550,7 @@ namespace Space_Game
             }
             while (counter < 10);
         }
-
-        static void showCargoInv(int cargoSpace, int[,] cargoItems)
-        {
-            int counter = 0;
-            Console.WriteLine("SHIP CARGO");
-            do
-            {
-                switch (cargoItems[(counter), 1])
-                {
-                    case 0:
-                        Console.WriteLine($"{counter + 1}. This container is empty.");
-                        break;
-                    case 1:
-                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Gold.");
-                        break;
-                    case 2:
-                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Iron.");
-                        break;
-                    case 3:
-                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Selenium.");
-                        break;
-                    case 4:
-                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Platinum.");
-                        break;
-                    case 5:
-                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Titanium.");
-                        break;
-                    case 6:
-                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Aluminum.");
-                        break;
-                    case 7:
-                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Rhodium.");
-                        break;
-                    case 8:
-                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Rhuthenium.");
-                        break;
-                    case 9:
-                        Console.WriteLine($"{counter + 1}. This container has {cargoItems[counter, 1]} units of Iridium.");
-                        break;
-                }
-                counter++;
-            }
-            while (counter <= cargoSpace);
-        }
+        
         static int getInt()
         {
             int value;
@@ -648,7 +589,7 @@ namespace Space_Game
                         {
                             Console.WriteLine("You don't have enough money.");
                             action = false;
-                            break;
+                               break;
                         }
                         else
                         {
@@ -673,7 +614,6 @@ namespace Space_Game
                     break;
             }
         }
-
 
         static void planetInv(int[] prices) // Planet Inventory
         {
@@ -731,7 +671,8 @@ namespace Space_Game
             }
             while (counter <= cargoSlots);
         }
-    }
+
+    
 
     }
 }
