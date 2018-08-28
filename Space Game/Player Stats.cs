@@ -8,6 +8,11 @@ namespace Space_Game
 {
     class Player_Stats
     {
+        public int money;
+        public int yearsTraveled;
+        public int weeksTraveled;
+        public int daysTraveled;
+        public int hoursTraveled;
 
     }
 }

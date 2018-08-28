@@ -34,7 +34,7 @@ namespace Space_Game
             return slotCapacity;
         }
 
-        public void ShipUpgrade(int choice)
+        private void ShipUpgrade(int choice)
         {
             switch (choice)
             {
@@ -59,5 +59,7 @@ namespace Space_Game
                     break;
             }
         }
+
+
     }
 }
