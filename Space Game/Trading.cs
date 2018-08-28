@@ -8,5 +8,11 @@ namespace Space_Game
 {
     class Trading
     {
+        public int money;
+
+        public Trading()
+        {
+            money = 100;
+        }
     }
 }

@@ -8,5 +8,6 @@ namespace Space_Game
 {
     class Player_Stats
     {
+
     }
 }
