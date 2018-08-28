@@ -118,7 +118,7 @@ namespace Space_Game
                     {
                         status(totalYears, totalWeeks, totalDays, totalHours,
                             totalTravelDistance, creditsNow);
-                        showCargoInv(cargoSlots, cargoItems);
+                        showCargoInv(myShip.CargoSlots(), cargoItems);
                     }
                     else if (input == "")
                     {

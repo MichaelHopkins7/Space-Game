@@ -11,6 +11,7 @@ namespace Space_Game
         private int speed;
         private int slots;
         private int slotCapacity;
+        public int[,] inventory;
 
         public Ship(int warpSpeed, int shipSlots, int shipSlotCapacity)
         {
