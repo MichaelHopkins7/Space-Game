@@ -12,6 +12,7 @@ namespace Space_Game
 
         static void Main(string[] args)
         {
+            
             bool isGameOver = false; //if a game end triggers this will be changed to true
             string input = ""; //Useful for when we want input
 
@@ -22,7 +23,7 @@ namespace Space_Game
                 { 0, 0 }, { 0, 0 }, { 0, 0 } }; //to store type and amount of cargo in slots
 
             int creditsNow = 100; //creates value for storing currency amount and sets initial currency. Whole credits only.
-            
+
             int shipSpeed = 3; // initial ship max speed
             double speed = 0; //will be used to store speed in lightyears from formula
 
@@ -37,7 +38,7 @@ namespace Space_Game
             int tripHours = 0;
 
             int[] prices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            
+
             double curXC = 0; //set up tracker for current location to be used to calculate distance
             double curYC = 0; //	and sets up starting coordinates to match starting planet of Earth
             double totalTravelDistance = 0; // tracks total lifetime travel distance
@@ -48,7 +49,7 @@ namespace Space_Game
             string destSystem = "";
             double distToDest = 0; //var for travel distance to new coordinates
             double destTravelTime = 0; //var for time spent traveling on a trip
-           
+
             Console.WriteLine("The Space Game");
             Console.WriteLine("After a lifetime of wandering between planets you have finally decided to pursue your fortune in the interplanetary trade industry.");
             Console.WriteLine("With Earth being your new home you have decided that the best trading planets for your success will be The Great Planet and Alpha Centauri.");
@@ -112,7 +113,7 @@ namespace Space_Game
                     }
                     else if (input == "Check Status")
                     {
-                        status(totalYears, totalWeeks, totalDays, totalHours, 
+                        status(totalYears, totalWeeks, totalDays, totalHours,
                             totalTravelDistance, creditsNow);
                         showCargoInv(cargoSlots, cargoItems);
                     }
@@ -141,7 +142,7 @@ namespace Space_Game
             }
             while (!isGameOver);
 
-            status(totalYears, totalWeeks, totalDays, totalHours, 
+            status(totalYears, totalWeeks, totalDays, totalHours,
                 totalTravelDistance, creditsNow);
 
             if (creditsNow > 100)
@@ -188,7 +189,7 @@ namespace Space_Game
 
                 destSystem = Console.ReadLine();
                 int destNum = 4;
-                
+
                 if (destSystem == "Earth" || destSystem == "earth" || destSystem == "1")
                 {
                     destNum = 0;
@@ -240,6 +241,9 @@ namespace Space_Game
             }
             while (!isGood);
         }
+        
+        
+        
 
         static void destX(int destNum, ref double destXC)
         {
