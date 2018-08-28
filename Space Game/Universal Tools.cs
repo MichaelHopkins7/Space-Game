@@ -8,6 +8,11 @@ namespace Space_Game
 {
     class Universal_Tools
     {
+
+        public Universal_Tools()
+        {
+        }
+
         public int GetInt(int maxNum)
         {
             int value;

@@ -12,6 +12,8 @@ namespace Space_Game
 
         static void Main(string[] args)
         {
+            Universal_Tools tool;
+            tool = new Universal_Tools(); //initialize the use of Useful tools
             Ship myShip;
             myShip = new Ship(3, 12, 6);
             bool isGameOver = false; //if a game end triggers this will be changed to true
@@ -177,40 +179,29 @@ namespace Space_Game
 
         static void newPlanet(string atLocal, ref string destSystem, ref int planetNum)
         { //newPlanet(playerLoc, ref destSystem, ref planetNum);
+            Universal_Tools tool;
+            tool = new Universal_Tools(); //initialize the use of Useful tools
             bool isGood = false;
             Console.WriteLine("Enter the place you wish to travel to from the list.");
             do
             {
-                Console.WriteLine("Please enter the name or number of the destination.");
-                Console.WriteLine($"Press \"Enter\" if you do not wish to move.\n");
+                Console.WriteLine("Please enter the number of the destination.");
+                Console.WriteLine($"Enter 0 if you do not wish to move.\n");
 
                 Console.WriteLine("1. Earth"); //Planets list
                 Console.WriteLine("2. Alpha Centauri");
                 Console.WriteLine("3. My Great Planet");
+                
+                int destNum = tool.GetInt(3);
 
-                destSystem = Console.ReadLine();
-                int destNum = 4;
-
-                if (destSystem == "Earth" || destSystem == "earth" || destSystem == "1")
-                {
-                    destNum = 0;
-                }
-                else if (destSystem == "Alpha Centauri" || destSystem == "alpha centauri" || destSystem == "2")
-                {
-                    destNum = 1;
-                }
-                else if (destSystem == "My Great Planet" || destSystem == "my great planet" || destSystem == "3")
-                {
-                    destNum = 2;
-                }
-                else if (destSystem == "")
+                
+                if (destNum == 0)
                 {
                     destNum = planetNum;
                     destSystem = atLocal;
                     isGood = true;
                 }
-
-                if (destNum == planetNum && !isGood)
+                else if (destNum == planetNum && !isGood)
                 {
                     Console.WriteLine("You are already there!");
                     destNum = planetNum;
@@ -222,17 +213,17 @@ namespace Space_Game
                 {
                     switch (destNum)
                     {
-                        case 0:
+                        case 1:
                             destSystem = "Earth";
                             isGood = true;
                             planetNum = 0;
                             break;
-                        case 1:
+                        case 2:
                             destSystem = "Alpha Centauri";
                             isGood = true;
                             planetNum = 1;
                             break;
-                        case 2:
+                        case 3:
                             destSystem = "My Great Planet";
                             isGood = true;
                             planetNum = 2;

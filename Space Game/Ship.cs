@@ -70,7 +70,7 @@ namespace Space_Game
             Console.WriteLine("3. Upgrading my ship's cargo space.");
             Console.WriteLine("4. I was just leaving.");
             Console.WriteLine("Please enter the number of your choice.");
-            choice = getInt(4);
+            choice = Universal_Tools GetInt(4);
             if (choice < 1 || choice > 4)
             {
                 choice = 0;
