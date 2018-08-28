@@ -12,7 +12,7 @@ namespace Space_Game
 
         static void Main(string[] args)
         {
-            
+            var myShip = new Ship();
             bool isGameOver = false; //if a game end triggers this will be changed to true
             string input = ""; //Useful for when we want input
 
