@@ -49,6 +49,7 @@
     <Compile Include="Ship.cs" />
     <Compile Include="Trading.cs" />
     <Compile Include="Travel.cs" />
+    <Compile Include="Universal Tools.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
