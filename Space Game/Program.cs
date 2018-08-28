@@ -464,7 +464,7 @@ namespace Space_Game
                 }
                 else if (input == "Buy" || input == "buy")
                 {
-                    buyingThings();
+                    buyingThings(); //Calls the method for buying
                 }
                 else if (input == "Sell" || input == "sell")
                 {
@@ -484,15 +484,52 @@ namespace Space_Game
             Console.WriteLine("Not done.");
         }
 
-        private static void buyingThings()
+        private static void buythings()
         {
-            Console.WriteLine("What would you like to buy?");
-            //method that shows current items and prices
-            int input = getInt();
-            Console.WriteLine($"You want {cargoName(input)}.");
-            Console.WriteLine("How much do you want?");
-            int itemCount = getInt();
-            
+            int input;
+            int itemAmount;
+            int totalPrice;
+            int cargoWhere;
+            bool action;
+            do
+            {
+                Console.WriteLine("Lets take a look at your ship"); //CWL lets take a look at your ship.  
+                Console.WriteLine("Nice ship, where are we putting your new cargo?"); //CWL Nice ship where are we putting the cargo after you buy?
+                cargoWhere = getInt(); // Verify that the number is an integer
+                if
+                    {
+                    (cargoWhere > cargoSp || cargoWhere < 1)
+                    Console.WriteLine("Your ship doesn't have that.");
+                }
+                else
+                {
+                    if (inventory[cargoWhere, 0] != 0)
+                    {
+                        Console.WriteLine($"You want to buy more {cargoName(inventory[cargoWhere, 0])}."};
+                    Console.WriteLine("How much to you want to buy?);
+
+                    itemAmount = getInt();
+                    if ((itemAmount + inventory[cargoWhere, 1]) > cargoSpace)
+                    {
+                        Console.WriteLine("There isn't enough space");
+                    }
+                    else
+                    {
+                        totalPrice = itemAmount * prices(inventory[cargoWhere, 0]);
+                        buySellYN(ref money, totalPrice, ref action, 1)
+                          if (action)
+                        {
+                            inventory[cargoWhere, 1] += itemAmount;
+                        }
+                        else
+                        {
+                            Console.Writeline("Mayber another time.");
+                        }
+                    }
+                }
+
+            }
+
         }
 
         static void setPrices(int planet, int[] prices)
