@@ -24,12 +24,12 @@ namespace Space_Game
             return speed;
         }
 
-        public int cargoSlots()
+        public int CargoSlots()
         {
-            return slots;
+            return this.slots;
         }
 
-        public int slotSize()
+        public int SlotSize()
         {
             return slotCapacity;
         }
@@ -59,6 +59,7 @@ namespace Space_Game
                     break;
             }
         }
+
 
 
     }

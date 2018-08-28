@@ -12,7 +12,8 @@ namespace Space_Game
 
         static void Main(string[] args)
         {
-            var myShip = new Ship(3, 12, 6 );
+            Ship myShip;
+            myShip = new Ship(3, 12, 6);
             bool isGameOver = false; //if a game end triggers this will be changed to true
             string input = ""; //Useful for when we want input
 
@@ -79,7 +80,7 @@ namespace Space_Game
                     if (input == "Trade")
                     {
                         vendorGreet(playerLoc);
-                        trading(planetNum, ref creditsNow, cargoSlots, slotSpace, ref cargoItems, prices);
+                        trading(planetNum, ref creditsNow, myShip.CargoSlots(), slotSpace, ref cargoItems, prices);
                     }
                     else if (input == "Travel")
                     {

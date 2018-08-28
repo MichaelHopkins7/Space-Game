@@ -13,6 +13,8 @@ namespace Space_Game
         public Trading()
         {
             money = 100;
+
+
         }
     }
 }
