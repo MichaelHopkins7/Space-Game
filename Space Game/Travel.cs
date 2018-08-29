@@ -14,6 +14,7 @@ namespace Space_Game
         private int tripDays;
         private int tripHours;
         private double[,] Universe;
+        private int numberOfPlanets;
         public int planetNum;
 
         // [Planet#, (0=X, 1=Y, 2=Name Part 1, 3=Name Part 2, 4=Name Part 3, 5=0 for pricing 6=Gold Price, 7=Iron Price, 8=Selenium Price,
@@ -26,8 +27,9 @@ namespace Space_Game
             this.tripWeeks = weeks;
             this.tripDays = days;
             this.tripHours = hours;
+            this.numberOfPlanets = numPlanets; //lets this keep track of how many planets you made
             this.Universe = BigBang(numPlanets); // makes the universe
-            this.planetNum = startingPlanet; //notes where you started, may make starting away from earth a thing in the future
+            this.planetNum = startingPlanet; //notes where you started/are, may make starting away from earth a thing in the future
         }
 
         public void ShowPlanetName(int planetNum) //displays a planet's name
@@ -35,9 +37,23 @@ namespace Space_Game
             Console.WriteLine($"{Universe[planetNum, 2]}{Universe[planetNum, 3]}{Universe[planetNum, 4]}");
         }
 
-        public double WhereCanMove(int planetNum, int destNum) //finds out where you can go and shows it
+        public void WhereCanMove(int planetNum, int fuel, double[] Universe) //finds out where you can go and shows it
         {
+            for (int counter = 0; counter < numberOfPlanets; counter++)
+            {
+                
+            }
+        }
 
+        private double distance(int planetNum, int destPlanet, double[,] Universe)
+        {
+            double between = 0;
+            double atX = Universe[planetNum, 0]; //starting point X
+            double atY = Universe[planetNum, 1]; //starting point Y
+            double thereX = Universe[destPlanet, 0]; //going to X
+            double thereY = Universe[destPlanet, 1]; //going to X
+
+            return between;
         }
 
         private double[,] BigBang(int numPlanets) //creates Earth and the specified number of planets randomly
