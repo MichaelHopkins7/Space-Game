@@ -12,8 +12,7 @@ namespace Space_Game
 
         static void Main(string[] args)
         {
-            Universal_Tools tool;
-            tool = new Universal_Tools(); //initialize the use of Useful tools
+            
             Ship myShip;
             myShip = new Ship(3, 12, 6);
             bool isGameOver = false; //if a game end triggers this will be changed to true
@@ -179,8 +178,6 @@ namespace Space_Game
 
         static void newPlanet(string atLocal, ref string destSystem, ref int planetNum)
         { //newPlanet(playerLoc, ref destSystem, ref planetNum);
-            Universal_Tools tool;
-            tool = new Universal_Tools(); //initialize the use of Useful tools
             bool isGood = false;
             Console.WriteLine("Enter the place you wish to travel to from the list.");
             do
@@ -192,7 +189,7 @@ namespace Space_Game
                 Console.WriteLine("2. Alpha Centauri");
                 Console.WriteLine("3. My Great Planet");
                 
-                int destNum = tool.GetInt(3);
+                int destNum = Utility.GetInt(3);
 
                 
                 if (destNum == 0)

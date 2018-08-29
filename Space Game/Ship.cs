@@ -71,7 +71,7 @@ namespace Space_Game
             Console.WriteLine("3. Upgrading my ship's cargo space.");
             Console.WriteLine("4. I was just leaving.");
             Console.WriteLine("Please enter the number of your choice.");
-            choice = Universal_Tools GetInt(4);
+            choice = Utility.GetInt(4);
             if (choice < 1 || choice > 4)
             {
                 choice = 0;
@@ -83,7 +83,7 @@ namespace Space_Game
                     Console.WriteLine("The cargo ship is 500 credits, the space freighter is 1000, and the battle cruiser .");
                     Console.WriteLine("is 2000. Enter 1 for the cargo ship, 2 for the space freighter, or 3 for the battle cruiser,");
                     Console.WriteLine("Enter 0 to exit.");
-                    choice = getInt(3);
+                    choice = Utility.GetInt(3);
                     switch (choice)
                     {
                         case 1:
