@@ -242,7 +242,7 @@ namespace Space_Game
                     destXC = 0.0;
                     break;
                 case 2:
-                    destXC  =- 4.6;
+                    destXC = -4.6;
                     break;
                 default:
                     {
@@ -435,10 +435,10 @@ namespace Space_Game
             Console.WriteLine($"Here is what we have.\n");
         }
 
-                
+
         static void trading(int placeNum, ref int playerMoney, int totalSpace, int slotSpace, ref int[,] shipContents, int[] prices)
         {
-            
+
             bool isDone = false;
             string input = "";
             do
@@ -454,7 +454,7 @@ namespace Space_Game
                 }
                 else if (input == "Buy" || input == "buy")
                 {
-                    buyingThings();
+                    buyingThings(); //Calls the method for buying
                 }
                 else if (input == "Sell" || input == "sell")
                 {
@@ -474,16 +474,59 @@ namespace Space_Game
             Console.WriteLine("Not done.");
         }
 
-        private static void buyingThings()
+        private static void buythings(ref int cargoSlots, ref int[,] inventory)
         {
-            Console.WriteLine("What would you like to buy?");
-            //method that shows current items and prices
-            int input = getInt();
-            Console.WriteLine($"You want {cargoName(input)}.");
-            Console.WriteLine("How much do you want?");
-            int itemCount = getInt();
-            
+            int input;
+            int cargoWhere;
+            int itemAmount;
+            int totalPrice;
+            string currentItemBuy;
+            bool action;
+            do
+            {
+                Console.WriteLine("Lets take a look at your ship");
+                Console.WriteLine("Enter 100 to check your inventory");
+                Console.WriteLine("Nice ship, what slot are we using for new cargo?");
+                cargoWhere = int.Parse(Console.ReadLine());
+                if (cargoWhere == 100)
+                {
+                    showCargoInv(cargoSlots, inventory);
+                }
+                if (cargoWhere > cargoSlots || cargoWhere <= 0)
+                {
+                    Console.WriteLine("That is not a valid slot");
+                }
+                else // this is where buying starts
+                {
+                    Console.WriteLine("What do you want to buy?");
+
+                    Console.WriteLine($"You want to buy more {cargoName(inventory[cargoWhere, 0])}.");
+                    currentItemBuy = { cargoName(inventory[cargoWhere, 0])};
+                    Console.WriteLine("How much to you want to buy?);
+                    itemAmount = int.Parse(Console.ReadLine());
+
+                    if ((itemAmount + inventory[cargoWhere, 1]) > cargoSpace)
+                    
+                    Console.WriteLine("There isn't enough space");
+                    }
+                    else
+                    {
+                     totalPrice = itemAmount * prices(inventory[cargoWhere, 0]);
+                     buySellYN(ref money, totalPrice, ref action, 1)
+                     if (action)
+                     {
+                     inventory[cargoWhere, 1] += itemAmount;
+                     }
+                     else
+                     {
+                     Console.Writeline("Mayber another time.");
+                     }
+                }
+            }
+
         }
+
+    }
 
         static void setPrices(int planet, int[] prices)
         {
