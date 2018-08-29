@@ -203,8 +203,6 @@ namespace Space_Game
                     destNum = planetNum;
                     isGood = true;
                 }
-                else if (destNum == 4)
-                    Console.WriteLine("Invalid destination!");
                 else
                 {
                     switch (destNum)
