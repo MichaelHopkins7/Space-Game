@@ -87,7 +87,7 @@ namespace Space_Game
                     {
                         case 1:
                             {
-                                Utility.buySellYN(ref money, 500, ref buy, 1);
+                                Utility.BuySellYN(ref money, 500, ref buy, 1);
                                 if (buy)
                                 {
                                     ShipUpgrade(3);
@@ -97,7 +97,7 @@ namespace Space_Game
                             }
                         case 2:
                             {
-                                Utility.buySellYN(ref money, 1000, ref buy, 1);
+                                Utility.BuySellYN(ref money, 1000, ref buy, 1);
                                 if (buy)
                                 {
                                     ShipUpgrade(4);
@@ -107,7 +107,7 @@ namespace Space_Game
                             }
                         case 3:
                             {
-                                Utility.buySellYN(ref money, 2000, ref buy, 1);
+                                Utility.BuySellYN(ref money, 2000, ref buy, 1);
                                 if (buy)
                                 {
                                     ShipUpgrade(5);
@@ -141,7 +141,7 @@ namespace Space_Game
                             {
                                 cost = speed * speed * 15;
                                 Console.WriteLine($"That'll be {cost} credits.");
-                                Utility.buySellYN(ref money, cost, ref buy, 1);
+                                Utility.BuySellYN(ref money, cost, ref buy, 1);
                                 if (buy)
                                 {
                                     ShipUpgrade(1);
@@ -171,7 +171,7 @@ namespace Space_Game
                         { 
                             cost = (slotCapacity + 2) * ((slotCapacity + 2)) * 5;
                             Console.WriteLine($"That'll be {cost} credits.");
-                            Utility.buySellYN(ref money, 300, ref buy, 1);
+                            Utility.BuySellYN(ref money, 300, ref buy, 1);
                             if (buy)
                             {
                                 ShipUpgrade(2);
