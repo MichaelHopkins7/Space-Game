@@ -10,14 +10,37 @@ namespace Space_Game
     {
         public double distanceTraveled;
         private int tripYears;
-        private int tripweeks;
+        private int tripWeeks;
         private int tripDays;
         private int tripHours;
-        
+        private double[,] Universe;
+        public int planetNum;
+
         // [Planet#, (0=X, 1=Y, 2=Name Part 1, 3=Name Part 2, 4=Name Part 3, 5=0 for pricing 6=Gold Price, 7=Iron Price, 8=Selenium Price,
         //      9=Platinum, 10=Titanium, 11=Aluminum, 12=Rhodium, 13=Rhuthenium, 14=Iridium, )
+        
+        public Travel(int numPlanets, int years, int weeks, int days, int hours, int startingPlanet) //your universe and trips
+        {
+            this.distanceTraveled = 0; //sets up trip variables
+            this.tripYears = years;
+            this.tripWeeks = weeks;
+            this.tripDays = days;
+            this.tripHours = hours;
+            this.Universe = BigBang(numPlanets); // makes the universe
+            this.planetNum = startingPlanet; //notes where you started, may make starting away from earth a thing in the future
+        }
 
-        public double[,] BigBang(int numPlanets)
+        public void ShowPlanetName(int planetNum) //displays a planet's name
+        {
+            Console.WriteLine($"{Universe[planetNum, 2]}{Universe[planetNum, 3]}{Universe[planetNum, 4]}");
+        }
+
+        public double WhereCanMove(int planetNum, int destNum) //finds out where you can go and shows it
+        {
+
+        }
+
+        private double[,] BigBang(int numPlanets) //creates Earth and the specified number of planets randomly
         {
             Random rnd = new Random();
             Random rndDouble = new Random();
@@ -57,19 +80,7 @@ namespace Space_Game
             }
             return planetList;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
         public string GetPlanetName(int planetNum, double[,] planetList)
         {
             string seg1 = "";
