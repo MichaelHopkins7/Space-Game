@@ -35,7 +35,7 @@ namespace Space_Game
             return value;
         }
 
-        public static void BuySellYN(ref int money, int val, ref bool action, int buySell)
+        public static void BuySellYN(int val, ref bool action, int buySell)
         {
             int choice;
             string purchaseSell;
@@ -49,7 +49,7 @@ namespace Space_Game
                 case 1:
                     if (buySell == 1)
                     {
-                        if (money > val)
+                        if (Player_Stats.money > val)
                         {
                             Console.WriteLine("You don't have enough money.");
                             action = false;
@@ -57,14 +57,14 @@ namespace Space_Game
                         }
                         else
                         {
-                            money -= val;
+                            Player_Stats.money -= val;
                             action = true;
                             break;
                         }
                     }
                     else
                     {
-                        money += val;
+                        Player_Stats.money += val;
                         action = true;
                         break;
                     }
