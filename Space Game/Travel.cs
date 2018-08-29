@@ -1,0 +1,225 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Space_Game
+{
+    class Travel
+    {
+        public double distanceTraveled;
+        private int tripYears;
+        private int tripweeks;
+        private int tripDays;
+        private int tripHours;
+        
+        // [Planet#, (0=X, 1=Y, 2=Name Part 1, 3=Name Part 2, 4=Name Part 3, 5=0 for pricing 6=Gold Price, 7=Iron Price, 8=Selenium Price,
+        //      9=Platinum, 10=Titanium, 11=Aluminum, 12=Rhodium, 13=Rhuthenium, 14=Iridium, )
+
+        public double[,] MakePlanetList(int numPlanets)
+        {
+            Random rnd = new Random();
+            Random rndDouble = new Random();
+            double[,] planetList = new double[numPlanets, 15];
+            planetList[0, 0] = 0;
+            planetList[0, 1] = 0;
+            planetList[0, 2] = 18;
+            planetList[0, 3] = 18;
+            planetList[0, 4] = 18;
+            planetList[0, 5] = 0;
+            planetList[0, 6] = 9;
+            planetList[0, 7] = 1;
+            planetList[0, 8] = 6;
+            planetList[0, 9] = 10;
+            planetList[0, 10] = 5;
+            planetList[0, 11] = 2;
+            planetList[0, 12] = 12;
+            planetList[0, 13] = 8;
+            planetList[0, 14] = 7;
+            for (int counter =1; counter < numPlanets; counter++)
+            {
+                planetList[counter, 0] = Math.Round(rndDouble.NextDouble(), 1) + rnd.Next(-50, 50);
+                planetList[counter, 1] = Math.Round(rndDouble.NextDouble(), 1) + rnd.Next(-50, 50);
+                planetList[counter, 2] = rnd.Next(1, 25);
+                planetList[counter, 3] = rnd.Next(1, 25);
+                planetList[counter, 4] = rnd.Next(1, 25);
+                planetList[counter, 5] = 0;
+                planetList[counter, 6] = rnd.Next(3,15);
+                planetList[counter, 7] = rnd.Next(3, 15);
+                planetList[counter, 8] = rnd.Next(3, 15);
+                planetList[counter, 9] = rnd.Next(3, 15);
+                planetList[counter, 10] = rnd.Next(3, 15);
+                planetList[counter, 11] = rnd.Next(3, 15);
+                planetList[counter, 12] = rnd.Next(3, 15);
+                planetList[counter, 13] = rnd.Next(3, 15);
+                planetList[counter, 14] = rnd.Next(3, 15);
+            }
+            return planetList;
+        }
+
+        public string GetPlanetName(int planetNum, double[,] planetList)
+        {
+            string seg1 = "";
+            string seg2 = "";
+            string seg3 = "";
+            switch (planetList[planetNum, 2])
+            {
+                case 1:
+                    seg1 = "Mac";
+                    break;
+                case 2:
+                    seg1 = "Try";
+                    break;
+                case 3:
+                    seg1 = "Sel";
+                    break;
+                case 4:
+                    seg1 = "Dar";
+                    break;
+                case 5:
+                    seg1 = "Kel";
+                    break;
+                case 6:
+                    seg1 = "Dre";
+                    break;
+                case 7:
+                    seg1 = "Nak";
+                    break;
+                case 8:
+                    seg1 = "Rol";
+                    break;
+                case 9:
+                    seg1 = "Van";
+                    break;
+                case 10:
+                    seg1 = "Sa";
+                    break;
+                case 11:
+                    seg1 = "To";
+                    break;
+                case 12:
+                    seg1 = "Fra";
+                    break;
+                case 13:
+                    seg1 = "Gel";
+                    break;
+                case 14:
+                    seg1 = "Ja";
+                    break;
+                case 15:
+                    seg1 = "Ae";
+                    break;
+                case 16:
+                    seg1 = "Quo";
+                    break;
+                case 17:
+                    seg1 = "Pra";
+                    break;
+                case 18:
+                    seg1 = "Ea";
+                    break;
+                case 19:
+                    seg1 = "Ti";
+                    break;
+                case 20:
+                    seg1 = "Ju";
+                    break;
+                case 21:
+                    seg1 = "Sat";
+                    break;
+                case 22:
+                    seg1 = "Ns";
+                    break;
+                case 23:
+                    seg1 = "Ero";
+                    break;
+                case 24:
+                    seg1 = "All";
+                    break;
+                case 25:
+                    seg1 = "Isn";
+                    break;
+            }
+            switch (planetList[planetNum, 3])
+            {
+                case 1:
+                    seg2 = "gol";
+                    break;
+                case 2:
+                    seg2 = "nan";
+                    break;
+                case 3:
+                    seg2 = "mar";
+                    break;
+                case 4:
+                    seg2 = "lel";
+                    break;
+                case 5:
+                    seg2 = "den";
+                    break;
+                case 6:
+                    seg2 = "sal";
+                    break;
+                case 7:
+                    seg2 = "sid";
+                    break;
+                case 8:
+                    seg2 = "jyr";
+                    break;
+                case 9:
+                    seg2 = "red";
+                    break;
+                case 10:
+                    seg2 = "no";
+                    break;
+                case 11:
+                    seg2 = "ke";
+                    break;
+                case 12:
+                    seg2 = "woe";
+                    break;
+                case 13:
+                    seg1 = "bon";
+                    break;
+                case 14:
+                    seg1 = "pre";
+                    break;
+                case 15:
+                    seg1 = "oni";
+                    break;
+                case 16:
+                    seg1 = "zio";
+                    break;
+                case 17:
+                    seg1 = "vem";
+                    break;
+                case 18:
+                    seg1 = "rt";
+                    break;
+                case 19:
+                    seg1 = "ta";
+                    break;
+                case 20:
+                    seg1 = "pi";
+                    break;
+                case 21:
+                    seg1 = "urn";
+                    break;
+                case 22:
+                    seg1 = "are";
+                    break;
+                case 23:
+                    seg1 = "san";
+                    break;
+                case 24:
+                    seg1 = "plu";
+                    break;
+                case 25:
+                    seg1 = "tap";
+                    break;
+            }
+            return seg1 + seg2 + seg3;
+        }
+    }
+}
