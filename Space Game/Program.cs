@@ -18,8 +18,7 @@ namespace Space_Game
             bool isGameOver = false; //if a game end triggers this will be changed to true
             string input = ""; //Useful for when we want input
 
-            int cargoSlots = 12; // Setting ship number of cargo slots
-            int slotSpace = 6; // setting cargo limit per slot
+            
             int[,] cargoItems = new int[24, 2] { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
                 { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
                 { 0, 0 }, { 0, 0 }, { 0, 0 } }; //to store type and amount of cargo in slots
@@ -81,7 +80,7 @@ namespace Space_Game
                     if (input == "Trade")
                     {
                         vendorGreet(playerLoc);
-                        trading(planetNum, ref creditsNow, myShip.CargoSlots(), slotSpace, ref cargoItems, prices);
+                        trading(planetNum, ref creditsNow, myShip.CargoSlots(), myShip.SlotSize(), ref cargoItems, prices);
                     }
                     else if (input == "Travel")
                     {
