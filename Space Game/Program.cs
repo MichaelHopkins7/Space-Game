@@ -14,7 +14,7 @@ namespace Space_Game
         {
 
             Ship myShip;
-            myShip = new Ship(3, 12, 6);
+            myShip = new Ship(3, 12, 6, 10, 10);
             bool isGameOver = false; //if a game end triggers this will be changed to true
             string input = ""; //Useful for when we want input
 

@@ -11,13 +11,18 @@ namespace Space_Game
         private int speed;
         private int slots;
         private int slotCapacity;
+        private int fuel;
+        private int fuelTank;
+        private bool fuelUpgrade = false;
         public int[,] inventory;
 
-        public Ship(int warpSpeed, int shipSlots, int shipSlotCapacity)
+        public Ship(int warpSpeed, int shipSlots, int shipSlotCapacity, int fuelNow, int fuelTankSize)
         {
             this.speed = warpSpeed;
             this.slots = shipSlots;
             this.slotCapacity = shipSlotCapacity;
+            this.fuel = fuelNow;
+            this.fuelTank = fuelTankSize;
         }
 
         public int Speed()
@@ -48,16 +53,30 @@ namespace Space_Game
                 case 3:
                     speed = 4;
                     slots = 16;
+                    fuelTank = 20;
+                    fuel = 20;
+                    fuelUpgrade = false;
                     break;
                 case 4:
                     speed = 6;
                     slots = 20;
                     slotCapacity = 10;
+                    fuelTank = 40;
+                    fuel = 40;
+                    fuelUpgrade = false;
                     break;
                 case 5:
                     speed = 8;
                     slots = 24;
                     slotCapacity = 14;
+                    fuelTank = 80;
+                    fuel = 80;
+                    fuelUpgrade = false;
+                    break;
+                case 6:
+                    fuelTank += (fuelTank / 2);
+                    fuel = fuelTank;
+                    fuelUpgrade = true;
                     break;
             }
         }
@@ -71,9 +90,10 @@ namespace Space_Game
             Console.WriteLine("1. Buying a new ship.");
             Console.WriteLine("2. Upgrading my ship's speed.");
             Console.WriteLine("3. Upgrading my ship's cargo space.");
+            Console.WriteLine("4. Upgrading my ship's fuel capacity.");
             Console.WriteLine("0. I was just leaving.");
             Console.WriteLine("Please enter the number of your choice.");
-            choice = Utility.GetInt(3);
+            choice = Utility.GetInt(4);
             
             switch (choice)
             {
@@ -171,7 +191,7 @@ namespace Space_Game
                         { 
                             cost = (slotCapacity + 2) * ((slotCapacity + 2)) * 5;
                             Console.WriteLine($"That'll be {cost} credits.");
-                            Utility.BuySellYN(ref money, 300, ref buy, 1);
+                            Utility.BuySellYN(ref money, cost, ref buy, 1);
                             if (buy)
                             {
                                 ShipUpgrade(2);
@@ -180,6 +200,25 @@ namespace Space_Game
                             else { break; }
                         }
                         
+                        break;
+                    }
+                case 4:
+                    {
+                        Console.WriteLine("Looking to travel to the farthest reaches.");
+                        if (fuelUpgrade)
+                        {
+                            Console.WriteLine("We already did that, you'll need a bigger ship to hold more fuel.");
+                        }
+                        else
+                        {
+                            cost = (fuelTank + (fuelTank / 2)) * 10;
+                            Console.WriteLine($"It will cost {cost}.");
+                            Utility.BuySellYN(ref money, cost, ref buy, 1);
+                            if (buy)
+                            {
+                                ShipUpgrade(6);
+                            }
+                        }
                         break;
                     }
                 case 0:
