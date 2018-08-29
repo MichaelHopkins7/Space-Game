@@ -88,7 +88,7 @@ namespace Space_Game
                     {
                         case 1:
                             {
-                                buySellYN(ref money, 500, ref buy, 1);
+                                Utility.buySellYN(ref money, 500, ref buy, 1);
                                 if (buy)
                                 {
                                     cargoSlots = 16;
@@ -100,7 +100,7 @@ namespace Space_Game
                             }
                         case 2:
                             {
-                                buySellYN(ref money, 1000, ref buy, 1);
+                                Utility.buySellYN(ref money, 1000, ref buy, 1);
                                 if (buy)
                                 {
                                     cargoSlots = 20;
@@ -112,7 +112,7 @@ namespace Space_Game
                             }
                         case 3:
                             {
-                                buySellYN(ref money, 2000, ref buy, 1);
+                                Utility.buySellYN(ref money, 2000, ref buy, 1);
                                 if (buy)
                                 {
                                     cargoSlots = 24;
@@ -156,7 +156,7 @@ namespace Space_Game
                             else if (speed == 4)
                             {
                                 Console.WriteLine("That'll be 250 credits.");
-                                buySellYN(ref money, 250, ref buy, 1);
+                                Utility.buySellYN(ref money, 250, ref buy, 1);
                                 if (buy)
                                 {
                                     ++speed;
@@ -167,7 +167,7 @@ namespace Space_Game
                             else if (speed == 6)
                             {
                                 Console.WriteLine("It'll be 500 credits.");
-                                buySellYN(ref money, 500, ref buy, 1);
+                                Utility.buySellYN(ref money, 500, ref buy, 1);
                                 if (buy)
                                 {
                                     ++speed;
@@ -178,7 +178,7 @@ namespace Space_Game
                             else
                             {
                                 Console.WriteLine("It'll be 1000 Credits.");
-                                buySellYN(ref money, 1000, ref buy, 1);
+                                Utility.buySellYN(ref money, 1000, ref buy, 1);
                                 if (buy)
                                 {
                                     ++speed;
@@ -203,7 +203,7 @@ namespace Space_Game
                         else if (slotSpace == 6)
                         {
                             Console.WriteLine("That'll be 300 credits.");
-                            buySellYN(ref money, 300, ref buy, 1);
+                            Utility.buySellYN(ref money, 300, ref buy, 1);
                             if (buy)
                             {
                                 slotSpace += 2;
@@ -214,7 +214,7 @@ namespace Space_Game
                         else if (slotSpace == 10)
                         {
                             Console.WriteLine("That'll be 600 credits.");
-                            buySellYN(ref money, 600, ref buy, 1);
+                            Utility.buySellYN(ref money, 600, ref buy, 1);
                             if (buy)
                             {
                                 slotSpace += 2;
@@ -225,7 +225,7 @@ namespace Space_Game
                         else if (slotSpace == 14)
                         {
                             Console.WriteLine("That'll be 1200 credits.");
-                            buySellYN(ref money, 1200, ref buy, 1);
+                            Utility.buySellYN(ref money, 1200, ref buy, 1);
                             if (buy)
                             {
                                 slotSpace += 2;

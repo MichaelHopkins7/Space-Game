@@ -35,7 +35,7 @@ namespace Space_Game
             return value;
         }
 
-        static void buySellYN(ref int money, int val, ref bool action, int buySell)
+        public static void buySellYN(ref int money, int val, ref bool action, int buySell)
         {
             int choice;
             string purchaseSell;
