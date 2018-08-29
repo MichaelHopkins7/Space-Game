@@ -14,8 +14,8 @@ namespace Space_Game
         private int tripDays;
         private int tripHours;
 
-        
-
+        public int[,] planets;
+        // [Planet#, (0=X, 1=Y, 2=Name Part 1, 3=Name Part 2, Name Part 3,  )
 
 
 

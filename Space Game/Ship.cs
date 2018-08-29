@@ -57,25 +57,24 @@ namespace Space_Game
                 case 5:
                     speed = 8;
                     slots = 24;
+                    slotCapacity = 14;
                     break;
             }
         }
 
-        public void newShip(ref int money, ref int cargoSlots, ref int slotSpace, ref int speed)
+        public void newShip(ref int money)
         {
+            int cost = 0;
             int choice = 0;
             bool buy = false;
             Console.WriteLine("Hello traveler, looking for a new ship or maybe just some upgrades?");
             Console.WriteLine("1. Buying a new ship.");
             Console.WriteLine("2. Upgrading my ship's speed.");
             Console.WriteLine("3. Upgrading my ship's cargo space.");
-            Console.WriteLine("4. I was just leaving.");
+            Console.WriteLine("0. I was just leaving.");
             Console.WriteLine("Please enter the number of your choice.");
-            choice = Utility.GetInt(4);
-            if (choice < 1 || choice > 4)
-            {
-                choice = 0;
-            }
+            choice = Utility.GetInt(3);
+            
             switch (choice)
             {
                 case 1:
@@ -91,9 +90,7 @@ namespace Space_Game
                                 Utility.buySellYN(ref money, 500, ref buy, 1);
                                 if (buy)
                                 {
-                                    cargoSlots = 16;
-                                    slotSpace = 6;
-                                    speed = 4;
+                                    ShipUpgrade(3);
                                     break;
                                 }
                                 else { break; }
@@ -103,9 +100,7 @@ namespace Space_Game
                                 Utility.buySellYN(ref money, 1000, ref buy, 1);
                                 if (buy)
                                 {
-                                    cargoSlots = 20;
-                                    slotSpace = 10;
-                                    speed = 6;
+                                    ShipUpgrade(4);
                                     break;
                                 }
                                 else { break; }
@@ -115,9 +110,7 @@ namespace Space_Game
                                 Utility.buySellYN(ref money, 2000, ref buy, 1);
                                 if (buy)
                                 {
-                                    cargoSlots = 24;
-                                    slotSpace = 14;
-                                    speed = 8;
+                                    ShipUpgrade(5);
                                     break;
                                 }
                                 else { break; }
@@ -127,22 +120,13 @@ namespace Space_Game
                                 Console.WriteLine("See ya around traveler.");
                                 break;
                             }
-                        default:
-                            {
-                                Console.WriteLine("If you aren't gonna talk sense then leave.");
-                                break;
-                            }
                     }
                     break;
                 case 2:
                     {
-                        if (speed == 5 || speed == 7)
+                        if (speed%2 == 1)
                         {
-                            Console.WriteLine("I told you last time that we can only do that once per ship.");
-                        }
-                        else if (speed == 9)
-                        {
-                            Console.WriteLine("At Warp 10 things get weird.  Nobody is gonna help you do that.");
+                            Console.WriteLine("I told you once per ship.");
                         }
                         else
                         {
@@ -153,35 +137,14 @@ namespace Space_Game
                             {
                                 Console.WriteLine("Nothing is gonna help that hunk of junk, just save up for a new ship.");
                             }
-                            else if (speed == 4)
+                            else 
                             {
-                                Console.WriteLine("That'll be 250 credits.");
-                                Utility.buySellYN(ref money, 250, ref buy, 1);
+                                cost = speed * speed * 15;
+                                Console.WriteLine($"That'll be {cost} credits.");
+                                Utility.buySellYN(ref money, cost, ref buy, 1);
                                 if (buy)
                                 {
-                                    ++speed;
-                                    break;
-                                }
-                                else { break; }
-                            }
-                            else if (speed == 6)
-                            {
-                                Console.WriteLine("It'll be 500 credits.");
-                                Utility.buySellYN(ref money, 500, ref buy, 1);
-                                if (buy)
-                                {
-                                    ++speed;
-                                    break;
-                                }
-                                else { break; }
-                            }
-                            else
-                            {
-                                Console.WriteLine("It'll be 1000 Credits.");
-                                Utility.buySellYN(ref money, 1000, ref buy, 1);
-                                if (buy)
-                                {
-                                    ++speed;
+                                    ShipUpgrade(1);
                                     break;
                                 }
                                 else { break; }
@@ -195,54 +158,33 @@ namespace Space_Game
                         Console.WriteLine("Gotta make sure things are attatched properly, don't want things coming");
                         Console.WriteLine("loose during warp travel.  The planet you're approaching when it breaks ");
                         Console.WriteLine("won't appreciate your clever cost cutting.");
-                        if (cargoSlots == 12)
+                        if (slotCapacity == 12)
                         {
                             Console.WriteLine("If we attatch anything to that mess you'll be turning into some light");
                             Console.WriteLine("speed shrapnel.");
                         }
-                        else if (slotSpace == 6)
+                        else if (slotCapacity == 8 || slotCapacity == 12 || slotCapacity == 16)
                         {
-                            Console.WriteLine("That'll be 300 credits.");
+                            Console.WriteLine("We can't make any more space on that.");
+                        }
+                        else
+                        { 
+                            cost = (slotCapacity + 2) * ((slotCapacity + 2)) * 5;
+                            Console.WriteLine($"That'll be {cost} credits.");
                             Utility.buySellYN(ref money, 300, ref buy, 1);
                             if (buy)
                             {
-                                slotSpace += 2;
+                                ShipUpgrade(2);
                                 break;
                             }
                             else { break; }
                         }
-                        else if (slotSpace == 10)
-                        {
-                            Console.WriteLine("That'll be 600 credits.");
-                            Utility.buySellYN(ref money, 600, ref buy, 1);
-                            if (buy)
-                            {
-                                slotSpace += 2;
-                                break;
-                            }
-                            else { break; }
-                        }
-                        else if (slotSpace == 14)
-                        {
-                            Console.WriteLine("That'll be 1200 credits.");
-                            Utility.buySellYN(ref money, 1200, ref buy, 1);
-                            if (buy)
-                            {
-                                slotSpace += 2;
-                                break;
-                            }
-                            else { break; }
-                        }
-                        break;
-                    }
-                case 4:
-                    {
-                        Console.WriteLine("See ya around traveler.");
+                        
                         break;
                     }
                 case 0:
                     {
-                        Console.WriteLine("Uh... ok, well see you later...");
+                        Console.WriteLine("See ya around traveler.");
                         break;
                     }
             }
