@@ -78,5 +78,31 @@ namespace Space_Game
                     break;
             }
         }
-    }
+
+        public static string cargoName(int typeNum)
+        {
+            switch (typeNum)
+            {
+                case 1:
+                    return "Gold";
+                case 2:
+                    return "Iron";
+                case 3:
+                    return "Selenium";
+                case 4:
+                    return "Platinum";
+                case 5:
+                    return "Titanium";
+                case 6:
+                    return "Aluminum";
+                case 7:
+                    return "Rhodium";
+                case 8:
+                    return "Rhuthenium";
+                case 9:
+                    return "Iridium";
+                default:
+                    return "nothing";
+            }
+        }
 }

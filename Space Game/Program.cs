@@ -501,8 +501,8 @@ namespace Space_Game
                 {
                     Console.WriteLine("What do you want to buy?");
 
-                    Console.WriteLine($"You want to buy more {cargoName(inventory[cargoWhere, 0])}.");
-                    currentItemBuy =  cargoName(inventory[cargoWhere, 0]);
+                    Console.WriteLine($"You want to buy more {Utility.cargoName(inventory[cargoWhere, 0])}.");
+                    currentItemBuy = Utility.cargoName(inventory[cargoWhere, 0]);
                     Console.WriteLine("How much to you want to buy?");
                     itemAmount = int.Parse(Console.ReadLine());
 
@@ -594,37 +594,13 @@ namespace Space_Game
             int counter = 1;
             do
             {
-                Console.WriteLine($"({counter}){cargoName(counter)}              {(prices[counter])}");
+                Console.WriteLine($"({counter}){Utility.cargoName(counter)}              {(prices[counter])}");
             }
             while (counter <= 9);
         }
 
-        static string cargoName(int typeNum)
-        {
-            switch (typeNum)
-            {
-                case 1:
-                    return "Gold";
-                case 2:
-                    return "Iron";
-                case 3:
-                    return "Selenium";
-                case 4:
-                    return "Platinum";
-                case 5:
-                    return "Titanium";
-                case 6:
-                    return "Aluminum";
-                case 7:
-                    return "Rhodium";
-                case 8:
-                    return "Rhuthenium";
-                case 9:
-                    return "Iridium";
-                default:
-                    return "nothing";
-            }
-        }
+
+
 
         static void showCargoInv(int cargoSlots, int[,] inventory)
         {
@@ -638,16 +614,16 @@ namespace Space_Game
                 }
                 else
                 {
-                    Console.WriteLine($"Container {counter + 1} has {inventory[counter, 1]} units of {cargoName(inventory[counter, 0])}."); //says container content type and count.
+                    Console.WriteLine($"Container {counter + 1} has {inventory[counter, 1]} units of {Utility.cargoName(inventory[counter, 0])}."); //says container content type and count.
                 }
                 counter++;
             }
             while (counter <= cargoSlots);
         }
-
-
-
     }
+
+
+    
 }
 
     
