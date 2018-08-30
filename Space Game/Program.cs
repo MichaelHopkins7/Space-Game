@@ -82,7 +82,7 @@ namespace Space_Game
                     if (input == "Trade")
                     {
                         vendorGreet(playerLoc);
-                        trading(planetNum, myShip.CargoSlots(), myShip.SlotSize(), ref cargoItems, prices);
+                        trading(planetNum, myShip.CargoSlots(), myShip.SlotSize(), ref cargoItems, prices, player);
                     }
                     else if (input == "Travel")
                     {
@@ -424,7 +424,7 @@ namespace Space_Game
         }
 
 
-        static void trading(int placeNum, int totalSpace, int slotSpace, ref int[,] shipContents, int[] prices)
+        static void trading(int placeNum, int totalSpace, int slotSpace, ref int[,] shipContents, int[] prices, Player_Stats player)
         {
 
             bool isDone = false;
@@ -442,7 +442,7 @@ namespace Space_Game
                 }
                 else if (input == "Buy" || input == "buy")
                 {
-                    BuyThings(totalSpace, slotSpace, shipContents, prices); //Calls the method for buying
+                    BuyThings(totalSpace, slotSpace, shipContents, prices, player); //Calls the method for buying
                 }
                 else if (input == "Sell" || input == "sell")
                 {
@@ -462,7 +462,7 @@ namespace Space_Game
             Console.WriteLine("Not done.");
         }
 
-        public static void BuyThings(int cargoSlots, int slotSpace, int[,] inventory, int[] prices)
+        public static void BuyThings(int cargoSlots, int slotSpace, int[,] inventory, int[] prices, Player_Stats player)
         {
             bool isGood = false;
             int input;
@@ -501,7 +501,7 @@ namespace Space_Game
                     else
                     {
                         totalPrice = itemAmount * prices[inventory[cargoWhere, 0]];
-                        Utility.BuySellYN(totalPrice, ref action, 1);
+                        Utility.BuySellYN(totalPrice, ref action, 1, player);
                         if (action)
                         {
                             inventory[cargoWhere, 1] += itemAmount;

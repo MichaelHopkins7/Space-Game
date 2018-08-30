@@ -86,7 +86,7 @@ namespace Space_Game
             }
         }
 
-        public void ShipThings(ref int money, ref Player_Stats player)
+        public void ShipThings(ref Player_Stats player)
         {
             int cost = 0;
             int choice = 0;
@@ -229,7 +229,37 @@ namespace Space_Game
                     }
                 case 5:
                     {
-                        BuyFuel(money);
+                        Console.WriteLine("Need some fuel huh?");
+                        if (fuel == fuelTank)
+                        {
+                            Console.WriteLine("Tank's full already");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ok how much do you want to buy?");
+                            Console.WriteLine("Enter 0 if you want a full tank.");
+                            choice = Utility.GetInt(fuelTank - fuel);
+                            if (choice == 0)
+                            {
+                                cost = (fuelTank - fuel) * 2;
+                                Console.WriteLine($"That will cost {cost}.");
+                                Utility.BuySellYN(cost, ref buy, 1, player);
+                                if (buy)
+                                {
+                                    Console.WriteLine("Thanks for your business!");
+                                }
+                            }
+                            else
+                            {
+                                cost = choice * 2;
+                                Console.WriteLine($"That will cost {cost}.");
+                                Utility.BuySellYN(cost, ref buy, 1, player);
+                                if (buy)
+                                {
+                                    Console.WriteLine("Thanks for your business!");
+                                }
+                            }
+                        }
                         break;
                     }
                 case 0:
@@ -239,27 +269,6 @@ namespace Space_Game
                     }
             }
         }
-
-        public void BuyFuel(int money)
-        {
-            int choice;
-            int cost;
-            Console.WriteLine("Need some fuel huh?");
-            if (fuel == fuelTank)
-            {
-                Console.WriteLine("Tank's full already");
-            }
-            else
-            {
-                Console.WriteLine("Ok how much do you want to buy?");
-                Console.WriteLine("Enter 0 if you want a full tank.");
-                choice = Utility.GetInt(fuelTank - fuel);
-                if (choice == 0)
-                {
-                    cost = (fuelTank - fuel) * 2;
-
-                }
-            }
-        }
+        
     }
 }
