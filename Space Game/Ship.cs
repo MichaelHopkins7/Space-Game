@@ -39,13 +39,12 @@ namespace Space_Game
         {
             return slotCapacity;
         }
-
         
         public int Fuel()
         {
             return fuel;
         }
-
+        
         private void ShipUpgrade(int choice)
         {
             switch (choice)
@@ -87,19 +86,20 @@ namespace Space_Game
             }
         }
 
-        public void newShip(ref int money)
+        public void ShipThings(ref int money, ref Player_Stats player)
         {
             int cost = 0;
             int choice = 0;
             bool buy = false;
-            Console.WriteLine("Hello traveler, looking for a new ship or maybe just some upgrades?");
+            Console.WriteLine("Hello traveler, looking a new ship, some upgrades, or maybe just for fuel?");
             Console.WriteLine("1. Buying a new ship.");
             Console.WriteLine("2. Upgrading my ship's speed.");
             Console.WriteLine("3. Upgrading my ship's cargo space.");
             Console.WriteLine("4. Upgrading my ship's fuel capacity.");
+            Console.WriteLine("5. Buy fuel for my ship.");
             Console.WriteLine("0. I was just leaving.");
             Console.WriteLine("Please enter the number of your choice.");
-            choice = Utility.GetInt(4);
+            choice = Utility.GetInt(5);
             
             switch (choice)
             {
@@ -113,7 +113,7 @@ namespace Space_Game
                     {
                         case 1:
                             {
-                                Utility.BuySellYN(500, ref buy, 1);
+                                Utility.BuySellYN(500, ref buy, 1, player);
                                 if (buy)
                                 {
                                     ShipUpgrade(3);
@@ -123,7 +123,7 @@ namespace Space_Game
                             }
                         case 2:
                             {
-                                Utility.BuySellYN(1000, ref buy, 1);
+                                Utility.BuySellYN(1000, ref buy, 1, player);
                                 if (buy)
                                 {
                                     ShipUpgrade(4);
@@ -133,7 +133,7 @@ namespace Space_Game
                             }
                         case 3:
                             {
-                                Utility.BuySellYN(2000, ref buy, 1);
+                                Utility.BuySellYN(2000, ref buy, 1, player);
                                 if (buy)
                                 {
                                     ShipUpgrade(5);
@@ -167,7 +167,7 @@ namespace Space_Game
                             {
                                 cost = speed * speed * 15;
                                 Console.WriteLine($"That'll be {cost} credits.");
-                                Utility.BuySellYN(cost, ref buy, 1);
+                                Utility.BuySellYN(cost, ref buy, 1, player);
                                 if (buy)
                                 {
                                     ShipUpgrade(1);
@@ -184,7 +184,7 @@ namespace Space_Game
                         Console.WriteLine("Gotta make sure things are attatched properly, don't want things coming");
                         Console.WriteLine("loose during warp travel.  The planet you're approaching when it breaks ");
                         Console.WriteLine("won't appreciate your clever cost cutting.");
-                        if (slotCapacity == 12)
+                        if (slots == 12)
                         {
                             Console.WriteLine("If we attatch anything to that mess you'll be turning into some light");
                             Console.WriteLine("speed shrapnel.");
@@ -197,7 +197,7 @@ namespace Space_Game
                         { 
                             cost = (slotCapacity + 2) * ((slotCapacity + 2)) * 5;
                             Console.WriteLine($"That'll be {cost} credits.");
-                            Utility.BuySellYN(cost, ref buy, 1);
+                            Utility.BuySellYN(cost, ref buy, 1, player);
                             if (buy)
                             {
                                 ShipUpgrade(2);
@@ -219,12 +219,17 @@ namespace Space_Game
                         {
                             cost = (fuelTank + (fuelTank / 2)) * 10;
                             Console.WriteLine($"It will cost {cost}.");
-                            Utility.BuySellYN(cost, ref buy, 1);
+                            Utility.BuySellYN(cost, ref buy, 1, player);
                             if (buy)
                             {
                                 ShipUpgrade(6);
                             }
                         }
+                        break;
+                    }
+                case 5:
+                    {
+                        BuyFuel(money);
                         break;
                     }
                 case 0:
@@ -235,5 +240,26 @@ namespace Space_Game
             }
         }
 
+        public void BuyFuel(int money)
+        {
+            int choice;
+            int cost;
+            Console.WriteLine("Need some fuel huh?");
+            if (fuel == fuelTank)
+            {
+                Console.WriteLine("Tank's full already");
+            }
+            else
+            {
+                Console.WriteLine("Ok how much do you want to buy?");
+                Console.WriteLine("Enter 0 if you want a full tank.");
+                choice = Utility.GetInt(fuelTank - fuel);
+                if (choice == 0)
+                {
+                    cost = (fuelTank - fuel) * 2;
+
+                }
+            }
+        }
     }
 }

@@ -30,7 +30,10 @@ namespace Space_Game
             return money;
         }
         
-
+        public void ChangeMoney(int change)
+        {
+            money += (change);
+        }
 
         public void Status()
         {
