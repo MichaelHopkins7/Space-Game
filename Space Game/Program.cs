@@ -14,7 +14,7 @@ namespace Space_Game
         {
 
             Ship myShip;
-            myShip = new Ship(3, 12, 6, 10, 10);
+            myShip = new Ship(3, 12, 6, 10, 10); // set ship speed, cargo slots, slot size, fuel tank, and fuel
             Travel myUniverse;
             myUniverse = new Travel(200, 0);
             Player_Stats player;
@@ -27,7 +27,7 @@ namespace Space_Game
                 { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
                 { 0, 0 }, { 0, 0 }, { 0, 0 } }; //to store type and amount of cargo in slots
             
-            int shipSpeed = 3; // initial ship max speed
+            
             double speed = 0; //will be used to store speed in lightyears from formula
 
             int totalYears = 0; //trackers for total time spent traveling
@@ -81,7 +81,7 @@ namespace Space_Game
                     input = Console.ReadLine();
                     if (input == "Trade")
                     {
-                        vendorGreet(playerLoc);
+                        vendorGreet(myUniverse.GetPlanetName());
                         trading(planetNum, myShip.CargoSlots(), myShip.SlotSize(), ref cargoItems, prices, player);
                     }
                     else if (input == "Travel")
@@ -89,11 +89,11 @@ namespace Space_Game
                         newPlanet(playerLoc, ref destSystem, ref planetNum);
                         if (destSystem != playerLoc)
                         {
-                            Moving(planetNum, shipSpeed, ref speed, ref curXC, ref curYC, ref distToDest);
+                            Moving(myUniverse.planetNum, myShip.Speed(), ref speed, ref curXC, ref curYC, ref distToDest);
                             totalTravelDistance += distToDest;
                             destTravelTime = travelTime(distToDest, speed);
                             convertTime(destTravelTime, ref tripYears, ref tripWeeks, ref tripDays, ref tripHours);
-                            Console.WriteLine($"You have arrived at {destSystem}.");
+                            Console.WriteLine($"You have arrived at {myUniverse.GetPlanetName()}.");
                             Console.Write("It took: ");
                             Console.Write($"{tripYears} Years, ");
                             Console.Write($"{tripWeeks} Weeks, ");
@@ -163,7 +163,7 @@ namespace Space_Game
         
 
 
-        static void newPlanet(string atLocal, ref string destSystem, ref int planetNum)
+        static void newPlanet(string atLocal, ref int planetNum)
         { //newPlanet(playerLoc, ref destSystem, ref planetNum);
             bool isGood = false;
             Console.WriteLine("Enter the place you wish to travel to from the list.");
@@ -182,7 +182,6 @@ namespace Space_Game
                 if (destNum == 0)
                 {
                     destNum = planetNum;
-                    destSystem = atLocal;
                     isGood = true;
                 }
                 else if (destNum == planetNum && !isGood)

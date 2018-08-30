@@ -36,14 +36,14 @@ namespace Space_Game
         {
             for (int counter = 0; counter < numberOfPlanets; counter++)
             {
-                if (myShip.Fuel() >= Distance(planetNum, counter, Universe) && planetNum != counter)
+                if (myShip.Fuel() >= Distance(counter, Universe) && planetNum != counter)
                 {
-                    Console.WriteLine($"{counter}" + ". " + GetPlanetName(counter, Universe));
+                    Console.WriteLine($"{counter}" + ". " + GetPlanetName());
                 }
             }
         }
 
-        private double Distance(int planetNum, int destPlanet, double[,] Universe)
+        private double Distance(int destPlanet, double[,] Universe)
         {
             double atX = Universe[planetNum, 0]; //starting point X
             double atY = Universe[planetNum, 1]; //starting point Y
@@ -95,12 +95,12 @@ namespace Space_Game
             return planetList;
         }
         
-        public string GetPlanetName(int planetNum, double[,] planetList)
+        public string GetPlanetName()
         {
             string seg1 = "";
             string seg2 = "";
             string seg3 = "";
-            switch (planetList[planetNum, 2])
+            switch (universe[planetNum, 2])
             {
                 case 1:
                     seg1 = "Mac";
@@ -178,7 +178,7 @@ namespace Space_Game
                     seg1 = "Isn";
                     break;
             }
-            switch (planetList[planetNum, 3])
+            switch (universe[planetNum, 3])
             {
                 case 1:
                     seg2 = "gol";
@@ -256,7 +256,7 @@ namespace Space_Game
                     seg2 = "tap";
                     break;
             }
-            switch (planetList[planetNum, 4])
+            switch (universe[planetNum, 4])
             {
                 case 1:
                     seg3 = "sar";
