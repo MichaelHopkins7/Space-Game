@@ -14,6 +14,10 @@ namespace Space_Game
         public int daysTraveled;
         public int hoursTraveled;
 
+        public Player_Stats(int money, int years, int weeks, int days, int hours)
+        {
+
+        }
 
 
     }
