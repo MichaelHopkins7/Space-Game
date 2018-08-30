@@ -13,47 +13,45 @@ namespace Space_Game
         private int tripWeeks;
         private int tripDays;
         private int tripHours;
-        private double[,] Universe;
+        private double[,] universe;
         private int numberOfPlanets;
         public int planetNum;
-
         // [Planet#, (0=X, 1=Y, 2=Name Part 1, 3=Name Part 2, 4=Name Part 3, 5=0 for pricing 6=Gold Price, 7=Iron Price, 8=Selenium Price,
         //      9=Platinum, 10=Titanium, 11=Aluminum, 12=Rhodium, 13=Rhuthenium, 14=Iridium, )
-        
-        public Travel(int numPlanets, int years, int weeks, int days, int hours, int startingPlanet) //your universe and trips
+        //public new Ship myShip; might not need
+
+        public Travel(int numPlanets, int startingPlanet) //your universe and trips
         {
-            this.distanceTraveled = 0; //sets up trip variables
-            this.tripYears = years;
-            this.tripWeeks = weeks;
-            this.tripDays = days;
-            this.tripHours = hours;
             this.numberOfPlanets = numPlanets; //lets this keep track of how many planets you made
-            this.Universe = BigBang(numPlanets); // makes the universe
+            this.universe = BigBang(numPlanets); // makes the universe
             this.planetNum = startingPlanet; //notes where you started/are, may make starting away from earth a thing in the future
         }
 
         public void ShowPlanetName(int planetNum) //displays a planet's name
         {
-            Console.WriteLine($"{Universe[planetNum, 2]}{Universe[planetNum, 3]}{Universe[planetNum, 4]}");
+            Console.WriteLine($"{universe[planetNum, 2]}{universe[planetNum, 3]}{universe[planetNum, 4]}");
         }
 
-        public void WhereCanMove(int planetNum, int fuel, double[] Universe) //finds out where you can go and shows it
+        public void WhereCanMove(int planetNum, int fuel, double[,] Universe, Ship myShip) //finds out where you can go and shows it
         {
             for (int counter = 0; counter < numberOfPlanets; counter++)
             {
-                
+                if (myShip.Fuel() >= Distance(planetNum, counter, Universe) && planetNum != counter)
+                {
+                    Console.WriteLine($"{counter}" + ". " + GetPlanetName(counter, Universe));
+                }
             }
         }
 
-        private double distance(int planetNum, int destPlanet, double[,] Universe)
+        private double Distance(int planetNum, int destPlanet, double[,] Universe)
         {
-            double between = 0;
             double atX = Universe[planetNum, 0]; //starting point X
             double atY = Universe[planetNum, 1]; //starting point Y
             double thereX = Universe[destPlanet, 0]; //going to X
             double thereY = Universe[destPlanet, 1]; //going to X
-
-            return between;
+            double diffX = Math.Abs(thereX - atX);
+            double diffY = Math.Abs(thereY - atY);
+            return Math.Sqrt(diffX * diffX + diffY * diffY);
         }
 
         private double[,] BigBang(int numPlanets) //creates Earth and the specified number of planets randomly

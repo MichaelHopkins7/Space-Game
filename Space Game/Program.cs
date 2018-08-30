@@ -15,6 +15,10 @@ namespace Space_Game
 
             Ship myShip;
             myShip = new Ship(3, 12, 6, 10, 10);
+            Travel myUniverse;
+            myUniverse = new Travel(200, 0);
+            Player_Stats player;
+            player = new Player_Stats(100, 0, 0, 0, 0, 0);
             bool isGameOver = false; //if a game end triggers this will be changed to true
             string input = ""; //Useful for when we want input
 
@@ -112,8 +116,7 @@ namespace Space_Game
                     }
                     else if (input == "Check Status")
                     {
-                        status(totalYears, totalWeeks, totalDays, totalHours,
-                            totalTravelDistance);
+                        player.Status();
                         showCargoInv(myShip.CargoSlots(), cargoItems);
                     }
                     else if (input == "")
@@ -130,7 +133,7 @@ namespace Space_Game
                         isGameOver = true;
                         input = "";
                     }
-                    else if ((Player_Stats.money == 0))
+                    else if (player.SMoney() == 0)
                     {
                         isGameOver = true;
                         input = "";
@@ -141,16 +144,15 @@ namespace Space_Game
             }
             while (!isGameOver);
 
-            status(totalYears, totalWeeks, totalDays, totalHours,
-                totalTravelDistance);
+            player.Status();
 
-            if (Player_Stats.money > 100)
+            if (player.SMoney() > 100)
             {
-                Console.WriteLine($"You made {Player_Stats.money - 100}!");
+                Console.WriteLine($"You made {player.SMoney() - 100}!");
             }
-            else if (Player_Stats.money < 100)
+            else if (player.SMoney() < 100)
             {
-                Console.WriteLine($"You lost {100 - Player_Stats.money}.");
+                Console.WriteLine($"You lost {100 - player.SMoney()}.");
             }
             else
             {
@@ -158,19 +160,7 @@ namespace Space_Game
             }
         }
 
-        static void status(int totalYears, int totalWeeks, int totalDays, int totalHours
-                        , double totalTravelDistance)
-        {
-            Console.WriteLine("You have been traveling for:");
-            Console.WriteLine($"Years:{totalYears}");
-            Console.WriteLine($"Weeks:{totalWeeks}");
-            Console.WriteLine($"Days:{totalDays}");
-            Console.WriteLine($"Hours:{totalHours}");
-
-            Console.WriteLine($"You traveled {totalTravelDistance} lightyears!");
-
-            Console.WriteLine($"You have {Player_Stats.money}");
-        }
+        
 
 
         static void newPlanet(string atLocal, ref string destSystem, ref int planetNum)

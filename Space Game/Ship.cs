@@ -40,6 +40,12 @@ namespace Space_Game
             return slotCapacity;
         }
 
+        
+        public int Fuel()
+        {
+            return fuel;
+        }
+
         private void ShipUpgrade(int choice)
         {
             switch (choice)
