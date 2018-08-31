@@ -19,12 +19,10 @@ namespace Space_Game
             myUniverse = new Travel(200, 0);
             Player_Stats player;
             player = new Player_Stats(100, 0, 0, 0, 0, 0);
+            int[] prices = new int[10];
+            Trading MakeMoney = new Trading(prices, 0);
             bool isGameOver = false; //if a game end triggers this will be changed to true
             int input; //Useful for when we want input
-            
-            
-            
-            int planetNum = 0; //start at Earths number
             
 
             Console.WriteLine("The Space Game");
@@ -78,7 +76,7 @@ namespace Space_Game
                         }
 
                     }
-                Utility.CheckGameOver(myShip, myUniverse, player, ref isGameOver);
+                isGameOver |= Utility.CheckGameOver(myShip, myUniverse, player);
             }
             while (!isGameOver);
 
@@ -117,7 +115,7 @@ namespace Space_Game
         }
 
 
-        static void trading(Travel myUniverse, int[] prices, Player_Stats player, ref Ship myShip)
+        static void trading(Travel myUniverse, int[] prices, Player_Stats player, Ship myShip)
         {
 
             bool isDone = false;
@@ -135,7 +133,7 @@ namespace Space_Game
                 }
                 else if (input == "Buy" || input == "buy")
                 {
-                    BuyThings(prices, player, ref myShip); //Calls the method for buying
+                    BuyThings(prices, player, myShip); //Calls the method for buying
                 }
                 else if (input == "Sell" || input == "sell")
                 {
@@ -155,10 +153,9 @@ namespace Space_Game
             Console.WriteLine("Not done.");
         }
 
-        public static void BuyThings(int[] prices, Player_Stats player, ref Ship myShip)
+        public static void BuyThings(int[] prices, Player_Stats player, Ship myShip)
         {
             bool isGood = false;
-            int input;
             int cargoWhere;
             int itemAmount;
             int totalPrice;

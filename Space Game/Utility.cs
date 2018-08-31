@@ -35,7 +35,7 @@ namespace Space_Game
             return value;
         }
 
-        public static void CheckGameOver(Ship myShip, Travel myUniverse, Player_Stats player, ref bool isGameOver)
+        public static bool CheckGameOver(Ship myShip, Travel myUniverse, Player_Stats player)
         {
             int counter = 0;
             bool hasCargo = false;
@@ -58,19 +58,20 @@ namespace Space_Game
 
             if (player.SYears() >= 40)
             {
-                isGameOver = true;
+                return true;
             }
             else if (player.SMoney() == 0 && hasCargo == false)
             {
-                isGameOver = true;
+                return true;
             }
             else if ((player.SMoney() <= 4) && enoughFuel == true)
             {
-                isGameOver = true;
+                return true;
             }
+            return false;
         }
 
-        public static void BuySellYN(int val, ref bool action, int buySell, ref Player_Stats player)
+        public static void BuySellYN(int val, ref bool action, int buySell, Player_Stats player)
         {
             int choice;
             string purchaseSell;

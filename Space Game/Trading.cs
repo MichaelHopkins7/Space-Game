@@ -17,9 +17,7 @@ namespace Space_Game
             this.prices = prices;
             this.cost = cost;
         }
-
-
-
+        
         private bool checkInventorySlot(Ship myShip)
         {
             bool isGood;
@@ -136,5 +134,94 @@ namespace Space_Game
             while (!isGood);
         }
 
+        static void sellThings(ref Player_Stats player, ref Ship myShip, int[] prices)
+        {
+            bool isGood = false;
+            int input;
+            int cAmount;
+            int sumTotal;
+            do
+            {
+                Console.WriteLine($"What cargo would you like to sell?\n");
+                Console.WriteLine("Please enter the slot number of the cargo you wish to sell.");
+                Console.WriteLine("Enter \"100\" to check your inventory, 101 to look at the planet's");
+                Console.WriteLine("pricing or 0 when you are done."); //what does the player want to do.
+                input = Utility.GetInt(myShip.CargoSlots() + 2);
+                switch (input)
+                {
+                    case 100:
+                        {
+                            Utility.ShowCargoInv(myShip); //SHOW ME WHAT YOU GOT
+                            break;
+                        }
+                    case 101:
+                        {
+                            planetInv(prices); //how much are things worth?
+                            break;
+                        }
+                    case 0:
+                        {
+                            Console.WriteLine("See ya around traveler."); //leaving
+                            isGood = true;
+                            break;
+                        }
+                    default: //done asking questions? time to sell things
+                        if (input < 0 || input > myShip.CargoSlots()) //why are you talking nonsense
+                        {
+                            Console.WriteLine("Uh... ok, well see you later...");
+                            isGood = true;
+                            break;
+                        }
+                        else if (myShip.Inventory[input, 1] == 0)
+                        {
+                            Console.WriteLine($"That container is empty.\n");
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Alright that has {inventory[input, 1]} units of {cargoName(inventory[input, 0])}.");
+                            Console.WriteLine($"How much would you like to sell?");
+                            cAmount = getInt(inventory[input, 1]);
+                            if (cAmount > inventory[input, 1] || cAmount < 0) // are you trying to sell more than you have?
+                            {
+                                Console.WriteLine("I don't understant.");
+                                break;
+                            }
+                            else if (cAmount == 0)
+                            {
+                                Console.WriteLine("It's fine if you don't want to sell.");
+                                break;
+                            }
+                            else
+                            {
+                                sumTotal = prices[inventory[input, 0]] * cAmount;
+                                Console.WriteLine($"I'll give you {sumTotal} credits for that much.");
+                                buySellYN(ref money, sumTotal, ref isGood, 2);
+                                if (isGood)
+                                {
+                                    Console.WriteLine("Pleasure doing business with you.");
+                                    if (cAmount == inventory[input, 1])
+                                    {
+                                        inventory[input, 0] = 0;
+                                        inventory[input, 1] = 0;
+                                    }
+                                    else
+                                    {
+                                        inventory[input, 1] -= cAmount;
+                                    }
+                                    isGood = false;
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("I can't offer you more than that.");
+                                    break;
+                                }
+                            }
+                        }
+                }
+            }
+            while (!isGood);
+        }
     }
 }
