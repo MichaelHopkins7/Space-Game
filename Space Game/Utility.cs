@@ -70,7 +70,7 @@ namespace Space_Game
             }
         }
 
-        public static void BuySellYN(int val, ref bool action, int buySell, Player_Stats player)
+        public static void BuySellYN(int val, ref bool action, int buySell, ref Player_Stats player)
         {
             int choice;
             string purchaseSell;

@@ -8,94 +8,98 @@ namespace Space_Game
 {
     class Trading
     {
-        public int money;
+        private int cost;
+        private int[] prices;
+        private bool isGood;
 
-        public Trading()
+        public Trading(int[] prices, int cost)
         {
-            money = 100;
+            this.prices = prices;
+            this.cost = cost;
         }
-        public static bool checkInventorySlot(int cargoSlots, int[,] inventory)
+
+
+
+        private bool checkInventorySlot(Ship myShip)
         {
             bool isGood;
             int cargoWhere;
-            int newCargo;
             do
             {
                 Console.WriteLine("Lets take a look at your ship");
-                showCargoInv(cargoSlots, inventory);// Check cargo inventory
+                Utility.ShowCargoInv(myShip);// Check cargo inventory
 
                 Console.WriteLine("Nice ship, what slot are we using for new cargo?");
-                cargoWhere = Utility.GetInt(cargoSlots); //Verify input is number
+                cargoWhere = Utility.GetInt(myShip.CargoSlots()); //Verify input is number
 
-                if (cargoWhere => 2 || cargoWhere <== 0)//Verify that the slot requested is not full or invalid
+                if ((cargoWhere >= myShip.CargoSlots()) || cargoWhere <= 0)//Verify that the slot requested is not full or invalid
                 {
                     Console.WriteLine("This is not a usable slot");
-                    isgood != True// return to the main menu        }
+                    isGood = false;// return to the main menu        }
                 }
                 else
                 {
-                    isgood = true
+                    return true;
                 }
             }
+            while (!isGood);
+            return false;
         }
 
-        public static void BuyThings(int cargoSlots, int slotSpace, int[,] inventory, int[] prices, )
+        public void BuyThings(ref Ship myShip, ref Player_Stats player)
         {
-            int input;
             int cargoWhere;
             int itemAmount;
-            int totalPrice;
             string currentItemBuy;
-
+            bool isGood = false;
+            bool buy = false;
             do
             {
-                checkInventorySlot
-                if
-                {
-                    isGood == true// begin buying process
-                }
-
-
                 Console.WriteLine("Nice ship, what slot are we using for new cargo?");
-                cargoWhere = Utility.GetInt(cargoSlots); ///CargoWhere: where we are placing the new cargo
-                if (cargoWhere == 100)
+                Console.WriteLine("Enter the slot number or 0 to show your inventory.");
+                cargoWhere = Utility.GetInt(myShip.CargoSlots()); ///CargoWhere: where we are placing the new cargo
+                if (cargoWhere == 0) // show inventory
                 {
-                    showCargoInv(cargoSlots, inventory);
-                }
-                else if (cargoWhere == 0 || cargoWhere is => 10)
-                {
-                    Console.WriteLine("You cannot access ")
+                    Utility.ShowCargoInv(myShip);
                 }
                 else // this is where buying starts
                 {
-                    Console.WriteLine("What do you want to buy?");
-
-                    Console.WriteLine($"You want to buy more {Utility.cargoName(inventory[cargoWhere, 0])}.");
-                    currentItemBuy = Utility.cargoName(inventory[cargoWhere, 0]);
-                    Console.WriteLine("How much to you want to buy?");
-                    itemAmount = int.Parse(Console.ReadLine());
-
-                    if ((itemAmount + inventory[cargoWhere, 1]) > slotSpace)
+                    if (myShip.inventory[cargoWhere, 0] != 0)
                     {
-                        Console.WriteLine("There isn't enough space");
+                        Console.WriteLine($"You want to buy more {Utility.cargoName(myShip.inventory[cargoWhere, 0])}.");
+                        Console.WriteLine($"How much {Utility.cargoName(myShip.inventory[cargoWhere, 0])} do you want to buy?");
+
                     }
                     else
                     {
-                        totalPrice = itemAmount * prices[inventory[cargoWhere, 0]];
-                        Utility.BuySellYN(totalPrice, ref action, 1);
-                        if (action)
+                        Console.WriteLine("What do you want to buy?");
+                        currentItemBuy = Utility.cargoName(myShip.inventory[cargoWhere, 0]);
+                        Console.WriteLine("How much to you want to buy?");
+                        itemAmount = Utility.GetInt(myShip.SlotSize());
+
+                        if ((itemAmount + myShip.inventory[cargoWhere, 1]) > myShip.SlotSize())
                         {
-                            inventory[cargoWhere, 1] += itemAmount;
+                            Console.WriteLine("There isn't enough space");
                         }
                         else
                         {
-                            Console.WriteLine("Mayber another time.");
+                            cost = itemAmount * prices[myShip.inventory[cargoWhere, 0]];
+                            Utility.BuySellYN(cost, ref buy, 1, ref player);
+                            if (buy)
+                            {
+                                myShip.inventory[cargoWhere, 1] += itemAmount;
+                                cost = 0;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Mayber another time.");
+                                cost = 0;
+                            }
                         }
                     }
                 }
             }
             while (!isGood);
-
         }
 
     }

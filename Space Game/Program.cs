@@ -22,7 +22,7 @@ namespace Space_Game
             bool isGameOver = false; //if a game end triggers this will be changed to true
             int input; //Useful for when we want input
             
-            int[] prices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            
             
             int planetNum = 0; //start at Earths number
             
