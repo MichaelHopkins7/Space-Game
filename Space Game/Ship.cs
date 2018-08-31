@@ -161,7 +161,7 @@ namespace Space_Game
                     break;
                 case 2:
                     {
-                        if (speed%2 == 1)
+                        if (speed%2 == 1 && speed != 3)
                         {
                             Console.WriteLine("I told you once per ship.");
                         }
@@ -197,8 +197,7 @@ namespace Space_Game
                         Console.WriteLine("won't appreciate your clever cost cutting.");
                         if (slots == 12)
                         {
-                            Console.WriteLine("If we attatch anything to that mess you'll be turning into some light");
-                            Console.WriteLine("speed shrapnel.");
+                            Console.WriteLine("If we attatch anything to that mess you'll be turning into some light speed shrapnel.");
                         }
                         else if (slotCapacity == 8 || slotCapacity == 12 || slotCapacity == 16)
                         {
