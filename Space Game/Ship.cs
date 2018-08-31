@@ -45,6 +45,11 @@ namespace Space_Game
             return fuel;
         }
         
+        public int FuelTank()
+        {
+            return fuelTank;
+        }
+
         public void UseFuel(double distance)
         {
             int fuelUsed = (int)(Math.Ceiling(distance));

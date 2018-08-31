@@ -8,11 +8,11 @@ namespace Space_Game
 {
     class Travel
     {
-        public double distanceTraveled;
-        private int tripYears;
-        private int tripWeeks;
-        private int tripDays;
-        private int tripHours;
+        private double travelTime;
+        public int tripYears;
+        public int tripWeeks;
+        public int tripDays;
+        public int tripHours;
         private double[,] universe;
         private int numberOfPlanets;
         public int planetNum;
@@ -27,7 +27,7 @@ namespace Space_Game
             this.planetNum = startingPlanet; //notes where you started/are, may make starting away from earth a thing in the future
         }
 
-        public void ShowPlanetName(int planetNum) //displays a planet's name
+        public void ShowPlanetName() //displays a planet's name
         {
             Console.WriteLine($"{universe[planetNum, 2]}{universe[planetNum, 3]}{universe[planetNum, 4]}");
         }
@@ -36,30 +36,138 @@ namespace Space_Game
         {
             for (int counter = 0; counter < numberOfPlanets; counter++)
             {
-                if (myShip.Fuel() >= Distance(counter, universe) && planetNum != counter)
+                if (myShip.Fuel() >= Distance(counter) && planetNum != counter)
                 {
                     Console.WriteLine($"{counter}" + ". " + GetPlanetName());
                 }
             }
         }
 
-        public void MovingTo(Ship myShip)
+        public void MovingTo(Ship myShip, Player_Stats player)
         {
-            int destNum;
-            Console.WriteLine("Where would you like to go?");
-            WhereCanMove(myShip);
-            Console.WriteLine("Enter the number for where you would like to go."); 
-            Console.WriteLine($"Or enter {numberOfPlanets + 1} to leave."); //ask where to go Earth is 0 so max+1 
-            destNum = Utility.GetInt(numberOfPlanets+1); //get input
+            int destNum; //going to planet #
+            int wSpeed; // warp factor holder
+            double speed; //speed in light years
+            bool isGood = false;
+            do
+            {
+                Console.WriteLine("Where would you like to go?");
+                WhereCanMove(myShip);
+                Console.WriteLine("Enter the number for where you would like to go.");
+                Console.WriteLine($"Or enter {numberOfPlanets + 1} to leave."); //ask where to go Earth is 0 so max+1 
+                destNum = Utility.GetInt(numberOfPlanets + 1); //get input
+                if (Distance(destNum) > myShip.Fuel() && planetNum != destNum)
+                {
+                    Console.WriteLine($"That is not close enough. Please select a planet on the list. Or {numberOfPlanets + 1} to leave.");
+                }
+                else if (planetNum != destNum)
+                {
+                    Console.WriteLine("What warp speed do you want to travel at?");
+                    Console.WriteLine($"Your current ship's maximum speed is {myShip.Speed()}.");
+                    wSpeed = Utility.GetInt(myShip.Speed());
+                    if (wSpeed == 0)
+                    {
+                        Console.WriteLine("You decide not to leave.");
+                    }
+                    else
+                    {
+                        speed = Math.Pow(wSpeed, (10 / 3.0)) + Math.Pow((10 - wSpeed), (-11 / 3.0));
+                        travelTime = Distance(destNum) / speed;
+                        convertTime(travelTime);
+                        Console.WriteLine($"You have arrived at {GetPlanetName()}.");
+                        Console.Write("It took: ");
+                        Console.Write($"{tripYears} Years, ");
+                        Console.Write($"{tripWeeks} Weeks, ");
+                        Console.Write($"{tripDays} Days, ");
+                        Console.Write($"and {tripHours} Hours.");
+                        player.addTime(tripYears, tripWeeks, tripDays, tripHours);
+                        tripYears = 0;
+                        tripWeeks = 0;
+                        tripDays = 0;
+                        tripHours = 0;
+                        myShip.UseFuel(Distance(destNum)); //uses the fuel
+                        planetNum = destNum;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("You decided not to leave.");
+                }
 
+                
+
+            }
+            while (!isGood);
         }
 
-        private double Distance(int destPlanet, double[,] Universe)
+        private void convertTime(double time)
         {
-            double atX = Universe[planetNum, 0]; //starting point X
-            double atY = Universe[planetNum, 1]; //starting point Y
-            double thereX = Universe[destPlanet, 0]; //going to X
-            double thereY = Universe[destPlanet, 1]; //going to X
+            bool isGood = false;
+            tripYears = 0; //initiate time spent on current trip
+            tripWeeks = 0;
+            tripDays = 0;
+            tripHours = 0;
+
+            do
+            {
+
+                isGood = false;
+                if (time >= 1) //is trip 1 or more years
+                {
+                    --time;
+                    ++tripYears; //add years for year total until time has no years
+                    isGood = false;
+                }
+                else
+                {
+                    isGood = true;
+                }
+            }
+            while (!isGood);
+            time *= 365;
+
+            do
+            {
+                isGood = false;
+                if (time >= 1)
+                {
+                    --time;
+                    ++tripDays;
+                    isGood = false;
+                }
+                else
+                {
+                    isGood = true;
+                }
+            }
+            while (!isGood);
+            tripWeeks = tripDays / 7;
+            tripDays %= 7;
+            time *= 24;
+            do //rounds up hours
+            {
+                isGood = false;
+                if (time > 0)
+                {
+                    --time;
+                    ++tripHours;
+                    isGood = false;
+                }
+                else
+                {
+                    isGood = true;
+                }
+            }
+            while (!isGood);
+            ++tripHours; //you spent at least an hour landing/docking and taking off/undocking 
+        }
+
+        private double Distance(int destNum)
+        {
+            double atX = universe[planetNum, 0]; //starting point X
+            double atY = universe[planetNum, 1]; //starting point Y
+            double thereX = universe[destNum, 0]; //going to X
+            double thereY = universe[destNum, 1]; //going to X
             double diffX = Math.Abs(thereX - atX);
             double diffY = Math.Abs(thereY - atY);
             return Math.Sqrt(diffX * diffX + diffY * diffY);

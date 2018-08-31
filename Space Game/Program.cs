@@ -87,24 +87,8 @@ namespace Space_Game
                     else if (input == "Travel")
                     {
                         
-                        
-                            Moving(myUniverse.planetNum, myShip.Speed(), ref speed, ref curXC, ref curYC, ref distToDest);
-                            totalTravelDistance += distToDest;
-                            destTravelTime = travelTime(distToDest, speed);
-                            convertTime(destTravelTime, ref tripYears, ref tripWeeks, ref tripDays, ref tripHours);
-                            Console.WriteLine($"You have arrived at {myUniverse.GetPlanetName()}.");
-                            Console.Write("It took: ");
-                            Console.Write($"{tripYears} Years, ");
-                            Console.Write($"{tripWeeks} Weeks, ");
-                            Console.Write($"{tripDays} Days, ");
-                            Console.Write($"and {tripHours} Hours.");
-                            playerLoc = destSystem;
-                            addTime(tripYears, tripWeeks, tripDays, tripHours, //adds travel time to total time
-                                ref totalYears, ref totalWeeks, ref totalDays, ref totalHours);
-                            tripYears = 0;
-                            tripWeeks = 0;
-                            tripDays = 0;
-                            tripHours = 0;
+                            
+                            
                             setPrices(planetNum, prices);
                             economicFluctuation(prices);
                         
@@ -155,203 +139,15 @@ namespace Space_Game
             }
         }
         
+        
 
+        
 
-        static void destX(int destNum, ref double destXC)
-        {
-            switch (destNum)
-            {
-                case 0:
-                    destXC = 0.0;
-                    break;
-                case 1:
-                    destXC = 0.0;
-                    break;
-                case 2:
-                    destXC = -4.6;
-                    break;
-                default:
-                    {
-                        return;
-                    }
-            }
-            return;
-        }
+        
 
-        static void Moving(int planetNum, int shipSpeed, ref double speed, ref double curXC, ref double curYC, ref double distToDest)
-        {
-            double destXC = 0;
-            double destYC = 0;
-            speed = warpSpeed(shipSpeed);
-            destX(planetNum, ref destXC);
-            destY(planetNum, ref destYC);
-            distToDest = calcDistance(curXC, curYC, destXC, destYC);
-            curXC = destXC;
-            curYC = destYC;
-        }
+        
 
-        static void destY(int destNum, ref double destYC)
-        {
-            switch (destNum)
-            {
-                case 0:
-                    destYC = 0.0;
-                    break;
-                case 1:
-                    destYC = -4.367;
-                    break;
-                case 2:
-                    destYC = 5;
-                    break;
-                default:
-                    {
-                        return;
-                    }
-            }
-            return;
-        }
-
-        static double warpSpeed(int maxSpeed)
-        {
-            bool isGood = false;
-            int requestedWF = 0;
-            do
-            {
-                isGood = false;
-                Console.WriteLine("Please enter the warp factor you wish to travel at.");
-                try
-                {
-                    requestedWF = int.Parse(Console.ReadLine());
-                    if (requestedWF > maxSpeed)
-                    {
-                        Console.WriteLine("Your ship can't go that fast!");
-                    }
-                    else if (requestedWF < 1)
-                    {
-                        Console.WriteLine("You need to be going at Warp speeds.");
-                    }
-                    else
-                    {
-                        isGood = true;
-                    }
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("Please enter an integer.");
-                }
-            }
-            while (!isGood);
-
-            double speed = Math.Pow(requestedWF, (10 / 3.0)) + Math.Pow((10 - requestedWF), (-11 / 3.0));
-            return speed;
-        }
-
-        static double calcDistance(double curX, double curY, double newX, double newY)
-        {
-            double diffX = Math.Abs(newX - curX);
-            double diffY = Math.Abs(newY - curY);
-            return Math.Sqrt(diffX * diffX + diffY * diffY);
-        }
-
-        static double travelTime(double distance, double speed) => distance / speed;
-
-        static void convertTime(double time, ref int totYears, ref int totWeeks, ref int totDays, ref int totHours)
-        {
-            bool isGood = false;
-            totYears = 0; //initiate time spent on current trip
-            totWeeks = 0;
-            totDays = 0;
-            totHours = 0;
-
-            do
-            {
-
-                isGood = false;
-                if (time >= 1) //is trip 1 or more years
-                {
-                    --time;
-                    ++totYears; //add years for year total until time has no years
-                    isGood = false;
-                }
-                else
-                {
-                    isGood = true;
-                }
-            }
-            while (!isGood);
-            time *= 365;
-
-            do
-            {
-                isGood = false;
-                if (time >= 1)
-                {
-                    --time;
-                    ++totDays;
-                    isGood = false;
-                }
-                else
-                {
-                    isGood = true;
-                }
-            }
-            while (!isGood);
-            totWeeks = totDays / 7;
-            totDays %= 7;
-            time *= 24;
-            do //rounds up hours
-            {
-                isGood = false;
-                if (time > 0)
-                {
-                    --time;
-                    ++totHours;
-                    isGood = false;
-                }
-                else
-                {
-                    isGood = true;
-                }
-            }
-            while (!isGood);
-            ++totHours; //you spent at least an hour landing/docking and taking off/undocking 
-        }
-
-        static void addTime(int tripYears, int tripWeeks, int tripDays, int tripHours, //taking trip time
-                        ref int totYears, ref int totWeeks, ref int totDays, ref int totHours) //to add to total time
-        {
-            bool isGood = false;
-            totYears += tripYears;
-            totWeeks += tripWeeks;
-            totDays += tripDays;
-            totHours += tripHours;
-
-            do // calculates adjustments to values due to totals crossing threshhold to next value and checks 40Year end.
-            {
-                isGood = false;
-                if (totWeeks >= 53)
-                {
-                    totWeeks -= 53;
-                    ++totYears;
-                    totDays += 6;
-                }
-                else if (totDays >= 7)
-                {
-                    totDays -= 7;
-                    ++totWeeks;
-                }
-                else if (totHours > 24)
-                {
-                    totHours -= 24;
-                    ++totDays;
-                }
-                else
-                {
-                    isGood = true;
-                }
-            }
-            while (!isGood);
-        }
+        
 
         // Design the vendors for each location
         // Method for labeling each vendor

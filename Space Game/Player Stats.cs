@@ -35,18 +35,56 @@ namespace Space_Game
             money += (change);
         }
 
-        public void Status()
+        public void Status(Travel myUniverse, Ship myShip)
         {
+            Console.WriteLine($"You are on {myUniverse.GetPlanetName()}.");
             Console.WriteLine("You have been traveling for:");
             Console.WriteLine($"Years:{years}");
             Console.WriteLine($"Weeks:{weeks}");
             Console.WriteLine($"Days:{days}");
-            Console.WriteLine($"Hours:{hours}");
+            Console.WriteLine($"Hours:{hours}/n");
 
-            Console.WriteLine($"You traveled {distance} lightyears!");
+            Console.WriteLine($"You traveled {distance} lightyears!/n");
 
-            Console.WriteLine($"You have {money} credits.");
+            Console.WriteLine($"You have {money} credits./n");
+            Console.WriteLine($"Your ship has {myShip.Fuel()} fuel in a fule container that can hold {myShip.FuelTank()} units of fuel.");
+            Console.WriteLine($"It hase a max speed of warp {myShip.Speed()}.");
+            Console.WriteLine($"And it has {myShip.CargoSlots()} slots of cargo space that hold {myShip.SlotSize()} units of cargo.");
         }
 
+        public void addTime(int tripYears, int tripWeeks, int tripDays, int tripHours) //adding trip to total time
+        {
+            bool isGood = false;
+            years += tripYears;
+            weeks += tripWeeks;
+            days += tripDays;
+            hours += tripHours;
+
+            do // calculates adjustments to values due to totals crossing threshhold to next value and checks 40Year end.
+            {
+                isGood = false;
+                if (weeks >= 53)
+                {
+                    weeks -= 53;
+                    ++years;
+                    days += 6;
+                }
+                else if (days >= 7)
+                {
+                    days -= 7;
+                    ++weeks;
+                }
+                else if (hours > 24)
+                {
+                    hours -= 24;
+                    ++days;
+                }
+                else
+                {
+                    isGood = true;
+                }
+            }
+            while (!isGood);
+        }
     }
 }
