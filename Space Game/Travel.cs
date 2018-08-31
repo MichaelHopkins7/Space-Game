@@ -48,9 +48,9 @@ namespace Space_Game
             int destNum;
             Console.WriteLine("Where would you like to go?");
             WhereCanMove(myShip);
-            Console.WriteLine("Enter the number for where you would like to go.");
-            Console.WriteLine($"Or enter {numberOfPlanets + 1} to leave.");
-            destNum = Utility.GetInt(numberOfPlanets+1);
+            Console.WriteLine("Enter the number for where you would like to go."); 
+            Console.WriteLine($"Or enter {numberOfPlanets + 1} to leave."); //ask where to go Earth is 0 so max+1 
+            destNum = Utility.GetInt(numberOfPlanets+1); //get input
 
         }
 

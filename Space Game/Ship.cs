@@ -45,6 +45,12 @@ namespace Space_Game
             return fuel;
         }
         
+        public void UseFuel(double distance)
+        {
+            int fuelUsed = (int)(Math.Ceiling(distance));
+            fuel -= fuelUsed;
+        }
+
         private void ShipUpgrade(int choice)
         {
             switch (choice)
