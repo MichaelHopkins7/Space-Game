@@ -32,15 +32,26 @@ namespace Space_Game
             Console.WriteLine($"{universe[planetNum, 2]}{universe[planetNum, 3]}{universe[planetNum, 4]}");
         }
 
-        public void WhereCanMove(int planetNum, int fuel, double[,] Universe, Ship myShip) //finds out where you can go and shows it
+        public void WhereCanMove(Ship myShip) //finds out where you can go and shows it
         {
             for (int counter = 0; counter < numberOfPlanets; counter++)
             {
-                if (myShip.Fuel() >= Distance(counter, Universe) && planetNum != counter)
+                if (myShip.Fuel() >= Distance(counter, universe) && planetNum != counter)
                 {
                     Console.WriteLine($"{counter}" + ". " + GetPlanetName());
                 }
             }
+        }
+
+        public void MovingTo(Ship myShip)
+        {
+            int destNum;
+            Console.WriteLine("Where would you like to go?");
+            WhereCanMove(myShip);
+            Console.WriteLine("Enter the number for where you would like to go.");
+            Console.WriteLine($"Or enter {numberOfPlanets + 1} to leave.");
+            destNum = Utility.GetInt(numberOfPlanets+1);
+
         }
 
         private double Distance(int destPlanet, double[,] Universe)

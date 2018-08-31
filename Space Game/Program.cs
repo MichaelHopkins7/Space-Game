@@ -86,9 +86,8 @@ namespace Space_Game
                     }
                     else if (input == "Travel")
                     {
-                        newPlanet(playerLoc, ref destSystem, ref planetNum);
-                        if (destSystem != playerLoc)
-                        {
+                        
+                        
                             Moving(myUniverse.planetNum, myShip.Speed(), ref speed, ref curXC, ref curYC, ref distToDest);
                             totalTravelDistance += distToDest;
                             destTravelTime = travelTime(distToDest, speed);
@@ -108,11 +107,7 @@ namespace Space_Game
                             tripHours = 0;
                             setPrices(planetNum, prices);
                             economicFluctuation(prices);
-                        }
-                        else
-                        {
-                            Console.WriteLine("You decided not to go anywhere.");
-                        }
+                        
                     }
                     else if (input == "Check Status")
                     {
@@ -159,63 +154,7 @@ namespace Space_Game
                 Console.WriteLine($"You broke even.");
             }
         }
-
         
-
-
-        static void newPlanet(string atLocal, ref int planetNum)
-        { //newPlanet(playerLoc, ref destSystem, ref planetNum);
-            bool isGood = false;
-            Console.WriteLine("Enter the place you wish to travel to from the list.");
-            do
-            {
-                Console.WriteLine("Please enter the number of the destination.");
-                Console.WriteLine($"Enter 0 if you do not wish to move.\n");
-
-                Console.WriteLine("1. Earth"); //Planets list
-                Console.WriteLine("2. Alpha Centauri");
-                Console.WriteLine("3. My Great Planet");
-
-                int destNum = Utility.GetInt(3);
-
-
-                if (destNum == 0)
-                {
-                    destNum = planetNum;
-                    isGood = true;
-                }
-                else if (destNum == planetNum && !isGood)
-                {
-                    Console.WriteLine("You are already there!");
-                    destNum = planetNum;
-                    isGood = true;
-                }
-                else
-                {
-                    switch (destNum)
-                    {
-                        case 1:
-                            destSystem = "Earth";
-                            isGood = true;
-                            planetNum = 0;
-                            break;
-                        case 2:
-                            destSystem = "Alpha Centauri";
-                            isGood = true;
-                            planetNum = 1;
-                            break;
-                        case 3:
-                            destSystem = "My Great Planet";
-                            isGood = true;
-                            planetNum = 2;
-                            break;
-                    }
-                }
-            }
-            while (!isGood);
-        }
-
-
 
 
         static void destX(int destNum, ref double destXC)
@@ -560,6 +499,7 @@ namespace Space_Game
                     break;
             }
         }
+
         static void economicFluctuation(int[] prices)
         {
             Random rnd = new Random();
