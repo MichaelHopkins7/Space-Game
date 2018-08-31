@@ -27,31 +27,10 @@ namespace Space_Game
                 { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
                 { 0, 0 }, { 0, 0 }, { 0, 0 } }; //to store type and amount of cargo in slots
             
-            
-            double speed = 0; //will be used to store speed in lightyears from formula
-
-            int totalYears = 0; //trackers for total time spent traveling
-            int totalWeeks = 0;
-            int totalDays = 0;
-            int totalHours = 0;
-
-            int tripYears = 0; //trackers for time spent traveling on current trip
-            int tripWeeks = 0;
-            int tripDays = 0;
-            int tripHours = 0;
-
             int[] prices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-
-            double curXC = 0; //set up tracker for current location to be used to calculate distance
-            double curYC = 0; //	and sets up starting coordinates to match starting planet of Earth
-            double totalTravelDistance = 0; // tracks total lifetime travel distance
-
+            
             int planetNum = 0; //start at Earths number
-
-            string playerLoc = "Earth"; //sets up current location name var and sets Earth for game start
-            string destSystem = "";
-            double distToDest = 0; //var for travel distance to new coordinates
-            double destTravelTime = 0; //var for time spent traveling on a trip
+            
 
             Console.WriteLine("The Space Game");
             Console.WriteLine("After a lifetime of wandering between planets you have finally decided to pursue your fortune in the interplanetary trade industry.");
@@ -82,7 +61,7 @@ namespace Space_Game
                     if (input == "Trade")
                     {
                         vendorGreet(myUniverse.GetPlanetName());
-                        trading(planetNum, myShip.CargoSlots(), myShip.SlotSize(), ref cargoItems, prices, player);
+                        trading(planetNum, myShip.CargoSlots(), myShip.SlotSize(), ref cargoItems, prices, player, myShip);
                     }
                     else if (input == "Travel")
                     {
@@ -91,7 +70,7 @@ namespace Space_Game
                     else if (input == "Check Status")
                     {
                         player.Status(myUniverse, myShip);
-                        showCargoInv(myShip.CargoSlots(), cargoItems);
+                        Utility.ShowCargoInv(myShip);
                     }
                     else if (input == "")
                     {
@@ -102,7 +81,7 @@ namespace Space_Game
                         Console.WriteLine("That is not a valid input.");
                     }
 
-                    if (totalYears >= 40)
+                    if (player.SYears() >= 40)
                     {
                         isGameOver = true;
                         input = "";
@@ -153,7 +132,7 @@ namespace Space_Game
         }
 
 
-        static void trading(int placeNum, int totalSpace, int slotSpace, ref int[,] shipContents, int[] prices, Player_Stats player)
+        static void trading(int placeNum, int totalSpace, int slotSpace, ref int[,] shipContents, int[] prices, Player_Stats player, Ship myShip)
         {
 
             bool isDone = false;
@@ -161,7 +140,7 @@ namespace Space_Game
             do
             {
                 planetInv(prices);
-                showCargoInv(totalSpace, shipContents);
+                Utility.ShowCargoInv(myShip);
                 Console.WriteLine("Would you like to buy or sell?");
                 Console.WriteLine("If you would like to leave press \"Enter\".");
                 input = Console.ReadLine();
@@ -171,7 +150,7 @@ namespace Space_Game
                 }
                 else if (input == "Buy" || input == "buy")
                 {
-                    BuyThings(totalSpace, slotSpace, shipContents, prices, player); //Calls the method for buying
+                    BuyThings(totalSpace, slotSpace, shipContents, prices, player, myShip); //Calls the method for buying
                 }
                 else if (input == "Sell" || input == "sell")
                 {
@@ -191,7 +170,7 @@ namespace Space_Game
             Console.WriteLine("Not done.");
         }
 
-        public static void BuyThings(int cargoSlots, int slotSpace, int[,] inventory, int[] prices, Player_Stats player)
+        public static void BuyThings(int cargoSlots, int slotSpace, int[,] inventory, int[] prices, Player_Stats player, Ship myShip)
         {
             bool isGood = false;
             int input;
@@ -208,7 +187,7 @@ namespace Space_Game
                 cargoWhere = Utility.GetInt(cargoSlots);
                 if (cargoWhere == 25)
                 {
-                    showCargoInv(cargoSlots, inventory);
+                    Utility.ShowCargoInv(myShip);
                 }
                 else if (cargoWhere == 0)
                 {
@@ -276,24 +255,7 @@ namespace Space_Game
 
 
 
-        static void showCargoInv(int cargoSlots, int[,] inventory)
-        {
-            int counter = 0;
-            Console.WriteLine("SHIP CARGO");
-            do
-            {
-                if (inventory[(counter), 0] == 0) // first spot in array is cargo type.  Type 0 is empty.
-                {
-                    Console.WriteLine($"Container {counter + 1} has nothing in it."); //says container it's on is empty
-                }
-                else
-                {
-                    Console.WriteLine($"Container {counter + 1} has {inventory[counter, 1]} units of {Utility.cargoName(inventory[counter, 0])}."); //says container content type and count.
-                }
-                counter++;
-            }
-            while (counter <= cargoSlots);
-        }
+        
     }
 
 

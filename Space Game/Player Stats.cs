@@ -30,6 +30,11 @@ namespace Space_Game
             return money;
         }
         
+        public int SYears()
+        {
+            return years;
+        }
+
         public void ChangeMoney(int change)
         {
             money += (change);

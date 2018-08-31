@@ -105,5 +105,24 @@ namespace Space_Game
                     return "nothing";
             }
         }
+
+        public static void ShowCargoInv(Ship myShip)
+        {
+            int counter = 0;
+            Console.WriteLine("SHIP CARGO");
+            do
+            {
+                if (myShip.inventory[(counter), 0] == 0) // first spot in array is cargo type.  Type 0 is empty.
+                {
+                    Console.WriteLine($"Container {counter + 1} has nothing in it."); //says container it's on is empty
+                }
+                else
+                {
+                    Console.WriteLine($"Container {counter + 1} has {myShip.inventory[counter, 1]} units of {cargoName(myShip.inventory[counter, 0])}."); //says container content type and count.
+                }
+                counter++;
+            }
+            while (counter <= myShip.CargoSlots());
+        }
     }
 }
