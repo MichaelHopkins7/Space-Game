@@ -32,13 +32,18 @@ namespace Space_Game
             Console.WriteLine($"{universe[planetNum, 2]}{universe[planetNum, 3]}{universe[planetNum, 4]}");
         }
 
-        public void WhereCanMove(Ship myShip) //finds out where you can go and shows it
+        public void WhereCanMove(Ship myShip, ref bool closePlanet, bool display) //finds out where you can go and shows it
         {
+            closePlanet = false;
             for (int counter = 0; counter < numberOfPlanets; counter++)
             {
                 if (myShip.Fuel() >= Distance(counter) && planetNum != counter)
                 {
-                    Console.WriteLine($"{counter}" + ". " + GetPlanetName());
+                    if (display)
+                    {
+                        Console.WriteLine($"{counter}" + ". " + GetPlanetName());
+                    }
+                    closePlanet = true;
                 }
             }
         }
@@ -49,14 +54,20 @@ namespace Space_Game
             int wSpeed; // warp factor holder
             double speed; //speed in light years
             bool isGood = false;
+            bool closePlanet = false;
             do
             {
                 Console.WriteLine("Where would you like to go?");
-                WhereCanMove(myShip);
+                WhereCanMove(myShip, ref closePlanet, true);
                 Console.WriteLine("Enter the number for where you would like to go.");
                 Console.WriteLine($"Or enter {numberOfPlanets + 1} to leave."); //ask where to go Earth is 0 so max+1 
                 destNum = Utility.GetInt(numberOfPlanets + 1); //get input
-                if (Distance(destNum) > myShip.Fuel() && planetNum != destNum)
+                if (closePlanet == false)
+                {
+                    Console.WriteLine("You don't have enough fuel to get anywhere.");
+                    isGood = false;
+                }
+                else if (Distance(destNum) > myShip.Fuel() && planetNum != destNum)
                 {
                     Console.WriteLine($"That is not close enough. Please select a planet on the list. Or {numberOfPlanets + 1} to leave.");
                 }
@@ -68,6 +79,7 @@ namespace Space_Game
                     if (wSpeed == 0)
                     {
                         Console.WriteLine("You decide not to leave.");
+                        isGood = false;
                     }
                     else
                     {
@@ -87,15 +99,15 @@ namespace Space_Game
                         tripHours = 0;
                         myShip.UseFuel(Distance(destNum)); //uses the fuel
                         planetNum = destNum;
+                        isGood = false;
                     }
                 }
                 else
                 {
                     Console.WriteLine("You decided not to leave.");
+                    isGood = false;
                 }
-
                 
-
             }
             while (!isGood);
         }

@@ -35,6 +35,41 @@ namespace Space_Game
             return value;
         }
 
+        public static void CheckGameOver(Ship myShip, Travel myUniverse, Player_Stats player, ref bool isGameOver)
+        {
+            int counter = 0;
+            bool hasCargo = false;
+            bool enoughFuel = false;
+            do
+            {
+                if (myShip.inventory[counter, 1] == 0 )
+                {
+                    hasCargo = false;
+                }
+                else
+                {
+                    hasCargo = true;
+                    counter = myShip.CargoSlots();
+                }
+            }
+            while (counter < myShip.CargoSlots());
+
+            myUniverse.WhereCanMove(myShip, ref enoughFuel, false);
+
+            if (player.SYears() >= 40)
+            {
+                isGameOver = true;
+            }
+            else if (player.SMoney() == 0 && hasCargo == false)
+            {
+                isGameOver = true;
+            }
+            else if ((player.SMoney() <= 4) && enoughFuel == true)
+            {
+                isGameOver = true;
+            }
+        }
+
         public static void BuySellYN(int val, ref bool action, int buySell, Player_Stats player)
         {
             int choice;

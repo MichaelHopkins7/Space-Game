@@ -20,9 +20,7 @@ namespace Space_Game
             Player_Stats player;
             player = new Player_Stats(100, 0, 0, 0, 0, 0);
             bool isGameOver = false; //if a game end triggers this will be changed to true
-            string input = ""; //Useful for when we want input
-
-            
+            int input; //Useful for when we want input
             
             int[] prices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             
@@ -48,49 +46,39 @@ namespace Space_Game
 
             do
             {
-                do
-                {
-                    input = "";
+                
                     Console.WriteLine("What would you like to do?");
-                    Console.WriteLine("1. Trade, Travel, Check Status?");
-                    Console.WriteLine("Or press \"Enter\" when you are ready to quit.");
-                    input = Console.ReadLine();
-                    if (input == "Trade")
+                    Console.WriteLine("1. Trade");
+                    Console.WriteLine("2. Travel");
+                    Console.WriteLine("3. Check Status");
+                    Console.WriteLine("0. Quit");
+                    input = Utility.GetInt(3);
+                    switch (input)
                     {
-                        vendorGreet(myUniverse.GetPlanetName());
-                        trading(planetNum, prices, player, ref myShip);
-                    }
-                    else if (input == "Travel")
-                    {
-                        
-                    }
-                    else if (input == "Check Status")
-                    {
-                        player.Status(myUniverse, myShip);
-                        Utility.ShowCargoInv(myShip);
-                    }
-                    else if (input == "")
-                    {
-                        isGameOver = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("That is not a valid input.");
-                    }
+                        case 1:
+                        {
+                            vendorGreet(myUniverse.GetPlanetName());
+                            trading(myUniverse, prices, player, ref myShip);
+                            break;
+                        }
+                        case 2:
+                        {
+                            myUniverse.MovingTo(myShip, player);
+                            break;
+                        }
+                        case 3:
+                        {
+                            player.Status(myUniverse, myShip);
+                            break;
+                        }
+                        case 0:
+                        {
+                            isGameOver = true;
+                            break;
+                        }
 
-                    if (player.SYears() >= 40)
-                    {
-                        isGameOver = true;
-                        input = "";
                     }
-                    else if (player.SMoney() == 0)
-                    {
-                        isGameOver = true;
-                        input = "";
-                    }
-
-                }
-                while (input != "");
+                Utility.CheckGameOver(myShip, myUniverse, player, ref isGameOver);
             }
             while (!isGameOver);
 
@@ -129,7 +117,7 @@ namespace Space_Game
         }
 
 
-        static void trading(int placeNum, int[] prices, Player_Stats player, ref Ship myShip)
+        static void trading(Travel myUniverse, int[] prices, Player_Stats player, ref Ship myShip)
         {
 
             bool isDone = false;

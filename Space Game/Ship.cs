@@ -253,7 +253,7 @@ namespace Space_Game
                             choice = Utility.GetInt(fuelTank - fuel);
                             if (choice == 0)
                             {
-                                cost = (fuelTank - fuel) * 2;
+                                cost = (fuelTank - fuel) * 5;
                                 Console.WriteLine($"That will cost {cost}.");
                                 Utility.BuySellYN(cost, ref buy, 1, player);
                                 if (buy)
@@ -263,7 +263,7 @@ namespace Space_Game
                             }
                             else
                             {
-                                cost = choice * 2;
+                                cost = choice * 5;
                                 Console.WriteLine($"That will cost {cost}.");
                                 Utility.BuySellYN(cost, ref buy, 1, player);
                                 if (buy)

@@ -54,7 +54,9 @@ namespace Space_Game
             Console.WriteLine($"You have {money} credits./n");
             Console.WriteLine($"Your ship has {myShip.Fuel()} fuel in a fule container that can hold {myShip.FuelTank()} units of fuel.");
             Console.WriteLine($"It hase a max speed of warp {myShip.Speed()}.");
-            Console.WriteLine($"And it has {myShip.CargoSlots()} slots of cargo space that hold {myShip.SlotSize()} units of cargo.");
+            Console.WriteLine($"And it has {myShip.CargoSlots()} slots of cargo space that hold {myShip.SlotSize()} units of cargo./n");
+            Console.WriteLine("Inside of which is:");
+            Utility.ShowCargoInv(myShip);
         }
 
         public void addTime(int tripYears, int tripWeeks, int tripDays, int tripHours) //adding trip to total time
