@@ -14,7 +14,9 @@ namespace Space_Game
         private int fuel;
         private int fuelTank;
         private bool fuelUpgrade = false;
-        public int[,] inventory;
+        public int[,] inventory = new int[24, 2] { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
+                { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
+                { 0, 0 }, { 0, 0 }, { 0, 0 } }; //to store type and amount of cargo in slots
 
         public Ship(int warpSpeed, int shipSlots, int shipSlotCapacity, int fuelNow, int fuelTankSize)
         {

@@ -22,10 +22,7 @@ namespace Space_Game
             bool isGameOver = false; //if a game end triggers this will be changed to true
             string input = ""; //Useful for when we want input
 
-
-            int[,] cargoItems = new int[24, 2] { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
-                { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
-                { 0, 0 }, { 0, 0 }, { 0, 0 } }; //to store type and amount of cargo in slots
+            
             
             int[] prices = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             
@@ -55,13 +52,13 @@ namespace Space_Game
                 {
                     input = "";
                     Console.WriteLine("What would you like to do?");
-                    Console.WriteLine("Trade, Travel, Check Status?");
+                    Console.WriteLine("1. Trade, Travel, Check Status?");
                     Console.WriteLine("Or press \"Enter\" when you are ready to quit.");
                     input = Console.ReadLine();
                     if (input == "Trade")
                     {
                         vendorGreet(myUniverse.GetPlanetName());
-                        trading(planetNum, myShip.CargoSlots(), myShip.SlotSize(), ref cargoItems, prices, player, myShip);
+                        trading(planetNum, prices, player, ref myShip);
                     }
                     else if (input == "Travel")
                     {
@@ -132,7 +129,7 @@ namespace Space_Game
         }
 
 
-        static void trading(int placeNum, int totalSpace, int slotSpace, ref int[,] shipContents, int[] prices, Player_Stats player, Ship myShip)
+        static void trading(int placeNum, int[] prices, Player_Stats player, ref Ship myShip)
         {
 
             bool isDone = false;
@@ -150,7 +147,7 @@ namespace Space_Game
                 }
                 else if (input == "Buy" || input == "buy")
                 {
-                    BuyThings(totalSpace, slotSpace, shipContents, prices, player, myShip); //Calls the method for buying
+                    BuyThings(prices, player, ref myShip); //Calls the method for buying
                 }
                 else if (input == "Sell" || input == "sell")
                 {
@@ -170,7 +167,7 @@ namespace Space_Game
             Console.WriteLine("Not done.");
         }
 
-        public static void BuyThings(int cargoSlots, int slotSpace, int[,] inventory, int[] prices, Player_Stats player, Ship myShip)
+        public static void BuyThings(int[] prices, Player_Stats player, ref Ship myShip)
         {
             bool isGood = false;
             int input;
@@ -184,7 +181,7 @@ namespace Space_Game
                 Console.WriteLine("Lets take a look at your ship");
                 Console.WriteLine("Enter 25 to check your inventory or 0 to leave.");
                 Console.WriteLine("Nice ship, what slot are we using for new cargo?");
-                cargoWhere = Utility.GetInt(cargoSlots);
+                cargoWhere = Utility.GetInt(myShip.CargoSlots());
                 if (cargoWhere == 25)
                 {
                     Utility.ShowCargoInv(myShip);
@@ -197,22 +194,22 @@ namespace Space_Game
                 {
                     Console.WriteLine("What do you want to buy?");
 
-                    Console.WriteLine($"You want to buy more {Utility.cargoName(inventory[cargoWhere, 0])}.");
-                    currentItemBuy = Utility.cargoName(inventory[cargoWhere, 0]);
+                    Console.WriteLine($"You want to buy more {Utility.cargoName(myShip.inventory[cargoWhere, 0])}.");
+                    currentItemBuy = Utility.cargoName(myShip.inventory[cargoWhere, 0]);
                     Console.WriteLine("How much to you want to buy?");
                     itemAmount = int.Parse(Console.ReadLine());
 
-                    if ((itemAmount + inventory[cargoWhere, 1]) > slotSpace)
+                    if ((itemAmount + myShip.inventory[cargoWhere, 1]) > myShip.SlotSize())
                     {
                         Console.WriteLine("There isn't enough space");
                     }
                     else
                     {
-                        totalPrice = itemAmount * prices[inventory[cargoWhere, 0]];
+                        totalPrice = itemAmount * prices[myShip.inventory[cargoWhere, 0]];
                         Utility.BuySellYN(totalPrice, ref action, 1, player);
                         if (action)
                         {
-                            inventory[cargoWhere, 1] += itemAmount;
+                            myShip.inventory[cargoWhere, 1] += itemAmount;
                         }
                         else
                         {
