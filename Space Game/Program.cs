@@ -87,15 +87,10 @@ namespace Space_Game
                     else if (input == "Travel")
                     {
                         
-                            
-                            
-                            setPrices(planetNum, prices);
-                            economicFluctuation(prices);
-                        
                     }
                     else if (input == "Check Status")
                     {
-                        player.Status();
+                        player.Status(myUniverse, myShip);
                         showCargoInv(myShip.CargoSlots(), cargoItems);
                     }
                     else if (input == "")
@@ -123,7 +118,7 @@ namespace Space_Game
             }
             while (!isGameOver);
 
-            player.Status();
+            player.Status(myUniverse, myShip);
 
             if (player.SMoney() > 100)
             {
@@ -250,51 +245,7 @@ namespace Space_Game
             while (!isGood);
 
         }
-
-
-
-        static void setPrices(int planet, int[] prices)
-        {
-            switch (planet)
-            {
-                case 0:
-                    prices[0] = 0;
-                    prices[1] = 9;
-                    prices[2] = 1;
-                    prices[3] = 6;
-                    prices[4] = 10;
-                    prices[5] = 5;
-                    prices[6] = 2;
-                    prices[7] = 12;
-                    prices[8] = 8;
-                    prices[9] = 7;
-                    break;
-                case 1:
-                    prices[0] = 0;
-                    prices[1] = 5;
-                    prices[2] = 10;
-                    prices[3] = 3;
-                    prices[4] = 3;
-                    prices[5] = 4;
-                    prices[6] = 12;
-                    prices[7] = 4;
-                    prices[8] = 6;
-                    prices[9] = 8;
-                    break;
-                case 2:
-                    prices[0] = 0;
-                    prices[1] = 5;
-                    prices[2] = 8;
-                    prices[3] = 9;
-                    prices[4] = 6;
-                    prices[5] = 11;
-                    prices[6] = 7;
-                    prices[7] = 10;
-                    prices[8] = 12;
-                    prices[9] = 3;
-                    break;
-            }
-        }
+        
 
         static void economicFluctuation(int[] prices)
         {
