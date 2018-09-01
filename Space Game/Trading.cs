@@ -56,7 +56,7 @@ namespace Space_Game
                 }
                 else if (input == "Buy" || input == "buy")
                 {
-                    BuyThings(prices, player, myShip); //Calls the method for buying
+                    BuyThings(myShip, player, myUniverse); //Calls the method for buying
                 }
                 else if (input == "Sell" || input == "sell")
                 {
@@ -73,60 +73,6 @@ namespace Space_Game
 
         
 
-        public static void BuyThings(int[] prices, Player_Stats player, Ship myShip)
-        {
-            bool isGood = false;
-            int cargoWhere;
-            int itemAmount;
-            int totalPrice;
-            string currentItemBuy;
-            bool action = false;
-            do
-            {
-                Console.WriteLine("Lets take a look at your ship");
-                Console.WriteLine($"Enter {(myShip.CargoSlots() + 1)} to check your inventory or 0 to leave.");
-                Console.WriteLine("Nice ship, what slot are we using for new cargo?");
-                cargoWhere = Utility.GetInt(myShip.CargoSlots() + 1);
-                if (cargoWhere == (myShip.CargoSlots() + 1))
-                {
-                    Utility.ShowCargoInv(myShip);
-                }
-                else if (cargoWhere == 0)
-                {
-                    isGood = false;
-                }
-                else // this is where buying starts
-                {
-                    Console.WriteLine("What do you want to buy?");
-
-                    Console.WriteLine($"You want to buy more {Utility.CargoName(myShip.inventory[cargoWhere, 0])}.");
-                    currentItemBuy = Utility.CargoName(myShip.inventory[cargoWhere, 0]);
-                    Console.WriteLine("How much to you want to buy?");
-                    itemAmount = int.Parse(Console.ReadLine());
-
-                    if ((itemAmount + myShip.inventory[cargoWhere, 1]) > myShip.SlotSize())
-                    {
-                        Console.WriteLine("There isn't enough space");
-                    }
-                    else
-                    {
-                        totalPrice = itemAmount * prices[myShip.inventory[cargoWhere, 0]];
-                        Utility.BuySellYN(totalPrice, ref action, 1, player);
-                        if (action)
-                        {
-                            myShip.inventory[cargoWhere, 1] += itemAmount;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Mayber another time.");
-                        }
-                    }
-                }
-            }
-            while (!isGood);
-
-        }
-
         public void PlanetInv(int[] prices) // Planet Inventory
         {
             Console.WriteLine("Item Name		    Cost\n");
@@ -138,10 +84,10 @@ namespace Space_Game
             while (counter <= 9);
         }
 
-        private bool checkInventorySlot(Ship myShip)
+        private bool checkInventorySlot(Ship myShip, ref int cargoWhere)
         {
             bool isGood;
-            int cargoWhere;
+            
             do
             {
                 Console.WriteLine("Lets take a look at your ship");
@@ -150,13 +96,14 @@ namespace Space_Game
                 Console.WriteLine("Nice ship, what slot are we using for new cargo?");
                 cargoWhere = Utility.GetInt(myShip.CargoSlots()); //Verify input is number
 
-                if ((cargoWhere >= myShip.CargoSlots()) || cargoWhere <= 0)//Verify that the slot requested is not full or invalid
+                if (cargoWhere <= 0)//Verify that the slot requested is not full or invalid
                 {
                     Console.WriteLine("This is not a usable slot");
                     isGood = false;// return to the main menu        }
                 }
                 else
                 {
+                    cargoWhere--;
                     return true;
                 }
             }
@@ -164,29 +111,22 @@ namespace Space_Game
             return false;
         }
 
-        public void BuyThings(ref Ship myShip, ref Player_Stats player, Travel myUniverse)
+        public void BuyThings(Ship myShip, Player_Stats player, Travel myUniverse)
         {
-            int cargoWhere;
+            int cargoWhere = 0;
             int itemAmount;
             int currentItemBuy;
             bool isGood = false;
             bool buy = false;
             do
             {
-                Console.WriteLine("Nice ship, what slot are we using for new cargo?");
-                Console.WriteLine("Enter the slot number or 0 to show your inventory and planet prices.");
-                cargoWhere = Utility.GetInt(myShip.CargoSlots()); ///CargoWhere: where we are placing the new cargo
-                if (cargoWhere == 0) // show inventory
+                if (checkInventorySlot(myShip, ref cargoWhere))
                 {
-                    Utility.ShowCargoInv(myShip);
-                }
-                else // this is where buying starts
-                {
+
                     if (myShip.inventory[cargoWhere, 0] != 0) //if slot isn't empty need to buy same thing
                     {
                         Console.WriteLine($"You want to buy more {Utility.CargoName(myShip.inventory[cargoWhere, 0])}.");
-                        Console.WriteLine($"How much {Utility.CargoName(myShip.inventory[cargoWhere, 0])} do you want to buy?");
-                        Console.WriteLine("How much to you want to buy?");
+                        Console.WriteLine("How much do you want to buy?");
                         itemAmount = Utility.GetInt(myShip.SlotSize());
                         if (itemAmount == 0)
                         {
@@ -196,8 +136,9 @@ namespace Space_Game
                         else if ((itemAmount + myShip.inventory[cargoWhere, 1]) > myShip.SlotSize()) //if the amount you want more than fills it you can't buy
                         {
                             Console.WriteLine("There isn't enough space");
+                            isGood = true;
                         }
-                        else
+                        else// this is where buying happens when you already have the item
                         {
                             cost = prices[myShip.inventory[cargoWhere, 0]] * itemAmount;
                             Console.WriteLine($"That will cost {cost}.");
@@ -207,6 +148,7 @@ namespace Space_Game
                                 Console.WriteLine("Thank you for your business.");
                                 isGood = true;
                             }
+                            cost = 0;
                         }
                     }
                     else //slot is empty, what do you want?
@@ -219,7 +161,7 @@ namespace Space_Game
                             Console.WriteLine("It's ok if you don't want to buy anything.");
                             isGood = true;
                         }
-                        else //so you are buying something
+                        else //initial buying an item, something you don't already own
                         {
                             Console.WriteLine("How much to you want to buy?");
                             itemAmount = Utility.GetInt(myShip.SlotSize());
@@ -235,6 +177,7 @@ namespace Space_Game
                             else
                             {
                                 cost = itemAmount * prices[myShip.inventory[cargoWhere, 0]];
+                                Console.WriteLine($"The cost is {cost}.")
                                 Utility.BuySellYN(cost, ref buy, 1, player);
                                 if (buy)
                                 {
@@ -250,6 +193,7 @@ namespace Space_Game
                         }
                     }
                 }
+                
             }
             while (!isGood);
         }

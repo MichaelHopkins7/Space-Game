@@ -85,7 +85,7 @@ namespace Space_Game
                 case 1:
                     if (buySell == 1)
                     {
-                        if (player.SMoney() > val)
+                        if (player.SMoney() < val)
                         {
                             Console.WriteLine("You don't have enough money.");
                             action = false;
