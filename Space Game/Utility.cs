@@ -115,7 +115,7 @@ namespace Space_Game
             }
         }
 
-        public static string cargoName(int typeNum)
+        public static string CargoName(int typeNum)
         {
             switch (typeNum)
             {
@@ -154,7 +154,7 @@ namespace Space_Game
                 }
                 else
                 {
-                    Console.WriteLine($"Container {counter + 1} has {myShip.inventory[counter, 1]} units of {cargoName(myShip.inventory[counter, 0])}."); //says container content type and count.
+                    Console.WriteLine($"Container {counter + 1} has {myShip.inventory[counter, 1]} units of {CargoName(myShip.inventory[counter, 0])}."); //says container content type and count.
                 }
                 counter++;
             }

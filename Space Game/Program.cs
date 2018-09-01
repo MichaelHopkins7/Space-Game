@@ -56,7 +56,7 @@ namespace Space_Game
                         case 1:
                         {
                             vendorGreet(myUniverse.GetPlanetName());
-                            trading(myUniverse, prices, player, ref myShip);
+                            trading(myUniverse, prices, player, myShip);
                             break;
                         }
                         case 2:
@@ -179,8 +179,8 @@ namespace Space_Game
                 {
                     Console.WriteLine("What do you want to buy?");
 
-                    Console.WriteLine($"You want to buy more {Utility.cargoName(myShip.inventory[cargoWhere, 0])}.");
-                    currentItemBuy = Utility.cargoName(myShip.inventory[cargoWhere, 0]);
+                    Console.WriteLine($"You want to buy more {Utility.CargoName(myShip.inventory[cargoWhere, 0])}.");
+                    currentItemBuy = Utility.CargoName(myShip.inventory[cargoWhere, 0]);
                     Console.WriteLine("How much to you want to buy?");
                     itemAmount = int.Parse(Console.ReadLine());
 
@@ -229,7 +229,7 @@ namespace Space_Game
             int counter = 1;
             do
             {
-                Console.WriteLine($"({counter}){Utility.cargoName(counter)}              {(prices[counter])}");
+                Console.WriteLine($"({counter}){Utility.CargoName(counter)}              {(prices[counter])}");
             }
             while (counter <= 9);
         }

@@ -64,8 +64,8 @@ namespace Space_Game
                 {
                     if (myShip.inventory[cargoWhere, 0] != 0) //if slot isn't empty need to buy same thing
                     {
-                        Console.WriteLine($"You want to buy more {Utility.cargoName(myShip.inventory[cargoWhere, 0])}.");
-                        Console.WriteLine($"How much {Utility.cargoName(myShip.inventory[cargoWhere, 0])} do you want to buy?");
+                        Console.WriteLine($"You want to buy more {Utility.CargoName(myShip.inventory[cargoWhere, 0])}.");
+                        Console.WriteLine($"How much {Utility.CargoName(myShip.inventory[cargoWhere, 0])} do you want to buy?");
                         Console.WriteLine("How much to you want to buy?");
                         itemAmount = Utility.GetInt(myShip.SlotSize());
                         if (itemAmount == 0)
@@ -81,7 +81,7 @@ namespace Space_Game
                         {
                             cost = prices[myShip.inventory[cargoWhere, 0]] * itemAmount;
                             Console.WriteLine($"That will cost {cost}.");
-                            Utility.BuySellYN(cost, ref buy, 1, ref player); //call the buying thing
+                            Utility.BuySellYN(cost, ref buy, 1, player); //call the buying thing
                             if (buy) //you bought something
                             {
                                 Console.WriteLine("Thank you for your business.");
@@ -115,7 +115,7 @@ namespace Space_Game
                             else
                             {
                                 cost = itemAmount * prices[myShip.inventory[cargoWhere, 0]];
-                                Utility.BuySellYN(cost, ref buy, 1, ref player);
+                                Utility.BuySellYN(cost, ref buy, 1, player);
                                 if (buy)
                                 {
                                     myShip.inventory[cargoWhere, 1] += itemAmount;
@@ -137,11 +137,13 @@ namespace Space_Game
         static void sellThings(ref Player_Stats player, ref Ship myShip, int[] prices)
         {
             bool isGood = false;
+            bool buy = false;
             int input;
             int cAmount;
             int sumTotal;
             do
             {
+                buy = false;
                 Console.WriteLine($"What cargo would you like to sell?\n");
                 Console.WriteLine("Please enter the slot number of the cargo you wish to sell.");
                 Console.WriteLine("Enter \"100\" to check your inventory, 101 to look at the planet's");
@@ -172,17 +174,17 @@ namespace Space_Game
                             isGood = true;
                             break;
                         }
-                        else if (myShip.Inventory[input, 1] == 0)
+                        else if (myShip.inventory[input, 1] == 0)
                         {
                             Console.WriteLine($"That container is empty.\n");
                             break;
                         }
                         else
                         {
-                            Console.WriteLine($"Alright that has {inventory[input, 1]} units of {cargoName(inventory[input, 0])}.");
+                            Console.WriteLine($"Alright that has {myShip.inventory[input, 1]} units of {Utility.CargoName(myShip.inventory[input, 0])}.");
                             Console.WriteLine($"How much would you like to sell?");
-                            cAmount = getInt(inventory[input, 1]);
-                            if (cAmount > inventory[input, 1] || cAmount < 0) // are you trying to sell more than you have?
+                            cAmount = Utility.GetInt(myShip.inventory[input, 1]);
+                            if (cAmount > myShip.inventory[input, 1] || cAmount < 0) // are you trying to sell more than you have?
                             {
                                 Console.WriteLine("I don't understant.");
                                 break;
@@ -194,20 +196,20 @@ namespace Space_Game
                             }
                             else
                             {
-                                sumTotal = prices[inventory[input, 0]] * cAmount;
+                                sumTotal = prices[myShip.inventory[input, 0]] * cAmount;
                                 Console.WriteLine($"I'll give you {sumTotal} credits for that much.");
-                                buySellYN(ref money, sumTotal, ref isGood, 2);
+                                Utility.BuySellYN(sumTotal, ref buy, 1, player);
                                 if (isGood)
                                 {
                                     Console.WriteLine("Pleasure doing business with you.");
-                                    if (cAmount == inventory[input, 1])
+                                    if (cAmount == myShip.inventory[input, 1])
                                     {
-                                        inventory[input, 0] = 0;
-                                        inventory[input, 1] = 0;
+                                        myShip.inventory[input, 0] = 0;
+                                        myShip.inventory[input, 1] = 0;
                                     }
                                     else
                                     {
-                                        inventory[input, 1] -= cAmount;
+                                        myShip.inventory[input, 1] -= cAmount;
                                     }
                                     isGood = false;
                                     break;
