@@ -64,7 +64,7 @@ namespace Space_Game
             {
                 return true;
             }
-            else if ((player.SMoney() <= 4) && enoughFuel == true)
+            else if ((player.SMoney() <= 4) && enoughFuel == false)
             {
                 return true;
             }

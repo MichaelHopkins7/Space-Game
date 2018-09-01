@@ -56,9 +56,8 @@ namespace Space_Game
                 {
                     case 1:
                     {
-                        
                         makeMoney.NewTrade(myUniverse, player, myShip);
-                        break;
+                            break;
                     }
                     case 2:
                     {
@@ -82,21 +81,15 @@ namespace Space_Game
                     }
 
                 }
-                isGameOver |= Utility.CheckGameOver(myShip, myUniverse, player);
+                if (!isGameOver)
+                {
+                    isGameOver = Utility.CheckGameOver(myShip, myUniverse, player);
+                }
             }
             while (!isGameOver);
 
             player.Status(myUniverse, myShip);
             
         }
-        
-        
     }
-
-
-    
 }
-
-    
-
-
