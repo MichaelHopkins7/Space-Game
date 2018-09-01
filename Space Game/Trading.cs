@@ -44,9 +44,9 @@ namespace Space_Game
             string input = "";
             Console.WriteLine($"Welcome to {myUniverse.GetPlanetName()}.");
             Console.WriteLine($"Here is what we have.\n");
+            PlanetInv(prices);
             do
             {
-                Utility.ShowCargoInv(myShip);
                 Console.WriteLine("Would you like to buy or sell?");
                 Console.WriteLine("If you would like to leave press \"Enter\".");
                 input = Console.ReadLine();
