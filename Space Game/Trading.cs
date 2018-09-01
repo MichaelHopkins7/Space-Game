@@ -42,6 +42,8 @@ namespace Space_Game
 
             bool isDone = false;
             string input = "";
+            Console.WriteLine($"Welcome to {myUniverse.GetPlanetName()}.");
+            Console.WriteLine($"Here is what we have.\n");
             do
             {
                 Utility.ShowCargoInv(myShip);

@@ -55,13 +55,13 @@ namespace Space_Game
                     {
                         case 1:
                         {
-                            VendorGreet(myUniverse.GetPlanetName());
+                            
                             makeMoney.NewTrade(myUniverse, player, myShip);
                             break;
                         }
                         case 2:
                         {
-                            myUniverse.MovingTo(myShip, player);
+                            myUniverse.MovingTo(myShip, player, makeMoney);
                             break;
                         }
                         case 3:
@@ -81,19 +81,7 @@ namespace Space_Game
             while (!isGameOver);
 
             player.Status(myUniverse, myShip);
-
-            if (player.SMoney() > 100)
-            {
-                Console.WriteLine($"You made {player.SMoney() - 100}!");
-            }
-            else if (player.SMoney() < 100)
-            {
-                Console.WriteLine($"You lost {100 - player.SMoney()}.");
-            }
-            else
-            {
-                Console.WriteLine($"You broke even.");
-            }
+            
         }
         
         
@@ -105,14 +93,6 @@ namespace Space_Game
         
 
         
-
-        // Design the vendors for each location
-        // Method for labeling each vendor
-        static void VendorGreet(string playerAt)
-        {
-            Console.WriteLine($"Welcome to {playerAt}.");
-            Console.WriteLine($"Here is what we have.\n");
-        }
 
 
         
