@@ -59,7 +59,7 @@ namespace Space_Game
             Utility.ShowCargoInv(myShip);
         }
 
-        public void addTime(int tripYears, int tripWeeks, int tripDays, int tripHours) //adding trip to total time
+        public void AddTime(int tripYears, int tripWeeks, int tripDays, int tripHours) //adding trip to total time
         {
             bool isGood = false;
             years += tripYears;

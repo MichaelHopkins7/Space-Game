@@ -14,9 +14,7 @@ namespace Space_Game
         private int fuel;
         private int fuelTank;
         private bool fuelUpgrade = false;
-        public int[,] inventory = new int[24, 2] { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
-                { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
-                { 0, 0 }, { 0, 0 }, { 0, 0 } }; //to store type and amount of cargo in slots
+        public int[,] inventory = new int[24, 2] ; //to store type and amount of cargo in slots
 
         public Ship(int warpSpeed, int shipSlots, int shipSlotCapacity, int fuelNow, int fuelTankSize)
         {
@@ -25,6 +23,10 @@ namespace Space_Game
             this.slotCapacity = shipSlotCapacity;
             this.fuel = fuelNow;
             this.fuelTank = fuelTankSize;
+            this.inventory = new int[24, 2]{
+                { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
+                { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
+                { 0, 0 }, { 0, 0 }, { 0, 0 } };
         }
 
         public int Speed()
