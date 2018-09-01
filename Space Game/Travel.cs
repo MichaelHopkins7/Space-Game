@@ -48,7 +48,7 @@ namespace Space_Game
             }
         }
 
-        public void MovingTo(Ship myShip, Player_Stats player)
+        public void MovingTo(Ship myShip, Player_Stats player, Trading makeMoney)
         {
             int destNum; //going to planet #
             int wSpeed; // warp factor holder
@@ -100,6 +100,7 @@ namespace Space_Game
                         myShip.UseFuel(Distance(destNum)); //uses the fuel
                         planetNum = destNum;
                         isGood = false;
+                        makeMoney.MakePrices(universe, planetNum);
                     }
                 }
                 else

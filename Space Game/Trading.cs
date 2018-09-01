@@ -18,12 +18,12 @@ namespace Space_Game
             this.cost = cost;
         }
         
-        public void MakePrices(Travel myUniverse)
+        public void MakePrices(double[,] universe, int planetNum)
         {
             int counter = 0;
             for (counter = 0; counter < 10; counter++)
             {
-                prices[counter] = (int)(myUniverse.universe[myUniverse.planetNum, (counter + 5)]);
+                prices[counter] = (int)(universe[planetNum, (counter + 5)]);
             }
             Random rnd = new Random();
             int rando;
