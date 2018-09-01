@@ -52,6 +52,18 @@ namespace Space_Game
             Console.WriteLine($"You traveled {distance} lightyears!/n");
 
             Console.WriteLine($"You have {money} credits./n");
+            if (money > 100)
+            {
+                Console.WriteLine($"You have gained {money - 100} credits.");
+            }
+            else if (money < 100)
+            {
+                Console.WriteLine($"You have lost {100 - money} credits.");
+            }
+            else
+            {
+                Console.WriteLine($"You are breaking even.");
+            }
             Console.WriteLine($"Your ship has {myShip.Fuel()} fuel in a fule container that can hold {myShip.FuelTank()} units of fuel.");
             Console.WriteLine($"It hase a max speed of warp {myShip.Speed()}.");
             Console.WriteLine($"And it has {myShip.CargoSlots()} slots of cargo space that hold {myShip.SlotSize()} units of cargo./n");

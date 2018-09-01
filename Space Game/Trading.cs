@@ -60,7 +60,7 @@ namespace Space_Game
                 }
                 else if (input == "Sell" || input == "sell")
                 {
-                    SellThings(player, myShip, prices);
+                    SellThings(player, myShip);
                 }
                 else
                 {
@@ -200,12 +200,12 @@ namespace Space_Game
             while (!isGood);
         }
 
-        public void SellThings(Player_Stats player, Ship myShip, int[] prices)
+        public void SellThings(Player_Stats player, Ship myShip)
         {
             bool isGood = false;
-            bool buy = false;
+            bool buy;
             int input;
-            int cAmount;
+            int sellAmount;
             int sumTotal;
             do
             {
@@ -215,11 +215,11 @@ namespace Space_Game
                 Console.WriteLine($"Enter {(myShip.CargoSlots() + 1)} to check your inventory, {myShip.CargoSlots() + 2} to look at the planet's");
                 Console.WriteLine("pricing or 0 when you are done."); //what does the player want to do.
                 input = Utility.GetInt(myShip.CargoSlots() + 2);
-                if (input == (myShip.CargoSlots() + 2))
+                if (input == (myShip.CargoSlots() + 1))
                 {
                     Utility.ShowCargoInv(myShip); //SHOW ME WHAT YOU GOT
                 }
-                else if (input == myShip.CargoSlots() + 1)
+                else if (input == myShip.CargoSlots() + 2)
                 {
                     PlanetInv(prices); //how much are things worth?
                 }
@@ -233,41 +233,37 @@ namespace Space_Game
                     Console.WriteLine("Uh... ok, well see you later...");
                     isGood = true;
                 }
-                else if (myShip.inventory[input, 1] == 0) // nothing there to sell
+                else if (myShip.inventory[(input-1), 1] == 0) // nothing there to sell
                 {
                     Console.WriteLine($"That container is empty.\n");
                 }
                 else
                 {
-                    Console.WriteLine($"Alright that has {myShip.inventory[input, 1]} units of {Utility.CargoName(myShip.inventory[input, 0])}.");
+                    input--;
+                    Console.WriteLine($"Alright that has {myShip.inventory[(input), 1]} units of {Utility.CargoName(myShip.inventory[(input), 0])}.");
                     Console.WriteLine($"How much would you like to sell?");
-                    cAmount = Utility.GetInt(myShip.inventory[input, 1]);
-                    if (cAmount > myShip.inventory[input, 1]) // are you trying to sell more than you have?
-                    {
-                        Console.WriteLine("You don't have that much.");
-                        break;
-                    }
-                    else if (cAmount == 0)
+                    sellAmount = Utility.GetInt(myShip.inventory[input, 1]);
+                    if (sellAmount == 0)
                     {
                         Console.WriteLine("It's fine if you don't want to sell.");
                         break;
                     }
                     else
                     {
-                        sumTotal = prices[myShip.inventory[input, 0]] * cAmount;
+                        sumTotal = prices[myShip.inventory[input, 0]] * sellAmount;
                         Console.WriteLine($"I'll give you {sumTotal} credits for that much.");
                         Utility.BuySellYN(sumTotal, ref buy, 1, player);
                         if (isGood)
                         {
                             Console.WriteLine("Pleasure doing business with you.");
-                            if (cAmount == myShip.inventory[input, 1])
+                            if (sellAmount == myShip.inventory[input, 1])
                             {
                                 myShip.inventory[input, 0] = 0;
                                 myShip.inventory[input, 1] = 0;
                             }
                             else
                             {
-                                myShip.inventory[input, 1] -= cAmount;
+                                myShip.inventory[input, 1] -= sellAmount;
                             }
                             isGood = false;
                         }
