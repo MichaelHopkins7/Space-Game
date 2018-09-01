@@ -114,10 +114,11 @@ namespace Space_Game
         public void BuyThings(Ship myShip, Player_Stats player, Travel myUniverse)
         {
             int cargoWhere = 0;
-            int itemAmount;
-            int currentItemBuy;
+            int itemAmount = 0;
+            int currentItemBuy = 0;
             bool isGood = false;
             bool buy = false;
+            cost = 0;
             do
             {
                 if (checkInventorySlot(myShip, ref cargoWhere))
@@ -177,11 +178,12 @@ namespace Space_Game
                             else
                             {
                                 cost = itemAmount * prices[myShip.inventory[cargoWhere, 0]];
-                                Console.WriteLine($"The cost is {cost}.")
+                                Console.WriteLine($"The cost is {cost}.");
                                 Utility.BuySellYN(cost, ref buy, 1, player);
                                 if (buy)
                                 {
-                                    myShip.inventory[cargoWhere, 1] += itemAmount;
+                                    myShip.inventory[cargoWhere, 1] = itemAmount;
+                                    myShip.inventory[cargoWhere, 0] = currentItemBuy;
                                     cost = 0;
                                 }
                                 else
