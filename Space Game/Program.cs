@@ -27,7 +27,7 @@ namespace Space_Game
 
             Console.WriteLine("The Space Game");
             Console.WriteLine("After a lifetime of wandering between planets you have finally decided to pursue your fortune in the interplanetary trade industry.");
-            Console.WriteLine("With Earth being your new home you have decided that the best trading planets for your success will be The Great Planet and Alpha Centauri.");
+            Console.WriteLine("With Earth being your new home you have decided that the best plan will be exploring new routes to new planets.");
             System.Threading.Thread.Sleep(6000);
             Console.Clear();
             Console.WriteLine("With your life savings(100 credits) and a brand new ship you head out to make your fortune. ");
