@@ -13,7 +13,7 @@ namespace Space_Game
         public int tripWeeks;
         public int tripDays;
         public int tripHours;
-        private double[,] universe;
+        public double[,] universe;
         private int numberOfPlanets;
         public int planetNum;
         // [Planet#, (0=X, 1=Y, 2=Name Part 1, 3=Name Part 2, 4=Name Part 3, 5=0 for pricing 6=Gold Price, 7=Iron Price, 8=Selenium Price,
@@ -92,7 +92,7 @@ namespace Space_Game
                         Console.Write($"{tripWeeks} Weeks, ");
                         Console.Write($"{tripDays} Days, ");
                         Console.Write($"and {tripHours} Hours.");
-                        player.addTime(tripYears, tripWeeks, tripDays, tripHours);
+                        player.AddTime(tripYears, tripWeeks, tripDays, tripHours);
                         tripYears = 0;
                         tripWeeks = 0;
                         tripDays = 0;

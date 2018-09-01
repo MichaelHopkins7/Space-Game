@@ -20,7 +20,7 @@ namespace Space_Game
             Player_Stats player;
             player = new Player_Stats(100, 0, 0, 0, 0, 0);
             int[] prices = new int[10];
-            Trading MakeMoney = new Trading(prices, 0);
+            Trading makeMoney = new Trading(prices, 0);
             bool isGameOver = false; //if a game end triggers this will be changed to true
             int input; //Useful for when we want input
             
@@ -55,8 +55,8 @@ namespace Space_Game
                     {
                         case 1:
                         {
-                            vendorGreet(myUniverse.GetPlanetName());
-                            trading(myUniverse, prices, player, myShip);
+                            VendorGreet(myUniverse.GetPlanetName());
+                            makeMoney.NewTrade(myUniverse, player, myShip);
                             break;
                         }
                         case 2:
@@ -108,131 +108,18 @@ namespace Space_Game
 
         // Design the vendors for each location
         // Method for labeling each vendor
-        static void vendorGreet(string playerAt)
+        static void VendorGreet(string playerAt)
         {
             Console.WriteLine($"Welcome to {playerAt}.");
             Console.WriteLine($"Here is what we have.\n");
         }
 
 
-        static void trading(Travel myUniverse, int[] prices, Player_Stats player, Ship myShip)
-        {
-
-            bool isDone = false;
-            string input = "";
-            do
-            {
-                planetInv(prices);
-                Utility.ShowCargoInv(myShip);
-                Console.WriteLine("Would you like to buy or sell?");
-                Console.WriteLine("If you would like to leave press \"Enter\".");
-                input = Console.ReadLine();
-                if (input == "")
-                {
-                    isDone = true;
-                }
-                else if (input == "Buy" || input == "buy")
-                {
-                    BuyThings(prices, player, myShip); //Calls the method for buying
-                }
-                else if (input == "Sell" || input == "sell")
-                {
-                    sellThings();
-                }
-                else
-                {
-                    Console.WriteLine("I don't understand.");
-                }
-            }
-            while (!isDone);
-            Console.WriteLine("Good Luck!");
-        }
-
-        private static void sellThings()
-        {
-            Console.WriteLine("Not done.");
-        }
-
-        public static void BuyThings(int[] prices, Player_Stats player, Ship myShip)
-        {
-            bool isGood = false;
-            int cargoWhere;
-            int itemAmount;
-            int totalPrice;
-            string currentItemBuy;
-            bool action = false;
-            do
-            {
-                Console.WriteLine("Lets take a look at your ship");
-                Console.WriteLine("Enter 25 to check your inventory or 0 to leave.");
-                Console.WriteLine("Nice ship, what slot are we using for new cargo?");
-                cargoWhere = Utility.GetInt(myShip.CargoSlots());
-                if (cargoWhere == 25)
-                {
-                    Utility.ShowCargoInv(myShip);
-                }
-                else if (cargoWhere == 0)
-                {
-
-                }
-                else // this is where buying starts
-                {
-                    Console.WriteLine("What do you want to buy?");
-
-                    Console.WriteLine($"You want to buy more {Utility.CargoName(myShip.inventory[cargoWhere, 0])}.");
-                    currentItemBuy = Utility.CargoName(myShip.inventory[cargoWhere, 0]);
-                    Console.WriteLine("How much to you want to buy?");
-                    itemAmount = int.Parse(Console.ReadLine());
-
-                    if ((itemAmount + myShip.inventory[cargoWhere, 1]) > myShip.SlotSize())
-                    {
-                        Console.WriteLine("There isn't enough space");
-                    }
-                    else
-                    {
-                        totalPrice = itemAmount * prices[myShip.inventory[cargoWhere, 0]];
-                        Utility.BuySellYN(totalPrice, ref action, 1, player);
-                        if (action)
-                        {
-                            myShip.inventory[cargoWhere, 1] += itemAmount;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Mayber another time.");
-                        }
-                    }
-                }
-            }
-            while (!isGood);
-
-        }
+        
+        
         
 
-        static void economicFluctuation(int[] prices)
-        {
-            Random rnd = new Random();
-            int rando;
-            int counter = 1;
-            do
-            {
-                rando = rnd.Next(1, 6);
-                prices[counter] += (rando - 3);
-                ++counter;
-            }
-            while (counter < 10);
-        }
 
-
-        static void planetInv(int[] prices) // Planet Inventory
-        {
-            Console.WriteLine("Cargo Name		    Cost\n");
-            int counter = 1;
-            do
-            {
-                Console.WriteLine($"({counter}){Utility.CargoName(counter)}              {(prices[counter])}");
-            }
-            while (counter <= 9);
-        }
 
 
 
