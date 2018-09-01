@@ -87,16 +87,16 @@ namespace Space_Game
             do
             {
                 Console.WriteLine("Lets take a look at your ship");
-                Console.WriteLine("Enter 25 to check your inventory or 0 to leave.");
+                Console.WriteLine($"Enter {(myShip.CargoSlots() + 1)} to check your inventory or 0 to leave.");
                 Console.WriteLine("Nice ship, what slot are we using for new cargo?");
-                cargoWhere = Utility.GetInt(myShip.CargoSlots());
-                if (cargoWhere == 25)
+                cargoWhere = Utility.GetInt(myShip.CargoSlots() + 1);
+                if (cargoWhere == (myShip.CargoSlots() + 1))
                 {
                     Utility.ShowCargoInv(myShip);
                 }
                 else if (cargoWhere == 0)
                 {
-
+                    isGood = false;
                 }
                 else // this is where buying starts
                 {
