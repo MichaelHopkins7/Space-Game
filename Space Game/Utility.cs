@@ -113,6 +113,7 @@ namespace Space_Game
                     action = false;
                     break;
             }
+            return;
         }
 
         public static string CargoName(int typeNum)
@@ -159,6 +160,7 @@ namespace Space_Game
                 counter++;
             }
             while (counter < myShip.CargoSlots());
+            return;
         }
     }
 }

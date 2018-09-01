@@ -30,6 +30,7 @@ namespace Space_Game
         public void ShowPlanetName() //displays a planet's name
         {
             Console.WriteLine($"{universe[planetNum, 2]}{universe[planetNum, 3]}{universe[planetNum, 4]}");
+            return;
         }
 
         public void WhereCanMove(Ship myShip, ref bool closePlanet, bool display) //finds out where you can go and shows it
@@ -46,6 +47,7 @@ namespace Space_Game
                     closePlanet = true;
                 }
             }
+            return;
         }
 
         public void MovingTo(Ship myShip, Player_Stats player, Trading makeMoney)
@@ -65,7 +67,7 @@ namespace Space_Game
                 if (closePlanet == false)
                 {
                     Console.WriteLine("You don't have enough fuel to get anywhere.");
-                    isGood = false;
+                    isGood = true;
                 }
                 else if (Distance(destNum) > myShip.Fuel() && planetNum != destNum)
                 {
@@ -99,18 +101,19 @@ namespace Space_Game
                         tripHours = 0;
                         myShip.UseFuel(Distance(destNum)); //uses the fuel
                         planetNum = destNum;
-                        isGood = false;
+                        isGood = true;
                         makeMoney.MakePrices(universe, planetNum);
                     }
                 }
                 else
                 {
                     Console.WriteLine("You decided not to leave.");
-                    isGood = false;
+                    isGood = true;
                 }
                 
             }
             while (!isGood);
+            return;
         }
 
         private void convertTime(double time)
@@ -173,6 +176,7 @@ namespace Space_Game
             }
             while (!isGood);
             ++tripHours; //you spent at least an hour landing/docking and taking off/undocking 
+            return;
         }
 
         private double Distance(int destNum)

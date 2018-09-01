@@ -38,6 +38,7 @@ namespace Space_Game
         public void ChangeMoney(int change)
         {
             money += (change);
+            return;
         }
 
         public void Status(Travel myUniverse, Ship myShip)
@@ -69,6 +70,8 @@ namespace Space_Game
             Console.WriteLine($"And it has {myShip.CargoSlots()} slots of cargo space that hold {myShip.SlotSize()} units of cargo./n");
             Console.WriteLine("Inside of which is:");
             Utility.ShowCargoInv(myShip);
+
+            return;
         }
 
         public void AddTime(int tripYears, int tripWeeks, int tripDays, int tripHours) //adding trip to total time
@@ -104,6 +107,7 @@ namespace Space_Game
                 }
             }
             while (!isGood);
+            return;
         }
     }
 }

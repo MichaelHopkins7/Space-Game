@@ -35,6 +35,7 @@ namespace Space_Game
                 ++counter;
             }
             while (counter < 10);
+            return;
         }
 
         public void NewTrade(Travel myUniverse, Player_Stats player, Ship myShip)
@@ -69,6 +70,7 @@ namespace Space_Game
             }
             while (!isDone);
             Console.WriteLine("Good Luck!");
+            return;
         }
 
         
@@ -82,6 +84,7 @@ namespace Space_Game
                 Console.WriteLine($"({counter}){Utility.CargoName(counter)}              {(prices[counter])}");
             }
             while (counter <= 9);
+            return;
         }
 
         private bool checkInventorySlot(Ship myShip, ref int cargoWhere)
@@ -185,11 +188,13 @@ namespace Space_Game
                                     myShip.inventory[cargoWhere, 1] = itemAmount;
                                     myShip.inventory[cargoWhere, 0] = currentItemBuy;
                                     cost = 0;
+                                    isGood = true;
                                 }
                                 else
                                 {
                                     Console.WriteLine("Mayber another time.");
                                     cost = 0;
+                                    isGood = true;
                                 }
                             }
                         }
@@ -198,6 +203,7 @@ namespace Space_Game
                 
             }
             while (!isGood);
+            return;
         }
 
         public void SellThings(Player_Stats player, Ship myShip)
@@ -246,14 +252,14 @@ namespace Space_Game
                     if (sellAmount == 0)
                     {
                         Console.WriteLine("It's fine if you don't want to sell.");
-                        break;
+                        isGood = true;
                     }
                     else
                     {
                         sumTotal = prices[myShip.inventory[input, 0]] * sellAmount;
                         Console.WriteLine($"I'll give you {sumTotal} credits for that much.");
                         Utility.BuySellYN(sumTotal, ref buy, 1, player);
-                        if (isGood)
+                        if (buy)
                         {
                             Console.WriteLine("Pleasure doing business with you.");
                             if (sellAmount == myShip.inventory[input, 1])
@@ -265,16 +271,18 @@ namespace Space_Game
                             {
                                 myShip.inventory[input, 1] -= sellAmount;
                             }
-                            isGood = false;
+                            isGood = true;
                         }
                         else
                         {
                             Console.WriteLine("Well I can't offer you more than that.");
+                            isGood = true;
                         }
                     }
                 }
             }
             while (!isGood);
+            return;
         }
     }
 }

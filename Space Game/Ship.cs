@@ -36,7 +36,7 @@ namespace Space_Game
 
         public int CargoSlots()
         {
-            return this.slots;
+            return slots;
         }
 
         public int SlotSize()
@@ -58,6 +58,7 @@ namespace Space_Game
         {
             int fuelUsed = (int)(Math.Ceiling(distance));
             fuel -= fuelUsed;
+            return;
         }
 
         private void ShipUpgrade(int choice)
@@ -99,6 +100,7 @@ namespace Space_Game
                     fuelUpgrade = true;
                     break;
             }
+            return;
         }
 
         public void ShipThings(Player_Stats player)
@@ -282,6 +284,7 @@ namespace Space_Game
                         break;
                     }
             }
+            return;
         }
         
     }
