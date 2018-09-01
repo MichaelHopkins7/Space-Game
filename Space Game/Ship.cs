@@ -101,7 +101,7 @@ namespace Space_Game
             }
         }
 
-        public void ShipThings(ref Player_Stats player)
+        public void ShipThings(Player_Stats player)
         {
             int cost = 0;
             int choice = 0;

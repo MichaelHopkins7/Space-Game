@@ -44,38 +44,44 @@ namespace Space_Game
 
             do
             {
-                
-                    Console.WriteLine("What would you like to do?");
-                    Console.WriteLine("1. Trade");
-                    Console.WriteLine("2. Travel");
-                    Console.WriteLine("3. Check Status");
-                    Console.WriteLine("0. Quit");
-                    input = Utility.GetInt(3);
-                    switch (input)
+                    
+                Console.WriteLine("What would you like to do?");
+                Console.WriteLine("1. Trade");
+                Console.WriteLine("2. Travel");
+                Console.WriteLine("3. Take care of my ship.");
+                Console.WriteLine("4. Check Status");
+                Console.WriteLine("0. Quit");
+                input = Utility.GetInt(3);
+                switch (input)
+                {
+                    case 1:
                     {
-                        case 1:
-                        {
-                            
-                            makeMoney.NewTrade(myUniverse, player, myShip);
-                            break;
-                        }
-                        case 2:
-                        {
-                            myUniverse.MovingTo(myShip, player, makeMoney);
-                            break;
-                        }
-                        case 3:
-                        {
-                            player.Status(myUniverse, myShip);
-                            break;
-                        }
-                        case 0:
-                        {
-                            isGameOver = true;
-                            break;
-                        }
-
+                        
+                        makeMoney.NewTrade(myUniverse, player, myShip);
+                        break;
                     }
+                    case 2:
+                    {
+                        myUniverse.MovingTo(myShip, player, makeMoney);
+                        break;
+                    }
+                    case 3:
+                    {
+                            myShip.ShipThings(player);
+                            break;
+                    }
+                    case 4:
+                    {
+                        player.Status(myUniverse, myShip);
+                        break;
+                    }
+                    case 0:
+                    {
+                        isGameOver = true;
+                        break;
+                    }
+
+                }
                 isGameOver |= Utility.CheckGameOver(myShip, myUniverse, player);
             }
             while (!isGameOver);
