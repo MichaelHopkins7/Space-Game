@@ -158,7 +158,7 @@ namespace Space_Game
                 }
                 counter++;
             }
-            while (counter <= myShip.CargoSlots());
+            while (counter < myShip.CargoSlots());
         }
     }
 }
