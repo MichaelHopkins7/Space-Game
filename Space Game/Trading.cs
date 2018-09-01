@@ -60,7 +60,7 @@ namespace Space_Game
                 }
                 else if (input == "Sell" || input == "sell")
                 {
-                    SellThings();
+                    SellThings(player, myShip, prices);
                 }
                 else
                 {
@@ -71,10 +71,7 @@ namespace Space_Game
             Console.WriteLine("Good Luck!");
         }
 
-        private static void SellThings()
-        {
-            Console.WriteLine("Not done.");
-        }
+        
 
         public static void BuyThings(int[] prices, Player_Stats player, Ship myShip)
         {
@@ -257,7 +254,7 @@ namespace Space_Game
             while (!isGood);
         }
 
-        public void sellThings(ref Player_Stats player, ref Ship myShip, int[] prices)
+        public void SellThings(Player_Stats player, Ship myShip, int[] prices)
         {
             bool isGood = false;
             bool buy = false;
@@ -269,81 +266,70 @@ namespace Space_Game
                 buy = false;
                 Console.WriteLine($"What cargo would you like to sell?\n");
                 Console.WriteLine("Please enter the slot number of the cargo you wish to sell.");
-                Console.WriteLine("Enter \"100\" to check your inventory, 101 to look at the planet's");
+                Console.WriteLine($"Enter {(myShip.CargoSlots() + 1)} to check your inventory, {myShip.CargoSlots() + 2} to look at the planet's");
                 Console.WriteLine("pricing or 0 when you are done."); //what does the player want to do.
                 input = Utility.GetInt(myShip.CargoSlots() + 2);
-                switch (input)
+                if (input == (myShip.CargoSlots() + 2))
                 {
-                    case 100:
+                    Utility.ShowCargoInv(myShip); //SHOW ME WHAT YOU GOT
+                }
+                else if (input == myShip.CargoSlots() + 1)
+                {
+                    PlanetInv(prices); //how much are things worth?
+                }
+                else if (input == 0)
+                {
+                    Console.WriteLine("See ya around traveler."); //leaving
+                    isGood = true;
+                }
+                else if (input < 0 || input > myShip.CargoSlots()) //why are you talking nonsense
+                {
+                    Console.WriteLine("Uh... ok, well see you later...");
+                    isGood = true;
+                }
+                else if (myShip.inventory[input, 1] == 0) // nothing there to sell
+                {
+                    Console.WriteLine($"That container is empty.\n");
+                }
+                else
+                {
+                    Console.WriteLine($"Alright that has {myShip.inventory[input, 1]} units of {Utility.CargoName(myShip.inventory[input, 0])}.");
+                    Console.WriteLine($"How much would you like to sell?");
+                    cAmount = Utility.GetInt(myShip.inventory[input, 1]);
+                    if (cAmount > myShip.inventory[input, 1]) // are you trying to sell more than you have?
+                    {
+                        Console.WriteLine("You don't have that much.");
+                        break;
+                    }
+                    else if (cAmount == 0)
+                    {
+                        Console.WriteLine("It's fine if you don't want to sell.");
+                        break;
+                    }
+                    else
+                    {
+                        sumTotal = prices[myShip.inventory[input, 0]] * cAmount;
+                        Console.WriteLine($"I'll give you {sumTotal} credits for that much.");
+                        Utility.BuySellYN(sumTotal, ref buy, 1, player);
+                        if (isGood)
                         {
-                            Utility.ShowCargoInv(myShip); //SHOW ME WHAT YOU GOT
-                            break;
-                        }
-                    case 101:
-                        {
-                            PlanetInv(prices); //how much are things worth?
-                            break;
-                        }
-                    case 0:
-                        {
-                            Console.WriteLine("See ya around traveler."); //leaving
-                            isGood = true;
-                            break;
-                        }
-                    default: //done asking questions? time to sell things
-                        if (input < 0 || input > myShip.CargoSlots()) //why are you talking nonsense
-                        {
-                            Console.WriteLine("Uh... ok, well see you later...");
-                            isGood = true;
-                            break;
-                        }
-                        else if (myShip.inventory[input, 1] == 0)
-                        {
-                            Console.WriteLine($"That container is empty.\n");
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Alright that has {myShip.inventory[input, 1]} units of {Utility.CargoName(myShip.inventory[input, 0])}.");
-                            Console.WriteLine($"How much would you like to sell?");
-                            cAmount = Utility.GetInt(myShip.inventory[input, 1]);
-                            if (cAmount > myShip.inventory[input, 1] || cAmount < 0) // are you trying to sell more than you have?
+                            Console.WriteLine("Pleasure doing business with you.");
+                            if (cAmount == myShip.inventory[input, 1])
                             {
-                                Console.WriteLine("I don't understant.");
-                                break;
-                            }
-                            else if (cAmount == 0)
-                            {
-                                Console.WriteLine("It's fine if you don't want to sell.");
-                                break;
+                                myShip.inventory[input, 0] = 0;
+                                myShip.inventory[input, 1] = 0;
                             }
                             else
                             {
-                                sumTotal = prices[myShip.inventory[input, 0]] * cAmount;
-                                Console.WriteLine($"I'll give you {sumTotal} credits for that much.");
-                                Utility.BuySellYN(sumTotal, ref buy, 1, player);
-                                if (isGood)
-                                {
-                                    Console.WriteLine("Pleasure doing business with you.");
-                                    if (cAmount == myShip.inventory[input, 1])
-                                    {
-                                        myShip.inventory[input, 0] = 0;
-                                        myShip.inventory[input, 1] = 0;
-                                    }
-                                    else
-                                    {
-                                        myShip.inventory[input, 1] -= cAmount;
-                                    }
-                                    isGood = false;
-                                    break;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("I can't offer you more than that.");
-                                    break;
-                                }
+                                myShip.inventory[input, 1] -= cAmount;
                             }
+                            isGood = false;
                         }
+                        else
+                        {
+                            Console.WriteLine("Well I can't offer you more than that.");
+                        }
+                    }
                 }
             }
             while (!isGood);
