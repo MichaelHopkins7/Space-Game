@@ -51,7 +51,7 @@ namespace Space_Game
                 Console.WriteLine("3. Take care of my ship.");
                 Console.WriteLine("4. Check Status");
                 Console.WriteLine("0. Quit");
-                input = Utility.GetInt(3);
+                input = Utility.GetInt(4);
                 switch (input)
                 {
                     case 1:

@@ -19,6 +19,7 @@ namespace Space_Game
                     if (value > maxNum || value < 0)
                     {
                         Console.WriteLine($"Please enter a valid integer equal to or less than {maxNum}.");
+                        input = Console.ReadLine();
                     }
                     else
                     {
@@ -31,8 +32,7 @@ namespace Space_Game
                     input = Console.ReadLine();
                 }
             }
-            while (false);
-            return value;
+            while (true);
         }
 
         public static bool CheckGameOver(Ship myShip, Travel myUniverse, Player_Stats player)
