@@ -36,7 +36,7 @@ namespace Space_Game
 
         public int CargoSlots()
         {
-            return slots;
+            return this.slots;
         }
 
         public int SlotSize()
