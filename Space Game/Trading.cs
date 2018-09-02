@@ -82,6 +82,7 @@ namespace Space_Game
             do
             {
                 Console.WriteLine($"({counter}){Utility.CargoName(counter)}              {(prices[counter])}");
+                counter++;// increments counter loop
             }
             while (counter <= 9);
             return;
