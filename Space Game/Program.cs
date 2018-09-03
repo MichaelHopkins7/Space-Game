@@ -43,7 +43,7 @@ namespace Space_Game
             System.Threading.Thread.Sleep(8000);
             Console.Clear();
 
-            do
+            while (!isGameOver)
             {
                     
                 Console.WriteLine("What would you like to do?");
@@ -87,8 +87,6 @@ namespace Space_Game
                     isGameOver = Utility.CheckGameOver(myShip, myUniverse, player);
                 }
             }
-            while (!isGameOver);
-
             player.Status(myUniverse, myShip);
             
         }
