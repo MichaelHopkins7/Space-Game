@@ -27,7 +27,7 @@ namespace Space_Game
 
             Console.WriteLine("The Space Game");
             Console.WriteLine("After a lifetime of wandering between planets you have finally decided to pursue your fortune in the interplanetary trade industry.");
-            Console.WriteLine("With Earth being your new home you have decided that the best plan will be exploring new routes to new planets.");
+            Console.WriteLine("Earth is your home and starting planet. You will embark from here to start exploring new routes to new planets.");
             System.Threading.Thread.Sleep(6000);
             Console.Clear();
             Console.WriteLine("With your life savings(100 credits) and a brand new ship you head out to make your fortune. ");
@@ -38,7 +38,8 @@ namespace Space_Game
             Console.WriteLine("You will have 40 years to acquire as much wealth as possible and become the greatest trader of all time.");
             Console.WriteLine("Trade Routes: Plan appropriate and ensure that you find the best routes for moving around the galaxy.");
             Console.WriteLine("Time: This is your greatest enemy, learn to manipulate it to give you the advantage.");
-            Console.WriteLine("Game Over Criteria: The game will end if you lose all of your fortune, quit the game, or you survive to 40 years.");
+            Console.WriteLine("Trade: Start early and trade often to be successful.");
+            Console.WriteLine("Game Over Criteria: The game will end if you lose all of your fortune, quit the game, or you survive for 40 years.");
             System.Threading.Thread.Sleep(8000);
             Console.Clear();
 

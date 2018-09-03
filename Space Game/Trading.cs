@@ -57,7 +57,7 @@ namespace Space_Game
                 }
                 else if (input == "Buy" || input == "buy")
                 {
-                    BuyThings(myShip, player, myUniverse); //Calls the method for buying
+                    BuyThings(myShip, player, myUniverse); //Calls the methomakepricesd for buying
                 }
                 else if (input == "Sell" || input == "sell")
                 {
