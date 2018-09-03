@@ -19,7 +19,7 @@ namespace Space_Game
             myUniverse = new Travel(200, 0);
             Player_Stats player;
             player = new Player_Stats(100, 0, 0, 0, 0, 0);
-            int[] prices = new int[10];
+            int[] prices = new int[10] { 0, 11, 3, 8, 12, 7, 4, 14, 10, 9 };
             Trading makeMoney = new Trading(prices, 0);
             bool isGameOver = false; //if a game end triggers this will be changed to true
             int input; //Useful for when we want input

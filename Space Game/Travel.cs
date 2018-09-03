@@ -201,15 +201,15 @@ namespace Space_Game
             planetList[0, 3] = 18;
             planetList[0, 4] = 18;
             planetList[0, 5] = 0;
-            planetList[0, 6] = 9;
-            planetList[0, 7] = 1;
-            planetList[0, 8] = 6;
-            planetList[0, 9] = 10;
-            planetList[0, 10] = 5;
-            planetList[0, 11] = 2;
-            planetList[0, 12] = 12;
-            planetList[0, 13] = 8;
-            planetList[0, 14] = 7;
+            planetList[0, 6] = 11;
+            planetList[0, 7] = 3;
+            planetList[0, 8] = 8;
+            planetList[0, 9] = 12;
+            planetList[0, 10] = 7;
+            planetList[0, 11] = 4;
+            planetList[0, 12] = 14;
+            planetList[0, 13] = 10;
+            planetList[0, 14] = 9;
             for (int counter =1; counter < numPlanets; counter++)
             {
                 planetList[counter, 0] = Math.Round(rndDouble.NextDouble(), 1) + rnd.Next(-50, 50);
