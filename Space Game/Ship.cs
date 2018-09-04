@@ -262,6 +262,7 @@ namespace Space_Game
                                 Utility.BuySellYN(cost, ref buy, 1, player);
                                 if (buy)
                                 {
+                                    fuel = fuelTank;
                                     Console.WriteLine("Thanks for your business!");
                                 }
                             }
