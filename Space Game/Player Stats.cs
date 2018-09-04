@@ -43,7 +43,7 @@ namespace Space_Game
 
         public void Status(Travel myUniverse, Ship myShip)
         {
-            Console.WriteLine($"You are on {myUniverse.GetPlanetName()}.");
+            Console.WriteLine($"You are on {myUniverse.GetPlanetName(myUniverse.planetNum)}.");
             Console.WriteLine("You have been traveling for:");
             Console.WriteLine($"Years:{years}");
             Console.WriteLine($"Weeks:{weeks}");

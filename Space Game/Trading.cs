@@ -43,7 +43,7 @@ namespace Space_Game
 
             bool isDone = false;
             string input = "";
-            Console.WriteLine($"Welcome to {myUniverse.GetPlanetName()}.");
+            Console.WriteLine($"Welcome to {myUniverse.GetPlanetName(myUniverse.planetNum)}.");
             Console.WriteLine($"Here is what we have.\n");
             PlanetInv(prices);
             do

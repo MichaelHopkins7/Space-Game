@@ -42,7 +42,7 @@ namespace Space_Game
                 {
                     if (display)
                     {
-                        Console.WriteLine($"{counter}" + ". " + GetPlanetName());
+                        Console.WriteLine($"{counter}" + ". " + GetPlanetName(counter));
                     }
                     closePlanet = true;
                 }
@@ -88,7 +88,7 @@ namespace Space_Game
                         speed = Math.Pow(wSpeed, (10 / 3.0)) + Math.Pow((10 - wSpeed), (-11 / 3.0));
                         travelTime = Distance(destNum) / speed;
                         convertTime(travelTime);
-                        Console.WriteLine($"You have arrived at {GetPlanetName()}.");
+                        Console.WriteLine($"You have arrived at {GetPlanetName(destNum)}.");
                         Console.Write("It took: ");
                         Console.Write($"{tripYears} Years, ");
                         Console.Write($"{tripWeeks} Weeks, ");
@@ -231,12 +231,12 @@ namespace Space_Game
             return planetList;
         }
         
-        public string GetPlanetName()
+        public string GetPlanetName(int toDisplay)
         {
             string seg1 = "";
             string seg2 = "";
             string seg3 = "";
-            switch (universe[planetNum, 2])
+            switch (universe[toDisplay, 2])
             {
                 case 1:
                     seg1 = "Mac";
