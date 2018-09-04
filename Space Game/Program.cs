@@ -90,6 +90,7 @@ namespace Space_Game
             }
             while (!isGameOver);
             player.Status(myUniverse, myShip);
+            Console.ReadLine();
             
         }
     }
