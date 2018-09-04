@@ -64,6 +64,11 @@ namespace Space_Game
                 Console.WriteLine("Enter the number for where you would like to go.");
                 Console.WriteLine($"Or enter {numberOfPlanets + 1} to leave."); //ask where to go Earth is 0 so max+1 
                 destNum = Utility.GetInt(numberOfPlanets + 1); //get input
+                if (destNum == numberOfPlanets +1)
+                {
+                    Console.WriteLine("You decide not to leave.");
+                    isGood = true;
+                }
                 if (closePlanet == false)
                 {
                     Console.WriteLine("You don't have enough fuel to get anywhere.");
