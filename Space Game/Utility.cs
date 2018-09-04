@@ -45,6 +45,7 @@ namespace Space_Game
                 if (myShip.inventory[counter, 1] == 0 )
                 {
                     hasCargo = false;
+                    counter++;
                 }
                 else
                 {

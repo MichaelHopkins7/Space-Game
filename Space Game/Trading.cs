@@ -77,11 +77,11 @@ namespace Space_Game
 
         public void PlanetInv(int[] prices) // Planet Inventory
         {
-            Console.WriteLine("Item Name		    Cost\n");
+            Console.WriteLine("Cost             Item Name");
             int counter = 1;
             do
             {
-                Console.WriteLine($"({counter}){Utility.CargoName(counter)}                 {prices[counter]}");
+                Console.WriteLine($"({counter}.){prices[counter]}               {Utility.CargoName(counter)}");
                 counter++;// increments counter loop
             }
             while (counter <= 9);
