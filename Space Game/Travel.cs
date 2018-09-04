@@ -314,7 +314,7 @@ namespace Space_Game
                     seg1 = "Isn";
                     break;
             }
-            switch (universe[planetNum, 3])
+            switch (universe[toDisplay, 3])
             {
                 case 1:
                     seg2 = "gol";
@@ -392,7 +392,7 @@ namespace Space_Game
                     seg2 = "tap";
                     break;
             }
-            switch (universe[planetNum, 4])
+            switch (universe[toDisplay, 4])
             {
                 case 1:
                     seg3 = "sar";
