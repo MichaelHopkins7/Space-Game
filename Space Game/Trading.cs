@@ -181,7 +181,7 @@ namespace Space_Game
                             }
                             else
                             {
-                                cost = itemAmount * prices[myShip.inventory[cargoWhere, 0]];
+                                cost = itemAmount * prices[currentItemBuy];
                                 Console.WriteLine($"The cost is {cost}.");
                                 Utility.BuySellYN(cost, ref buy, 1, player);
                                 if (buy)
