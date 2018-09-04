@@ -259,7 +259,7 @@ namespace Space_Game
                     {
                         sumTotal = prices[myShip.inventory[input, 0]] * sellAmount;
                         Console.WriteLine($"I'll give you {sumTotal} credits for that much.");
-                        Utility.BuySellYN(sumTotal, ref buy, 1, player);
+                        Utility.BuySellYN(sumTotal, ref buy, 2, player);
                         if (buy)
                         {
                             Console.WriteLine("Pleasure doing business with you.");
