@@ -69,7 +69,7 @@ namespace Space_Game
                     Console.WriteLine("You decide not to leave.");
                     isGood = true;
                 }
-                if (closePlanet == false)
+                else if (closePlanet == false)
                 {
                     Console.WriteLine("You don't have enough fuel to get anywhere.");
                     isGood = true;
