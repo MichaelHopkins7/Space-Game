@@ -48,7 +48,7 @@ namespace Space_Game
             PlanetInv(prices);
             do
             {
-                Console.WriteLine("Would you like to buy or sell?");
+                Console.WriteLine("Would you like to buy or sell? Please type buy or sell for selection.");
                 Console.WriteLine("If you would like to leave press \"Enter\".");
                 input = Console.ReadLine();
                 if (input == "")

@@ -233,7 +233,7 @@ namespace Space_Game
                         }
                         else
                         {
-                            cost = (fuelTank + (fuelTank / 2)) * 10;
+                            cost = (fuelTank + (fuelTank / 2)) * 5;
                             Console.WriteLine($"It will cost {cost}.");
                             Utility.BuySellYN(cost, ref buy, 1, player);
                             if (buy)

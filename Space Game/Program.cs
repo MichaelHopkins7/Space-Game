@@ -28,11 +28,11 @@ namespace Space_Game
             Console.WriteLine("The Space Game");
             Console.WriteLine("After a lifetime of wandering between planets you have finally decided to pursue your fortune in the interplanetary trade industry.");
             Console.WriteLine("Earth is your home and starting planet. You will embark from here to start exploring new routes to new planets.");
-            System.Threading.Thread.Sleep(500);
+            System.Threading.Thread.Sleep(10000);
             Console.Clear();
             Console.WriteLine("With your life savings(100 credits) and a brand new ship you head out to make your fortune. ");
             Console.WriteLine("Welcome to the beginning of your space trading adventure.");
-            System.Threading.Thread.Sleep(500);
+            System.Threading.Thread.Sleep(6000);
             Console.Clear();
             Console.WriteLine("Rules for the game:");
             Console.WriteLine("You will have 40 years to acquire as much wealth as possible and become the greatest trader of all time.");
@@ -40,7 +40,7 @@ namespace Space_Game
             Console.WriteLine("Time: This is your greatest enemy, learn to manipulate it to give you the advantage.");
             Console.WriteLine("Trade: Start early and trade often to be successful.");
             Console.WriteLine("Game Over Criteria: The game will end if you lose all of your fortune, quit the game, or you survive for 40 years.");
-            System.Threading.Thread.Sleep(500);
+            System.Threading.Thread.Sleep(15000);
             Console.Clear();
 
             do
