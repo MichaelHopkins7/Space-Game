@@ -57,6 +57,7 @@ namespace Space_Game
             double speed; //speed in light years
             bool isGood = false;
             bool closePlanet = false;
+            int input = 0;
             do
             {
                 Console.WriteLine("Where would you like to go?");
@@ -93,21 +94,32 @@ namespace Space_Game
                         speed = Math.Pow(wSpeed, (10 / 3.0)) + Math.Pow((10 - wSpeed), (-11 / 3.0));
                         travelTime = Distance(destNum) / speed;
                         convertTime(travelTime);
-                        Console.WriteLine($"You have arrived at {GetPlanetName(destNum)}.");
-                        Console.Write("It took: ");
+                        Console.Write("It will take: ");
                         Console.Write($"{tripYears} Years, ");
                         Console.Write($"{tripWeeks} Weeks, ");
                         Console.Write($"{tripDays} Days, ");
                         Console.Write($"and {tripHours} Hours.");
-                        player.AddTime(tripYears, tripWeeks, tripDays, tripHours);
-                        tripYears = 0;
-                        tripWeeks = 0;
-                        tripDays = 0;
-                        tripHours = 0;
-                        myShip.UseFuel(Distance(destNum)); //uses the fuel
-                        planetNum = destNum;
-                        isGood = true;
-                        makeMoney.MakePrices(universe, planetNum);
+                        Console.WriteLine("Would you like to travel?");
+                        input = Utility.GetInt(2);
+                        if (input == 1)
+                        {
+                            player.AddDistance(Distance(destNum));
+                            Console.WriteLine($"You have arrived at {GetPlanetName(destNum)}.");
+                            player.AddTime(tripYears, tripWeeks, tripDays, tripHours);
+                            tripYears = 0;
+                            tripWeeks = 0;
+                            tripDays = 0;
+                            tripHours = 0;
+                            myShip.UseFuel(Distance(destNum)); //uses the fuel
+                            planetNum = destNum;
+                            isGood = true;
+                            makeMoney.MakePrices(universe, planetNum);
+                        }
+                        else
+                        {
+                            Console.WriteLine("You decided not to leave.");
+                            isGood = true;
+                        }
                     }
                 }
                 else

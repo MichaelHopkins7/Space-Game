@@ -41,6 +41,11 @@ namespace Space_Game
             return;
         }
 
+        public void AddDistance(double howFar)
+        {
+            distance += howFar;
+        }
+
         public void Status(Travel myUniverse, Ship myShip)
         {
             Console.WriteLine($"You are on {myUniverse.GetPlanetName(myUniverse.planetNum)}.");
@@ -48,11 +53,11 @@ namespace Space_Game
             Console.WriteLine($"Years:{years}");
             Console.WriteLine($"Weeks:{weeks}");
             Console.WriteLine($"Days:{days}");
-            Console.WriteLine($"Hours:{hours}/n");
+            Console.WriteLine($"Hours:{hours}\n");
 
-            Console.WriteLine($"You traveled {distance} lightyears!/n");
+            Console.WriteLine($"You traveled {distance} lightyears!\n");
 
-            Console.WriteLine($"You have {money} credits./n");
+            Console.WriteLine($"You have {money} credits.\n");
             if (money > 100)
             {
                 Console.WriteLine($"You have gained {money - 100} credits.");
