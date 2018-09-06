@@ -59,6 +59,7 @@ namespace Space_Game
 
             if (player.SYears() >= 40)
             {
+                Console.WriteLine("After long years trading you've gotten too old to for this and retire.");
                 return true;
             }
             else if (player.SMoney() == 0 && hasCargo == false)
